@@ -1,0 +1,138 @@
+.container {
+  padding: 31rpx 19rpx 100rpx 21rpx;
+  color: #385076;
+  font-size: 24rpx;
+}
+
+.device-status {
+  height: 300rpx;
+  background-color: #102957;
+  border-radius: 10rpx;
+  padding: 30rpx 19rpx 0 20rpx;
+}
+
+.device-status .status-top {
+  width: 710rpx;
+  height: 66rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.device-status .status-top .device-positionDes {
+  width: 144rpx;
+  height: 38rpx;
+  color: #395787;
+  background-color: #0B224A;
+  border-radius: 19rpx;
+  padding: 3rpx 14rpx 2rpx 15rpx;
+  font-size: 24rpx;
+  line-height: 33rpx;
+}
+
+.device-status .status-top .iconshezhi {
+  font-size: 36rpx;
+  margin: -10rpx 38rpx 0 0;
+}
+
+.device-status .status-middle {
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+  background: linear-gradient(360deg, rgba(29, 197, 37, 1) 0%, rgba(37, 240, 132, 1) 100%);
+  border: 1px solid rgba(46, 215, 81, 1);
+  box-sizing: border-box;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 42rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 59px;
+}
+
+.device-status .status-bottom {
+  text-align: center;
+  height: 36rpx;
+  font-size: 25rpx;
+  line-height: 36rpx;
+  color: #15FC71;
+  font-weight: 400;
+  margin-top: 20rpx;
+}
+
+.control-log {
+  width: 710rpx;
+  background: rgba(16, 41, 87, 1);
+  border-radius: 10px;
+  margin-top: 20rpx;
+}
+
+.control-log .control-title {
+  height: 108rpx;
+  margin-left: 51rpx;
+  line-height: 108rpx;
+  font-size: 28rpx;
+  color: #15E9FC;
+  font-weight: 400;
+}
+
+.control-log .divde-border {
+  margin: 0 31rpx 0 29rpx;
+  border-bottom: 1px solid rgba(0, 20, 52, 1);
+}
+
+
+
+.weui-cell-third {
+  background: #fff;
+}
+
+.weui-cell-list {
+  background: #fff;
+  margin: 5px 50px 5px 50px;
+}
+
+.weui-cell-line {
+  /* width: 100px; */
+  margin-left: 5px;
+  border-left: 1px solid #ddd;
+  height: 100px;
+  background: #fff
+}
+.lineHidden {
+  border-left:0 solid #000;
+}
+
+.weui-cell-circle {
+  border: 1px solid #000;
+  border-radius: 5px;
+  width: 10px;
+  height: 10px;
+  border-color: blue;
+}
+
+.weui-cell-time {
+  /* width: 50px; */
+  float: left;
+  font-size: 14px;
+  padding-left: 15px;
+  width: 72px;
+
+}
+
+.weui-cell-event {
+
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+.weui-cell-name {
+  font-size: 14px;
+  height: 23px;
+  margin-left: 100px;
+}

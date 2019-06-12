@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/deviceDetail/deviceDetail",
+    "pages/judge/judge",
+    "pages/guide/guide",
+    "pages/login/login",
+    "pages/index/index",
+    "pages/user/user",
+    "pages/deviceInfo/deviceInfo",
+    "pages/membership/membership",
+    "pages/regional-management/regional-management",
+    "pages/deviceInstall/deviceInstall"
+  ],
+  "window": {
+    "backgroundColor": "#001434",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0B2551",
+    "navigationBarTitleText": "企业物联网",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#456EAD",
+    "selectedColor": "#15E9FC",
+    "backgroundColor": "#102957",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "监控",
+        "iconPath": "assets/images/tab1.png",
+        "selectedIconPath": "assets/images/tab1_s.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "assets/images/tab2.png",
+        "selectedIconPath": "assets/images/tab2_s.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

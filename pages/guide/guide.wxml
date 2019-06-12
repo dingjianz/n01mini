@@ -1,0 +1,13 @@
+<!--pages/guide/guide.wxml-->
+<view class='greens {{small?"small":""}}'><image src='/assets/images/lovely.JPG'></image></view>
+<view class='desc'>物联网</view>
+<view class='login-btn'>
+  <button class='btn-1 btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+    <image src="/assets/images/weixin@2x.png"></image> 
+    <text>微信快速登录</text>
+  </button>
+  <button class='btn-2 btn' catchtap='login'>
+    <image src="/assets/images/phone@2x.png"></image>
+    <text>手机号登录</text>
+  </button>
+</view>

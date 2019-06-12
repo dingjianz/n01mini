@@ -1,0 +1,101 @@
+/* pages/user/user.wxss */
+.user-info-container{
+    height: 204rpx;
+    padding-top: 34rpx;
+    padding-left: 30rpx;
+    position: relative;
+}
+.user-info-container::after{
+    content: '12';
+    width: 140%;
+    height: 238rpx;
+    position: absolute;
+    left: -20%;
+    top: 0;
+    z-index: -1;
+    border-radius: 0 0 50% 50%;
+    background-color: #0B2551;
+}
+.user-info-container > .user-info .user-icon{
+    width: 120rpx;
+    height: 120rpx;
+    background-color: #09224A;
+    border-radius: 60rpx;
+    display: inline-block;
+}
+.user-info-container > .user-info .user-icon .user-pic{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.user-info-container > .user-info .user-phone{
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 13rpx;
+    margin-left: 30rpx;
+    font-size: 34rpx;
+    color: #15E9FC;
+    line-height: 48rpx;
+}
+.user-info-container > .user-setting-btn{
+    position: absolute;
+    top: 57rpx;
+    right: -16rpx;
+    display: inline-block;
+    width: 126rpx;
+    height: 42rpx;
+    line-height: 42rpx;
+    background-color: #132F63;
+    color: #456EAD;
+    font-size: 24rpx;
+    border-radius: 21rpx;
+}
+.user-info-container > .user-setting-btn .iconfont{
+    font-size: 24rpx;
+    display: inline-block;
+    margin-left: -15rpx;
+    margin-right: 5rpx;
+}
+.user-cell-group{
+    background-color: transparent;
+    padding: 0 20rpx;
+    margin-top: 13rpx;
+}
+.user-cell-group .user-cell{
+    background-color: #102957;
+    margin-top: 20rpx;
+    height: 110rpx;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+    color: #8BABE7;
+    font-size: 30rpx;
+    border-radius: 10rpx;
+}
+.user-cell-group .user-cell::after{
+    height: 0;
+    border: 0 none;
+}
+.user-cell-group .user-cell .iconfont{
+    font-size: 36rpx;
+    color: #15E9FC;
+    margin-right: 28rpx;
+}
+.user-cell-group .user-cell .iconfont.iconchengyuanguanli{
+    font-size: 30rpx;
+}
+.user-cell-group .user-cell .cell-footer-wrap{
+    display: flex;
+    height: 38rpx;
+    line-height: 38rpx;
+    align-items: center;
+}
+.user-cell-group .user-cell .cell-footer-wrap .cell-desc{
+    color: #456EAD;
+    font-size: 26rpx;
+    margin-right: 20rpx;
+}
+.user-cell-group .user-cell .cell-footer-wrap .iconfont{
+    font-size: 26rpx;
+    color: #354E75;
+    margin-right: 0;
+}

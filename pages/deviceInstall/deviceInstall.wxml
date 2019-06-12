@@ -1,0 +1,29 @@
+<view class="container">
+  <block>
+    <view class="device-wrapper">
+      <view class="device-name">设备名称</view>
+      <view class="device-data">土壤温湿度
+        <icon class="iconfont iconjiantou u-jiantou"></icon>
+      </view>
+    </view>
+    <view class="wrapper-botBorder"></view>
+  </block>
+  <block>
+    <view class="device-wrapper">
+      <view class="device-name">设备分类</view>
+      <view class="device-data">内遮阳
+        <icon class="iconfont iconjiantou u-jiantou"></icon>
+      </view>
+    </view>
+    <view class="wrapper-botBorder"></view>
+  </block>
+  <block>
+    <view class="device-wrapper">
+      <view class="device-name">所属区域</view>
+      <view class="device-data">生产示范基地
+        <icon class="iconfont iconjiantou u-jiantou"></icon>
+      </view>
+    </view>
+    <view class="wrapper-botBorder"></view>
+  </block>
+</view>

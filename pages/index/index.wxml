@@ -1,0 +1,81 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+    <view class="area_check">全部区域</view>
+    <view class="hole_video">
+        <video id="myVideo" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" binderror="videoErrorCallback" enable-danmu danmu-btn show-center-play-btn='{{false}}' show-play-btn="{{true}}" danmu-btn='{{false}}' controls='{{false}}'></video>
+        <view class="videoctrol">
+            <view class="left_ctrol" bindtap="playfn">暂停/播放</view>
+            <view class="right_ctrol">
+                <view class="ctrolbtn">云台</view>
+                <view class="topbtn">置顶</view>
+                <view class="fullscreen">全屏</view>
+            </view>
+        </view>    
+    </view>
+    <!-- 直播视频列表 -->
+    <view class="video_section">
+        <view class="video_list">
+            <scroll-view class="scroll-view_X" scroll-x="true" bindscroll="scroll" lower-threshold="50" bindscrolltolower="rightListen">
+                <view class="video_item">
+                  <iconfont dataNum="123.3" color="red" fontSize="50"></iconfont>
+                  <text class='iconfont iconnumber-1'></text>
+                </view>
+                <view class="video_item">2#摄像头</view>
+                <view class="video_item">3#摄像头</view>
+                <view class="video_item">4#摄像头</view>
+                <view class="video_item">5#摄像头</view>
+                <view class="video_item">6#摄像头</view>
+                <view class="video_item">7#摄像头</view>
+                <view class="video_item">8#摄像头</view>
+            </scroll-view>
+        </view>
+        <view class="multibtn">多窗口</view>
+        <view class="shadow" hidden="{{shadowHide}}"></view>
+    </view>
+    
+    <!-- 传感、控制和综合设备分类 -->
+    <view class="equip_tab">
+        <view class="{{activeTab==index ? 'active':''}}"  data-index="{{index}}" wx:for="{{tabs}}" wx:for-index="index" wx:for-item="item" bindtap="changeTab">{{item.title}}·{{item.num}}</view>
+    </view>
+    <view class="equip_tabcon">
+        <view class="sensortype">
+            <view class="sensortit">土壤类</view>
+            <view class="sensorlist">
+                <view class="half_item">
+                    <view class="wrap" bindtap="deviceInfo">
+                        <image class="label" src="/assets/images/1.png"></image> 
+                        <view class="desc">
+                            <view class="tit">土壤温湿度</view>
+                            <view class="indicator">温度<text>25</text></view>
+                            <view class="indicator">湿度<text>60%</text></view>
+                        </view>
+                    </view>
+                </view>
+                <view class="half_item">
+                    <view class="wrap" bindtap="deviceInfo">
+                        <image class="label" src="/assets/images/1.png"></image> 
+                        <view class="desc">
+                            <view class="tit">二氧化硫浓度</view>
+                            <view class="value">28.32<text>ppm</text></view>
+                        </view>
+                    </view>
+                </view>
+            </view>     
+        </view>
+        <view class="sensortype">
+            <view class="sensortit">其他类</view>
+            <view class="sensorlist">
+                <view class="hole_item">
+                    <view class="wrap">
+                        <image class="label" src="/assets/images/1.png"></image> 
+                        <view class="desc">
+                            <view>土壤温湿度</view>
+                            <view>温度<text>25</text></view>
+                            <view>湿度<text>60%</text></view>
+                        </view>
+                    </view>
+                </view>
+            </view>     
+        </view>
+    </view>
+</view>

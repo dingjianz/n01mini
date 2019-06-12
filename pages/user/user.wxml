@@ -1,0 +1,31 @@
+<!-- pages/user/user.wxml -->
+<view class="user-info-container">
+    <view class="user-info">
+        <view class="user-icon">
+            <image class="user-pic" src="../../assets/images/head-icon.png" />
+        </view>
+        <text class="user-phone">137****9486</text>
+    </view>
+    <button class="user-setting-btn">
+        <view class="iconfont iconshezhi"></view>
+        <text class="t-setting">设置</text>
+    </button>
+</view>
+<i-cell-group i-class="user-cell-group clearfix">
+    <i-cell i-class="user-cell" is-link url="../membership/membership">
+        <text class="cell-title">成员管理</text>
+        <view slot="icon" class="iconfont iconchengyuanguanli"></view>
+        <view slot="footer" class="cell-footer-wrap">
+            <text class="cell-desc">邀请他人一起管理设备</text>
+            <view class="iconfont iconjiantou"></view>
+        </view>
+    </i-cell>
+    <i-cell i-class="user-cell" is-link url="../regional-management/regional-management">
+        <text class="cell-title">区域管理</text>
+        <view slot="icon" class="iconfont icondituicon"></view>
+        <view slot="footer" class="cell-footer-wrap">
+            <text class="cell-desc">将设备按区域进行管理</text>
+            <view class="iconfont iconjiantou"></view>
+        </view>
+    </i-cell>
+</i-cell-group>

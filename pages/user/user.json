@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "i-cell-group": "../../components/i-view/cell-group/index",
+    "i-cell": "../../components/i-view/cell/index"
+  },
+  "navigationBarTitleText": "我的"
+}

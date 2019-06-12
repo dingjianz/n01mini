@@ -1,0 +1,171 @@
+.container {
+  color:#456EAD;
+  font-size:28rpx;
+} 
+.area_check{
+    width:100%;
+    height:82rpx;
+    line-height:82rpx;
+    color:#15E9FC;
+    text-align:center;
+}
+/* 视频监控 */
+.hole_video,#myVideo{
+    width:100%;
+    position:relative;
+}
+.hole_video .videoctrol{
+    width:100%;
+    height:60rpx;
+    position:absolute;
+    left:0;
+    bottom:0;
+    z-index:99;
+    background:rgba(0,0,0,0.7);  
+    padding:0 20rpx; 
+    box-sizing:border-box;
+}
+.hole_video .videoctrol,.hole_video .videoctrol .right_ctrol{
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow:row nowrap;
+}
+.hole_video .videoctrol .right_ctrol view{
+    justify-content:flex-start;
+    margin:0 10rpx;
+}
+/* 视频列表 */
+.video_section{
+    position:relative;
+    width:100%;
+    height:100rpx;
+    padding:10rpx;
+    box-sizing:border-box;
+    background-color:#102957;
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow:row nowrap;
+}
+.video_list{
+    width:calc(100% - 100rpx);
+    height:100%;
+}
+.scroll-view_X{
+    width:100%;
+    height:100%;
+    display:flex;
+    display:-webkit-flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow:row nowrap;
+    white-space:nowrap;
+}
+.scroll-view_X .video_item{
+    display:inline-block;
+    height:100%;
+    margin:0 20rpx;
+    line-height:1;
+    background:#f5f5f5;
+}
+.scroll-view_X .video_item:last-child{
+    margin-right:0;
+}
+.video_section .multibtn{
+    width:75rpx;
+    flex:none;
+    font-size:18rpx;
+    color:#15E9FC;
+}
+.video_section .shadow{
+    width:30rpx;
+    height:100%;
+    background-color:red;
+    position:absolute;
+    top:0;
+    right:100rpx;
+}
+/* 传感器列表 */
+.equip_tab{
+    width:100%;
+    margin-top:30rpx;
+    height:88rpx;
+    line-height:88rpx;
+    display:flex;
+    display:-webkit-flex;
+    justify-content:space-around;
+    align-items: center;
+    flex-flow:row nowrap;
+    background-color:#102957;
+}
+.equip_tab .active{
+    color:#15E9FC;
+}
+.equip_tabcon{
+    width:100%;
+    padding:0 10rpx;
+    box-sizing:border-box;
+}
+.sensortit{
+    margin-top:20rpx;
+    height:65rpx;
+    line-height:65rpx;
+    text-align:center;
+}
+.sensorlist,.sensorlist .wrap{
+    display:flex;
+    display:-webkit-flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    flex-flow:row wrap;
+}
+.sensorlist .half_item,.sensorlist .hole_item{
+    width:50%;
+    box-sizing:border-box;
+    padding:0 10rpx 20rpx;
+}
+.sensorlist .hole_item{
+    width:100%;
+}
+.sensorlist .wrap{
+    align-items:center;
+    width:100%;
+    height:150rpx;
+    background-color:#102957;
+    border-radius:8rpx;
+    padding:0 18rpx;
+    box-sizing:border-box;
+}
+.sensorlist .label{
+    width:80rpx;
+    height:80rpx;
+    flex:none;
+    margin-right:16rpx;
+}
+.sensorlist .desc{
+    display:flex;
+    display:-webkit-flex;
+    flex-flow:column;
+    text-align: left;
+}
+.sensorlist .desc .tit{
+    font-size:28rpx;
+    line-height:40rpx;
+}
+.sensorlist .desc .indicator{
+    font-size:24rpx;
+    line-height:35rpx;
+}
+.sensorlist .desc .value{
+    font-size:30rpx;
+    color:#15FC71;
+    line-height:40rpx;
+}
+.sensorlist .desc text{
+    font-size:24rpx;
+    color:#15FC71;
+    margin-left:16rpx;
+}

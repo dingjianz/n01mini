@@ -1,0 +1,41 @@
+.container {
+  padding: 31rpx 0;
+  height: 1000rpx;
+  color: #385076;
+  font-size: 24rpx;
+}
+
+.device-wrapper {
+  width: 100%;
+  height: 110rpx;
+  background-color: #102957;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+}
+
+.device-wrapper .device-name {
+  color: #8babe7;
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+
+.device-wrapper .device-data {
+  color: #456ead;
+  font-size: 26rpx;
+  line-height: 37rpx;
+  margin-top: -15rpx;
+}
+
+.device-wrapper .device-data .u-jiantou {
+  font-size: 26rpx;
+  margin: 0 29rpx 0 10rpx;
+  color: #354e75;
+}
+
+.wrapper-botBorder {
+  width: 100%;
+  border-bottom: 1px solid #001434;
+}

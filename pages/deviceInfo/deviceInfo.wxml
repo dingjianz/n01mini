@@ -1,0 +1,42 @@
+<!--pages/deviceInfo/deviceInfo.wxml-->
+<view class="container">
+  <view class="part_a">
+    <view class="title">
+      <view class="left">
+        <view class="equiptit">土壤温湿度</view>
+        <view class="area">生产示范基地</view>
+      </view>
+      <!-- <image src="/assets/images/weixin@2x.png"></image> -->
+      <icon class="iconfont iconshezhi" bindtap="turnToDeviceInstall"></icon>
+        
+    </view>
+    <view class="indicator">
+      <view class="line">
+        <view class="card">
+          <view class="wrap">
+            <iconfont dataNum="28.4" color="#15FC71" fontSize="60"><text class="unit">℃</text></iconfont>
+            <!-- <text class="num">28.4<text class="unit">℃</text></text> -->
+            <view class="name">温度</view>
+          </view>
+        </view>
+        <view class="card">
+          <view class="wrap">
+            <iconfont dataNum="39.9" color="#15FC71" fontSize="60"><text class="unit">%</text></iconfont>
+            <view class="name">湿度</view>
+          </view>
+        </view>
+      </view>
+      <view class="update">10小时前更新</view>
+    </view>
+  </view>
+  <!-- 折线图 -->
+  <view class="part_b">
+    <view class="opts">
+      <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"  wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}">
+        {{item.txt}}</view>
+    </view>
+    <view class="echart">
+      <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+    </view>
+  </view>
+</view>

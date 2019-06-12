@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "ec-canvas": "../../components/ec-canvas/ec-canvas",
+        "iconfont": "../../components/iconfont/iconfont"
+    },
+    "navigationBarTitleText": "设备详情"
+}

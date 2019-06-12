@@ -1,0 +1,41 @@
+/**app.wxss**/
+@import './assets/css/icon.wxss';
+
+.container {
+  height: 100%;
+  box-sizing: border-box;
+} 
+page{
+    background-color:#001434;
+    color: #fff;
+}
+.clearfix:before,
+.clearfix:after{
+  content: '';
+  display: table;
+  height: 0;
+  width: 0;
+}
+.clearfix:after{
+  clear: both;
+}
+.f-l{
+  float: left;
+}
+.f-r{
+  float: right;
+}
+.t-l{
+  text-align: left
+}
+.t-r{
+  text-align: right;
+}
+.t-c{
+  text-align: center;
+}
+.t-ellipsis{
+  text-overflow: ellipsis;
+  white-space: nowrapl;
+  overflow: hidden;
+}
