@@ -1,0 +1,7 @@
+<!--components/switch-self/switch-self.wxml-->
+<view class="onoff-type1" wx:if="{{type==1}}">
+  <view wx:for="{{switchArr1}}" wx:key="{{index}}" catchtap='changeSwitchType1' data-index="{{index}}" class="btn {{item.class}} {{switchIndex1==index?'active':''}}">{{item.text}}</view>
+</view>
+<view class="onoff-type2" wx:if="{{type==2}}">
+  <view wx:for="{{switchArr2}}" wx:key="{{index}}" catchtap='changeSwitchType2' data-index="{{index}}" class="btn {{item.class}} {{switchIndex2==index?'active':''}}">{{item.text}}</view>
+</view>

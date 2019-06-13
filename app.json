@@ -1,15 +1,23 @@
 {
   "pages": [
-    "pages/deviceDetail/deviceDetail",
     "pages/judge/judge",
     "pages/guide/guide",
-    "pages/login/login",
     "pages/index/index",
+    "pages/login/login",
     "pages/user/user",
-    "pages/deviceInfo/deviceInfo",
     "pages/membership/membership",
     "pages/regional-management/regional-management",
-    "pages/deviceInstall/deviceInstall"
+    "pages/regional-detail/regional-detail",
+    "pages/regional-add/regional-add",
+    "pages/member-detail/member-detail",
+    "pages/member-add/member-add",
+    "pages/view-control/view-control",
+    "pages/deviceInfo/deviceInfo",
+    "pages/deviceDetail/deviceDetail",
+    "pages/deviceInstall/deviceInstall",
+    "pages/deviceSelectType/deviceSelectType",
+    "pages/areaSelect/areaSelect",
+    "pages/create-team/create-team"
   ],
   "window": {
     "backgroundColor": "#001434",

@@ -8,7 +8,7 @@
       </view>
       <!-- <image src="/assets/images/weixin@2x.png"></image> -->
       <icon class="iconfont iconshezhi" bindtap="turnToDeviceInstall"></icon>
-        
+
     </view>
     <view class="indicator">
       <view class="line">
@@ -32,7 +32,14 @@
   <!-- 折线图 -->
   <view class="part_b">
     <view class="opts">
-      <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"  wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}">
+      <!-- 1天 7天 30天 -->
+      <view class="opts-left">
+        <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index" wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}" wx:if="{{index < 3}}"> {{item.txt}}</view>
+      </view>
+      <!-- 自定义  -->
+      <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
+        wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}"
+        wx:if="{{index === 3}}">
         {{item.txt}}</view>
     </view>
     <view class="echart">

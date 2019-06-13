@@ -6,28 +6,30 @@ Page({
    */
   data: {
     axis: [{
-        time: '2018-2-15',
-        name: '张三',
-        event: '垃圾太多'
+        time: '今天 14:37',
+        name: '暂停',
+        event: '13735479486'
       },
       {
-        time: '2018-2-15',
-        name: '王三',
-        event: '垃圾太多'
+        time: '前天 14:37',
+        name: '开启',
+        event: '13735479486'
       },
       {
-        time: '2018-2-15',
-        name: '张三',
-        event: '垃圾太多'
+        time: '今天 14:37',
+        name: '关闭',
+        event: '13735479486'
       },
       {
-        time: '2018-2-15',
-        name: '张三',
-        event: '垃圾太多'
+        time: '今天 14:37',
+        name: '开启',
+        event: '13735479486'
       }
     ]
   },
-
+  returnStatusName(name) {
+    console.log(name)
+  },
   /**
    * 生命周期函数--监听页面加载
    */

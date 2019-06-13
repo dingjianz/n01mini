@@ -1,0 +1,35 @@
+.container {
+  padding: 31rpx 20rpx 0 20rpx;
+}
+
+.type-wrapper {
+  width: 710rpx;
+  box-sizing: border-box;
+  background: rgba(16, 41, 87, 1);
+  border-radius: 10rpx;
+}
+.type-list {
+  height: 110rpx;
+  color: #15E9FC;
+  font-size: 30rpx;
+  line-height: 110rpx;
+  box-sizing: border-box;
+  display: flex;
+  display:-webkit-flex;
+  justify-content: space-between;
+  padding: 0 30rpx 0 29rpx;
+}
+.divede-border {
+  width: 670rpx;
+  margin: 0 auto;
+  border: 1px solid #001434;
+}
+.type-list .type-name {
+  color:#8BABE7;
+}
+.type-list .type-name.active {
+  color: #15E9FC;
+}
+.icon-hidden {
+  display: none;
+}

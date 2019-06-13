@@ -1,4 +1,7 @@
 {
+  "navigationBarTitleText": "设置",
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "i-modal": "../../components/i-view/modal/index"
+  }
 }

@@ -1,2 +1,25 @@
 <!--pages/membership/membership.wxml-->
-<text>pages/membership/membership.wxml</text>
+<i-cell-group i-class="custom-cell-group clearfix">
+    <i-cell i-class="custom-cell" is-link url="../create-team/create-team">
+        <view class="cell-title">
+            18123643331
+            <text class="remarks">(拥有者)</text>
+        </view>
+        <view slot="footer" class="cell-footer-wrap">
+            <text class="cell-desc">管理员</text>
+            <view class="suffix-icon iconfont iconjiantou"></view>
+        </view>
+    </i-cell>
+    <i-cell i-class="custom-cell" is-link url="../create-team/create-team">
+        <view class="cell-title">
+            18123643331
+            <text class="remarks"></text>
+        </view>
+        <view slot="footer" class="cell-footer-wrap">
+            <text class="cell-desc">管理员</text>
+            <view class="suffix-icon iconfont iconjiantou"></view>
+        </view>
+    </i-cell>
+</i-cell-group>
+
+<button class="f-button">添加成员</button>

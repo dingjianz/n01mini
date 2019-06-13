@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "iconfont": "../../components/iconfont/iconfont"
+    "iconfont": "../../components/iconfont/iconfont",
+    "onoff": "../../components/switch-self/switch-self"
   }
 }

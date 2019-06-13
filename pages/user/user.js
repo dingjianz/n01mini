@@ -5,15 +5,24 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        // 拥有团队
+        ownedTeam: true,
+        actions: [
+            {
+                name: '我再想想',
+                color: '#395787'
+            },
+            {
+                name: '确定删除',
+                color: '#C23634'
+            }
+        ],
     },
 
-    navigateTo(e){
-        // console.log(e);
-        // wx.navigateTo({
-        //     url: e.target.dataset.url
-        // });
+    handleBtn(e) {
+        console.log(e);
     },
+
     /**
      * 生命周期函数--监听页面加载
      */

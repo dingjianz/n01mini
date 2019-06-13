@@ -1,5 +1,5 @@
 <!--components/iconfont/iconfont.wxml-->
-<view>
+<view style='color:{{color}};'>
   <text wx:for="{{fontArr}}" wx:key="index" style='color:{{color}};font-size:{{fontSize}}rpx;margin-left:-{{fontSize/3}}rpx;' class='iconfont {{iconArr[item]}}'></text>
   <slot></slot>
 </view>

@@ -140,7 +140,7 @@ export const post = (url, data, token) => {
             },
             fail:function(err) {
                 wx.showToast({
-                    title: '登陆失败啦啦啦',
+                    title: '登陆失败',
                     icon: 'none',
                     duration: 2000
                 })
@@ -152,15 +152,13 @@ export const post = (url, data, token) => {
 //名称改变背景颜色
 export function todealName(str){
 	str=str.replace(/\s/g,'');
-	var colors=['#648EC3','#8364C3','#C36468','#64B0C3','#64B0C3','#C38664'];
+	var colors=['#4BB7FB','#F06292','#FB854B','#26C6DA','#BA68C8','#B3D64C','#82B1FF','#FF8A80'];
 	if(typeof str=='string'){
 		var color=getcolors(str);
-		var strname=getname(str);
-		return [color,strname];
+		return color;
 	}else if(typeof str=='number'){
 		var color=getcolors(String(str));
-		var strname=getname(str);
-		return [color,strname];
+		return color;
 	}else{
 		return false;
 	}
@@ -172,23 +170,6 @@ export function todealName(str){
 			num+=String(strarr[i].charCodeAt());
 		}
 		return colors[parseInt(num)%(colors.length)]
-	}
-	//计算字符串
-	function getname(str){
-		str=str.toUpperCase();
-		if(str.length>0){
-			if(str.length<2){
-				return str;
-			}else{
-				if(str.match(/[\u4e00-\u9fa5]/g) && str.match(/[\u4e00-\u9fa5]/g).length==str.length){	//全部中文
-					return str.substring(str.length-2,str.length);
-				}else{
-					return str.substring(0,2);
-				}
-			}
-		}else{
-			return false;
-		}
 	}
 }
 

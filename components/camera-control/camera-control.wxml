@@ -1,0 +1,49 @@
+<!--components/camera-control/camera-control.wxml-->
+<view class="control-container" wx:if="{{showCameraCrl}}">
+    <button
+     class="ctrl-close" 
+     bindtap="closeHandleCtrl"
+    >
+        <view class="close-icon iconfont iconclose"></view>
+    </button>
+    <view class="ctrl-steering-wheel">
+        <button
+         class="arrow-key key-top {{keys.top ? 'active' : ''}}"
+         bindtouchstart="handleKey"
+         bindtouchend="leaveHandleKey"
+         data-key="top"
+        ></button>
+        <button
+         class="arrow-key key-right {{keys.right ? 'active' : ''}}" 
+         bindtouchstart="handleKey" 
+         bindtouchend="leaveHandleKey" 
+         data-key="right"
+        ></button>
+        <button
+         class="arrow-key key-btm {{keys.btm ? 'active' : ''}}" 
+         bindtouchstart="handleKey" 
+         bindtouchend="leaveHandleKey"
+         data-key="btm"
+        ></button>
+        <button
+         class="arrow-key key-left {{keys.left ? 'active' : ''}}" 
+         bindtouchstart="handleKey" 
+         bindtouchend="leaveHandleKey" 
+         data-key="left"
+        ></button>
+    </view>
+    <view class="ctrl-scale">
+        <button
+         class="scale-key zoom-out {{keys.out ? 'active' : ''}}" 
+         bindtouchstart="handleKey" 
+         bindtouchend="leaveHandleKey" 
+         data-key="out"
+        ></button>
+        <button
+         class="scale-key zoom-in {{keys.in ? 'active' : ''}}"
+         bindtouchstart="handleKey" 
+         bindtouchend="leaveHandleKey" 
+         data-key="in"
+        ></button>
+    </view>
+</view>

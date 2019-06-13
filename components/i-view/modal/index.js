@@ -1,6 +1,8 @@
 Component({
     externalClasses: ['i-class', 'i-class-mask'],
-
+    options: {
+        styleIsolation: 'apply-shared'
+    },
     properties: {
         visible: {
             type: Boolean,

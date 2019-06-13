@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "选择区域",
+  "usingComponents": {
+    "i-icon": "../../components/i-view/icon/index"
+  }
+}

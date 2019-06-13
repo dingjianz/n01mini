@@ -21,7 +21,11 @@ Component({
   lifetimes: {
     attached: function () {
       // 在组件实例进入页面节点树时执行
-      console.log(this.properties.dataNum)
+      if (!this.properties.color){
+        this.setData({
+          color: '#15FC71'
+        })
+      }
       var num = this.properties.dataNum.split('');
       var arr = [];
       num.forEach((item,index)=>{
@@ -34,8 +38,6 @@ Component({
       this.setData({
         fontArr: arr
       })
-
-      console.log(this.data.fontArr)
     },
     detached: function () {
       // 在组件实例被从页面节点树移除时执行

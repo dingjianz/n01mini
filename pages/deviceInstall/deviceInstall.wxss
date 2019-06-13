@@ -31,11 +31,26 @@
 
 .device-wrapper .device-data .u-jiantou {
   font-size: 26rpx;
-  margin: 0 29rpx 0 10rpx;
+  padding: 0 29rpx 0 10rpx;
   color: #354e75;
 }
 
 .wrapper-botBorder {
   width: 100%;
   border-bottom: 1px solid #001434;
+}
+
+.input-wrapper {
+  width: 400rpx;
+  height: 80rpx;
+  border:1px solid rgba(41,65,102,1);
+  box-sizing: border-box;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  margin-left: 24rpx;
+  padding-left: 15rpx;
+}
+.u-input {
+  color:#15E9FC;
 }

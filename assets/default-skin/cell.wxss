@@ -1,0 +1,49 @@
+/* 自定义cell皮肤样式 */
+.custom-cell-group{
+    background-color: transparent;
+    padding: 0 20rpx;
+    margin-top: 13rpx;
+}
+.custom-cell-group .custom-cell{
+    background-color: #102957;
+    margin-top: 20rpx;
+    height: 110rpx;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+    color: #8BABE7;
+    font-size: 30rpx;
+    border-radius: 10rpx;
+}
+.custom-cell-group .custom-cell::after{
+    height: 0;
+    border: 0 none;
+}
+
+.custom-cell-group .custom-cell .prefix-icon{
+    font-size: 36rpx;
+    color: #15E9FC;
+    margin-right: 28rpx;
+}
+.custom-cell-group .custom-cell .cell-title .remarks{
+    color: #15E9FC;
+    font-size: 26rpx;
+    display: inline-block;
+    height: 30rpx;
+    line-height: 30rxp;
+}
+.custom-cell-group .custom-cell .cell-footer-wrap{
+    display: flex;
+    height: 38rpx;
+    line-height: 38rpx;
+    align-items: center;
+}
+.custom-cell-group .custom-cell .cell-footer-wrap .cell-desc{
+    color: #456EAD;
+    font-size: 26rpx;
+    margin-right: 20rpx;
+}
+.custom-cell-group .custom-cell .cell-footer-wrap .suffix-icon{
+    font-size: 26rpx;
+    color: #354E75;
+    margin-right: 0;
+}

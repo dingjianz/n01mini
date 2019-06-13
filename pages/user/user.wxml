@@ -11,21 +11,35 @@
         <text class="t-setting">设置</text>
     </button>
 </view>
-<i-cell-group i-class="user-cell-group clearfix">
-    <i-cell i-class="user-cell" is-link url="../membership/membership">
+<i-cell-group wx:if="{{ownedTeam}}" i-class="custom-cell-group clearfix">
+    <i-cell i-class="custom-cell" is-link url="../membership/membership">
         <text class="cell-title">成员管理</text>
-        <view slot="icon" class="iconfont iconchengyuanguanli"></view>
+        <view slot="icon" class="prefix-icon iconfont iconchengyuanguanli"></view>
         <view slot="footer" class="cell-footer-wrap">
             <text class="cell-desc">邀请他人一起管理设备</text>
-            <view class="iconfont iconjiantou"></view>
+            <view class="suffix-icon iconfont iconjiantou"></view>
         </view>
     </i-cell>
-    <i-cell i-class="user-cell" is-link url="../regional-management/regional-management">
+    <i-cell i-class="custom-cell" is-link url="../regional-management/regional-management">
         <text class="cell-title">区域管理</text>
-        <view slot="icon" class="iconfont icondituicon"></view>
+        <view slot="icon" class="prefix-icon iconfont icondituicon"></view>
         <view slot="footer" class="cell-footer-wrap">
             <text class="cell-desc">将设备按区域进行管理</text>
-            <view class="iconfont iconjiantou"></view>
+            <view class="suffix-icon iconfont iconjiantou"></view>
         </view>
     </i-cell>
 </i-cell-group>
+<i-cell-group wx:else i-class="custom-cell-group clearfix">
+    <i-cell i-class="custom-cell" is-link url="../create-team/create-team">
+        <text class="cell-title">邀请他人一起管理设备</text>
+        <view slot="footer" class="cell-footer-wrap">
+            <text class="cell-desc">创建团队</text>
+            <view class="suffix-icon iconfont iconjiantou"></view>
+        </view>
+    </i-cell>
+</i-cell-group>
+<i-modal visible title="确定删除“13735479486”吗？" actions="{{actions}}" bind:click="handleBtn">
+
+    <view class="modal-c">删除后，该成员将失去在团队中的所有 权限。</view>
+    
+</i-modal>

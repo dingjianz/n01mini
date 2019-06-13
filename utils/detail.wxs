@@ -1,0 +1,25 @@
+var filter = { // 返回类名
+  returnClassName: function (name) {
+    if (name === '开启') {
+      return 'z-open';
+    } else if (name === '关闭') {
+      return 'z-close';
+    } else {
+      return 'z-pause';
+    }
+  },
+  returnstatusName: function (name) {
+    if (name === '开启') {
+      return 'z-status-open';
+    } else if (name === '关闭') {
+      return 'z-status-close';
+    } else {
+      return 'z-status-pause';
+    }
+  }
+}
+// 导出对外暴露的属性
+module.exports = {
+  returnClassName: filter.returnClassName,
+  returnstatusName: filter.returnstatusName
+}

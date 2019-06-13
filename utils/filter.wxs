@@ -1,0 +1,27 @@
+var filter = {
+    numTofixed : function (num, n, per) {//获取n位小数
+        if (num != 0) {
+            if (arguments.length == 3 && per) {
+                num = num * 100;
+                return parseInt(num * Math.pow(10, n) + 0.5, 10) / Math.pow(10, n) + "%";
+            } else {
+                return parseInt(num * Math.pow(10, n) + 0.5, 10) / Math.pow(10, n);
+            }
+        } else {
+            if (arguments.length == 3 && per) {
+                return "0%";
+            } else {
+                return 0;
+            }
+        }
+    },
+    strExchange : function(val,newval){//字符为空时可自定义文案
+        var text = val ? val : newval;
+        return text;
+    }
+}
+
+module.exports = {
+    numTofixed: filter.numTofixed,
+    strExchange: filter.strExchange
+}

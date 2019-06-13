@@ -1,0 +1,50 @@
+/* components/switch-self/switch-self.wxss */
+.onoff-type1,.onoff-type2{
+  width: 202rpx;
+  height:62rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  border-radius: 60rpx;
+  border: 1rpx solid #1E3C73;
+  padding: 0 10rpx;
+  background-color: #001434;
+  box-sizing: border-box;
+}
+.onoff-type2{
+  width: 160rpx;
+}
+.onoff-type1>.btn.active,.onoff-type2>.btn.active{
+  border-radius: 100%;
+  color: #fff;
+}
+.onoff-type1>.btn,.onoff-type2>.btn{
+  line-height: 48rpx;
+  width: 48rpx;
+  height: 48rpx;
+  text-align: center;
+}
+.onoff-type1>.off,.onoff-type2>.off{
+  color: #FD4F4F;
+}
+.onoff-type1>.stop{
+  color: #FCAD15;
+}
+.onoff-type1>.open,.onoff-type2>.open{
+  color: #30E034;
+}
+
+.onoff-type1>.off.active,.onoff-type2>.off.active{
+  background:linear-gradient(0deg,rgba(254,77,77,1),rgba(252,136,109,1));
+  box-shadow:0px 3px 6px 0px rgba(254,77,77,0.4);
+}
+.onoff-type1>.stop.active{
+  background:linear-gradient(0deg,rgba(254,148,77,1),rgba(254,189,77,1));
+  box-shadow:0px 3px 6px 0px rgba(254,159,77,0.4);
+}
+.onoff-type1>.open.active,.onoff-type2>.open.active{
+  background:linear-gradient(0deg,rgba(29,197,37,1),rgba(37,240,132,1));
+  box-shadow:0px 3px 6px 0px rgba(37,223,107,0.4);
+}

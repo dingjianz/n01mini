@@ -1,11 +1,12 @@
+<wxs module="filter" src="../../utils/detail.wxs"></wxs>
 <view class="container">
   <view class="device-status">
     <view class="status-top">
       <view class="device-positionDes">生产示范基地</view>
       <icon class="iconfont iconshezhi"></icon>
     </view>
-    <view class="status-middle">
-      开启
+    <view class="status-middle {{filter.returnstatusName('暂停')}}">
+      暂停
     </view>
     <view class="status-bottom">内遮阳一号开关</view>
   </view>
@@ -14,23 +15,24 @@
     <view class="divde-border"></view>
 
     <view class="control-detail">
-      212212
-
-      <block wx:for="{{axis}}" wx:key="*this">
-        <view class='weui-cell-list'>
-
-          <view class='weui-cell-circle'></view>
-
-          <view class="weui-cell-line {{index === (axis.length - 1) ? 'lineHidden' : ''}}" >
-
-            <view class='weui-cell-time'>{{item.time}}</view>
-            <view class='weui-cell-name'>{{item.name}}</view>
-            <view class='weui-cell-event'>{{item.event}}</view>
+      <!-- 时间轴 -->
+      <view class="border-left">
+        <block wx:for="{{axis}}" wx:key="{{index}}">
+          <view class="cell-circle"></view>
+          <view class="border-item" hidden="{{index === (axis.length - 1) ? 'lineHidden' : ''}}"></view>
+        </block>
+      </view>
+      <!-- 具体记录内容 -->
+      <view class="log-detail">
+        <block wx:for="{{axis}}" wx:key="{{index}}">
+          <view class="log-wrapper">
+            <view class="log-time">{{item.time}}</view>
+            <view class="log-status">
+              <text class="z-open {{filter.returnClassName(item.name)}}" decode>{{item.name}}&nbsp;&nbsp;</text>({{item.event}})
+            </view>
           </view>
-
-        </view>
-
-      </block>
+        </block>
+      </view>
     </view>
   </view>
 </view>

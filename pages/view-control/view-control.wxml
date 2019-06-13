@@ -1,0 +1,4 @@
+<!--pages/view-control/view-control.wxml-->
+<view>
+    <camera-control bindkeyup="keyup"></camera-control>
+</view>

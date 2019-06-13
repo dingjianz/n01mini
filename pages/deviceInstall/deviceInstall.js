@@ -1,23 +1,85 @@
-// pages/deviceInstall/deviceInstall.js
-Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {
 
-  },
+Page({
 
-  /**
-   * 组件的初始数据
-   */
-  data: {
+    /**
+     * 页面的初始数据
+     */
+    data: {
+      visible: false
+    },
+    handleOpen: function() {
+      console.log(111)
+      this.setData({
+        visible: true
+      })
+    },
+    handleClose() {
+      this.setData({
+        visible: false
+      })
+    },
+    turnToSelectType() {
+      wx.navigateTo({
+        url: '/pages/deviceSelectType/deviceSelectType'
+      })
+    },
+    turnToAreaSelect() {
+      wx.navigateTo({
+        url: '/pages/areaSelect/areaSelect'
+      })
+    },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function () {
+    },
 
-  },
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
 
-  /**
-   * 组件的方法列表
-   */
-  methods: {
+    },
 
-  }
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
+
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
+
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+
+    }
 })

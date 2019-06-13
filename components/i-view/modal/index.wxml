@@ -21,10 +21,10 @@
             <view class="i-modal-actions" wx:else>
                 <i-grid i-class="i-modal-grid" wx:if="{{ showOk || showCancel }}">
                     <i-grid-item i-class="i-modal-grid-item" wx:if="{{ showCancel }}">
-                        <i-button i-class="i-modal-btn-cancel" long type="ghost" bind:click="handleClickCancel">{{ cancelText }}</i-button>
+                        <i-button i-class="i-modal-btn-cancel i-modal-btn" long type="ghost" bind:click="handleClickCancel">{{ cancelText }}</i-button>
                     </i-grid-item>
                     <i-grid-item i-class="i-modal-grid-item-last" wx:if="{{ showOk }}">
-                        <i-button i-class="i-modal-btn-ok" long type="ghost" bind:click="handleClickOk">{{ okText }}</i-button>
+                        <i-button i-class="i-modal-btn-ok i-modal-btn" long type="ghost" bind:click="handleClickOk">{{ okText }}</i-button>
                     </i-grid-item>
                 </i-grid>
             </view>
@@ -32,7 +32,7 @@
     </view>
 </view>
 <template name="button">
-    <i-button long type="ghost" data-index="{{ index }}" bind:click="handleClickItem">
+    <i-button long type="ghost" data-index="{{ index }}" bind:click="handleClickItem" i-class="i-modal-btn">
         <view class="i-modal-btn-loading" wx:if="{{ item.loading }}"></view>
         <i-icon wx:if="{{ item.icon }}" type="{{ item.icon }}" i-class="i-modal-btn-icon"></i-icon>
         <view class="i-modal-btn-text" style="{{ item.color ? 'color: ' + item.color : '' }}">{{ item.name }}</view>

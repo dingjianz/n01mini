@@ -1,0 +1,28 @@
+var filter = {
+  // 对不同字符串 返回其对应的色值
+  todealName:function (str){
+    var colors = ['#4BB7FB', '#F06292', '#FB854B', '#26C6DA', '#BA68C8', '#B3D64C', '#82B1FF', '#FF8A80'];
+    if (typeof str == 'string') {
+      var color = getcolors(str);
+      return color;
+    } else if (typeof str == 'number') {
+      var color = getcolors(str+'');
+      return color;
+    } else {
+      return false;
+    }
+    //计算颜色
+    function getcolors(str) {
+      var num = '';
+      var strarr = str.split("");
+      for (var i = 0; i < strarr.length; i++) {
+        num += strarr[i].charCodeAt()+'';
+      }
+      return colors[parseInt(num) % (colors.length)]
+    }
+  }
+}
+// 导出对外暴露的属性
+module.exports = {
+  todealName: filter.todealName
+}

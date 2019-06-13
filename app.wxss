@@ -9,6 +9,7 @@ page{
     background-color:#001434;
     color: #fff;
 }
+
 .clearfix:before,
 .clearfix:after{
   content: '';
@@ -39,3 +40,6 @@ page{
   white-space: nowrapl;
   overflow: hidden;
 }
+
+.d-flex{display: flex;display: -webkit-flex;}
+.hidden{display: none !important;}

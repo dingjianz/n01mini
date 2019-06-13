@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "camera-control": "../../components/camera-control/camera-control"
+  },
+  "navigationBarTitleText": "摄像头控制组件展示页"
+}

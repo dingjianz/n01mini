@@ -1,0 +1,47 @@
+.container{
+    padding:20rpx;
+}
+.datebox{
+    padding:100rpx 0;
+    color:#395787;
+    font-size:38rpx;
+    display:flex;
+    display:-webkit-flex;
+    justify-content:center;
+    align-items: center;
+    flex-flow:row nowrap;
+    background:rgba(11,34,74,1);
+    border-radius:10rpx;
+}
+.datebox .connector{
+    font-size:28rpx;
+    width:100rpx;
+    text-align:center;
+}
+.datebox .dateSt,.datebox .dateOv{
+    height:68rpx;
+    line-height:68rpx;
+    border-bottom:2rpx solid #456EAD;
+}
+.datebox .hasval{
+    color:#8BABE7;
+    border-color:#8BABE7;
+}
+
+.datebox .active{
+    color:#15FC71!important;
+    border-color:#15FC71!important;
+}
+
+
+.submit{
+    width:100%;
+    height:98rpx;
+    line-height:98rpx;
+    font-size:32rpx;
+    text-align:center;
+    color:#8BABE7;
+    background:rgba(11,34,74,1);
+    border-radius:10rpx;
+    margin-top:40rpx;
+}
