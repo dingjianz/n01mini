@@ -43,6 +43,10 @@
         {{item.txt}}</view>
     </view>
     <view class="echart">
+      <view class="temperature-humidity">
+        <text class="temperature {{thflag ? 'active' : ''}}" bindtap="selectThFlag" data-thflag="{{true}}">温度</text>
+        <text class="humidity {{thflag ? '' : 'active'}}" bindtap="selectThFlag" data-thflag="{{false}}">湿度</text>
+      </view>
       <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
     </view>
   </view>

@@ -122,7 +122,8 @@ Page({
     }, {
       id: 4,
       txt: '自定义'
-    }]
+    }],
+    thflag: true // 土壤湿温度设备详情时，折线表先显示温度
   },
   onShareAppMessage: function (res) {
     return {
@@ -140,6 +141,11 @@ Page({
   turnToDeviceInstall() {
     wx.navigateTo({
       url: '/pages/deviceInstall/deviceInstall'
+    })
+  },
+  selectThFlag(e) {
+    this.setData({
+      thflag: e.target.dataset.thflag
     })
   },
   onReady() {}

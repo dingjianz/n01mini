@@ -146,6 +146,31 @@
 .part_b .echart {
   width: 100%;
   height: 610rpx;
+  position: relative;
+}
+
+.part_b .echart .temperature-humidity {
+  position: absolute;
+  top: 30rpx;
+  right: 34rpx;
+  color: #395787;
+  z-index: 9999;
+}
+
+.part_b .echart .temperature-humidity text {
+  width: 84rpx;
+  height: 36rpx;
+  font-size: 26rpx;
+  display: inline-block;
+  line-height: 33rpx;
+  text-align: center;
+  border-radius: 18rpx;
+  box-sizing: border-box;
+}
+
+.part_b .echart .temperature-humidity text.active {
+  color: #8BABE7;
+  border: 1px solid #8BABE7;
 }
 
 .part_b ec-canvas {
