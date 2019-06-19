@@ -23,7 +23,9 @@ Page({
       tip: '删除后，该成员将失去在团队中的所有 权限。'
     },
     role: '管理员',
-    self: false
+    userId: undefined,
+    self: false,
+    params: {}
   },
 
   // 删除成员modal的按钮操作
@@ -34,7 +36,19 @@ Page({
         this.closeModal({ currentTarget });
         break;
       case 1:
-        this.closeModal({ currentTarget });
+        post(urlData.iotCompanyUserRefRemove, {
+          companyId: wx.getStorageSync('CID'),
+          userId: this.data.params.userId
+        }, wx.getStorageSync('TOKEN'))
+        .then((response) => {
+          let res = response.data;
+          if(res.respCode === 0){
+            wx.navigateBack({
+              delta: 1
+            });
+            this.closeModal({ currentTarget });
+          }
+        })
         break;
       default:
         break;
@@ -63,10 +77,12 @@ Page({
   },
   
   getMemberInfo(userId){
+    // console.log(userId);
     let companyId = wx.getStorageSync('CID');
     let accessToken = wx.getStorageSync('TOKEN');
     let userInfo = wx.getStorageSync('COMPANYINFO').userCompanyVO;
     // console.log(userInfo);
+
     post(urlData.iotCompanyUserRefGet, {
       userId,
       companyId
@@ -79,7 +95,7 @@ Page({
           ['delRoleModal.title']: res.obj.userVO.phone,
           role: res.obj.roleVO.roleName,
           self: res.obj.userVO.phone === userInfo.userVO.phone,
-
+          userId: res.obj.userVO.id
         })
       }
     })
@@ -88,7 +104,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getMemberInfo(options.userId);
+    this.setData({
+      params: options
+    })
   },
 
   /**
@@ -102,7 +120,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getMemberInfo(this.data.params.userId);
   },
 
   /**

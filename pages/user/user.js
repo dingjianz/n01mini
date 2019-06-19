@@ -7,7 +7,7 @@ Page({
     data: {
         // 拥有团队
         ownedTeam: true,
-        phone: wx.getStorageSync('USERPHONE')
+        phone: ''
     },
 
     handleBtn(e) {
@@ -31,7 +31,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.checkOwnedTeam();
     },
     
     /**
@@ -45,7 +44,10 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        
+        this.setData({
+            phone: wx.getStorageSync('USERPHONE')
+        });
+        this.checkOwnedTeam();
     },
 
     /**

@@ -7,33 +7,55 @@ Page({
    * 页面的初始数据
    */
   data: {
-    role: [
-      {
-        id: 1,
-        name: '管理员',
-        roleDesc: ''
-      },
-      // {
-      //   id: 2,
-      //   name: '管控员'
-      // },
-      // {
-      //   id: 3,
-      //   name: '观察员'
-      // }
-    ],
-    current: '管理员',
+    role: [],
+    current: undefined,
 
     position: 'right',
 
     roleModal: {
       visible: false
-    }
+    },
+    userId: undefined,
   },
-  handleRoleChange({ detail = {} }) {
-    this.setData({
-      current: detail.value
-    });
+  handleRoleChange({ currentTarget }) {
+    // console.log(currentTarget);
+    if (!this.data.userId) {
+      // console.log(pages);
+      let pages = getCurrentPages();
+      let prevPage = pages[pages.length - 2];
+      prevPage.setData({
+        role: {
+          id: currentTarget.dataset.id,
+          name: currentTarget.dataset.name
+        }
+      })
+      wx.navigateBack({
+        delta: 1
+      });
+      return true;
+    };
+    post(urlData.iotCompanyUserRefEdit, {
+      companyId: wx.getStorageSync('CID'),
+      roleId: currentTarget.dataset.id,
+      userId: this.data.userId
+    }, wx.getStorageSync('TOKEN'))
+      .then((response) => {
+        let res = response.data;
+        if (res.respCode === 0) {
+          // console.log(res);
+          // wx.showToast({
+          //   title: '角色修改成功',
+          //   icon: 'success',
+          //   duration: 3000
+          // });
+          wx.navigateBack({
+            delta: 1
+          });
+          this.setData({
+            current: currentTarget.dataset.name
+          });
+        }
+      })
   },
 
   getRoleList() {
@@ -50,9 +72,9 @@ Page({
                 roleDesc: item.roleDesc
               }
             }),
+            current: this.data.current || res.obj.list[0].roleName,
             ['roleModal.role']: res.obj.list.map((item) => {
               return {
-                id: item.id,
                 name: item.roleName,
                 roleDesc: item.roleDesc
               }
@@ -68,16 +90,27 @@ Page({
       [currentTarget.dataset.modal]: true
     })
   },
+
   // 关闭弹框-可抽至于公共方法 *
   closeModal({ currentTarget }) {
     this.setData({
       [currentTarget.dataset.modal]: false
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    (options.userId !== undefined)
+      && this.setData({
+        userId: options.userId
+      });
+    (options.roleName !== undefined)
+      && this.setData({
+        current: options.roleName
+      })
+
     this.getRoleList();
   },
 

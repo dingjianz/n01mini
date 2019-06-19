@@ -13,6 +13,9 @@
   color: #395A8F;
   font-size: 26rpx;
 }
+.custom-cell-group .custom-cell .cell-title.checked{
+  color: #84A5E0;
+}
 .f-input{
   height: 110rpx;
   background-color: #102957;

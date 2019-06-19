@@ -69,6 +69,7 @@ Page({
         this.setData({
             activeId: wx.getStorageSync('CID')
         });
+        console.log(getCurrentPages());
     },
 
     /**

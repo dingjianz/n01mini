@@ -4,7 +4,14 @@ Component({
      * 组件的属性列表
      */
     properties: {
-
+        deviceId: {//设备id
+            type: Number,
+            value:12
+        },
+        deviceTit: {//设备名称
+            type: String,
+            value: '设备名称'
+        }
     },
     /**
      * 组件的初始数据
@@ -41,14 +48,7 @@ Component({
       },
       // 退出控制
       closeCtrl() {
-          // wx.navigateBack({
-          //     url: '/pages/multiVideo/multiVideo'
-          // });
           this.triggerEvent('exitCtrl');
-      },
-      // 设置
-      intoSet(e){
-        this.triggerEvent('intoSet')
       }
     }
 })

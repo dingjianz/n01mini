@@ -46,13 +46,20 @@
   margin-left: 7rpx;
   font-size: 32rpx;
 }
-radio .wx-radio-input{
+.custom-radio .wx-radio-input{
   background: transparent;
   border: 0 none;
 }
-radio .wx-radio-input.wx-radio-input-checked::before{
+.custom-radio .wx-radio-input.wx-radio-input-disabled{
+  background-color: transparent;
+}
+.custom-radio .wx-radio-input.wx-radio-input-checked{
+  background-color: transparent;
+}
+.custom-radio .wx-radio-input.wx-radio-input-checked::before{
   color: #15E9FC;
   font-size: 38rpx;
+  background-color: transparent;
 }
 /* 弹框模板 */
 .f-modal-container{

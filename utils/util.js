@@ -1,5 +1,70 @@
 // 工具类
 
+const serverUrl = {
+  '0': 'https://zaiottest.snkoudai.com/api/',
+  '1': 'https://zaiot.snkoudai.com/api/'
+}
+const httpServer = serverUrl[0];
+
+export const urlData = {
+  // ====摄像头模块====
+  'iotCameraEditGroup': httpServer + 'iot/co/camera/edit/group', //修改企业摄像头所属区域
+  'iotCameraEditName': httpServer + 'iot/co/camera/edit/name', //修改摄像头名称
+  'iotCameraList': httpServer + 'iot/co/camera/list', //获取企业设备/个人设备----按照区域获取企业摄像头列表
+
+  // ====团队/企业模块====
+  'iotCompanyAdd': httpServer + 'iot/co/company/add', //创建团队/企业
+  'iotCompanyDel': httpServer + 'iot/co/company/del', //删除团队/企业
+  'iotCompanyEditName': httpServer + 'iot/co/company/edit/name', //修改团队/企业名称
+  'iotCompanyGet': httpServer + 'iot/co/company/get', //获取企业详情
+  'iotCompanyList': httpServer + 'iot/co/company/list', //获取用户的企业列表
+
+  // ====企业角色模块====
+  'iotCompanyRoleList': httpServer + 'iot/co/companyrole/list', //获取企业角色列表
+
+  // ====企业用户模块====
+  'iotCompanyUserEditMy': httpServer + 'iot/co/companyuser/edit/my', //修改自己的用户昵称或头像，保证昵称和头像有一个字段不为空
+  'iotCompanyUserGet': httpServer + 'iot/co/companyuser/get', //使用accesstoken获取个人信息
+  'iotCompanyUserRefEdit': httpServer + 'iot/co/companyuser/ref/edit', //修改企业下某员工的角色
+  'iotCompanyUserRefGet': httpServer + 'iot/co/companyuser/ref/get', //获取某一企业下某一个员工的详细信息
+  'iotCompanyUserRefGetMyPerm': httpServer + 'iot/co/companyuser/ref/get/myperm', //获取员工在企业下权限标识列表
+  'iotCompanyUserRefJoin': httpServer + 'iot/co/companyuser/ref/join', //添加企业成员
+  'iotCompanyUserRefList': httpServer + 'iot/co/companyuser/ref/list', //获取企业成员列表
+  'iotCompanyUserRefQuit': httpServer + 'iot/co/companyuser/ref/quit', //退出企业
+  'iotCompanyUserRefRemove': httpServer + 'iot/co/companyuser/ref/remove', //删除企业下某员工
+  'iotCompanyUserRefTransfer': httpServer + 'iot/co/companyuser/ref/transfer', //移交团队
+
+  // ====控制器分类模块====
+  'iotControllerCateList': httpServer + 'iot/co/controllercategory/list', //获取分类列表
+
+  // ====设备模块====
+  'iotDeviceCountByProType': httpServer + 'iot/co/device/count/byProductType', //获取企业设备/个人设备数量（按照产品类型，区域）
+  'iotDeviceEditContCate': httpServer + 'iot/co/device/edit/controllerCategory', //修改控制器类型设备所属分类
+  'iotDeviceEditGroup': httpServer + 'iot/co/device/edit/group', //修改设备所属区域
+  'iotDeviceEditName': httpServer + 'iot/co/device/edit/name', //修改设备显示名称
+  'iotDeviceGetDetail': httpServer + 'iot/co/device/get/detail', //获取设备的详细信息
+  'iotDeviceSListByProType': httpServer + 'iot/co/device/stateList/byProductType', //获取企业设备/个人设备-设备列表(包含当前的设备实时状态)
+
+  // ====区域模块====
+  'iotDeviceGroupAdd': httpServer + 'iot/co/devicegroup/add', //企业下添加区域
+  'iotDeviceGroupDel': httpServer + 'iot/co/devicegroup/del', //企业下删除区域
+  'iotDeviceGroupEdit': httpServer + 'iot/co/devicegroup/edit', //企业下修改区域名称
+  'iotDeviceGroupList': httpServer + 'iot/co/devicegroup/list', //获取企业下区域列表
+  'iotDeviceGroupListCount': httpServer + 'iot/co/devicegroup/list/count', //获取企业下区域列表即该区域下设备数量
+
+  // ====登录模块====
+  'iotLoginLogout': httpServer + 'iot/co/login/logout', //退出登录
+  'iotLoginPhone': httpServer + 'iot/co/login/phone', //手机号验证码登录
+
+  // ====短信模块====
+  'baseSmsSendSmsVcode': httpServer + 'foundation/sms/sendSmsVcode', //发送短信验证码
+
+  // ====短信模块====
+  'baseSmsSendSmsVcode': httpServer + 'foundation/sms/sendSmsVcode',  //发送短信验证码
+
+}
+
+
 // 检测手机号
 export const checkPhone = p => {
     let pReg = /^1\d{10}$/;
@@ -98,8 +163,9 @@ export const post = (url, data, token) => {
       },
       data: data,
       success: function (res) {
-        resolve(res)
-        if (res.data.respCode === 400) {
+        if (res.data.respCode === 0){
+          resolve(res)
+        }else if (res.data.respCode === 400) {  //token失效
           wx.showToast({
             title: '账号出现异常，请重新登录',
             icon: 'none',
@@ -112,11 +178,10 @@ export const post = (url, data, token) => {
           }, 1000)
           wx.removeStorageSync('TOKEN')
           wx.removeStorageSync('USERPHONE')
-        }
-        if (res.data.respCode === 2012) {
-          wx.switchTab({
-            url: '/pages/index/index',
-          })
+        }else if(res.data.respCode === 404) { //权限不足
+          getCompany(wx.getStorageSync('CID'))
+        } else if (res.data.respCode === 405){  //当前用户不在该团队时
+          
         }
       },
       fail: function (err) {
@@ -155,19 +220,26 @@ export function todealName(str) {
 }
 
 // 权限判断
-export function ishasPower(mark, nextfn) { //mark仅支持数组 
+export function ishasPower(mark, nextfn , reget=false) { //mark仅支持数组 ,nextfn是回调，reget是是否需要重新拉取权限
   let results = [], powerArr = wx.getStorageSync('COMPANYINFO').perms;
-  if (mark instanceof Array) {
-    results = [];
-    mark.forEach((item, index) => {
-      results.push(hasitem(powerArr, item))
-    })
-  }
-  if (nextfn) {
-    nextfn(results)
+  if (!reget && wx.getStorageSync('COMPANYINFO').perms && (wx.getStorageSync('COMPANYINFO').powerTime > (new Date().getTime() - 1200000))){
+    if (mark instanceof Array) {
+      results = [];
+      mark.forEach((item, index) => {
+        results.push(hasitem(powerArr, item))
+      })
+      if (nextfn) {
+        nextfn(results)
+      }
+    }
+  } else {
+    getCompany(wx.getStorageSync('CID'),function(){
+      ishasPower.call(null,mark, nextfn)
+    });
   }
 }
 
+//item在arr中是否存在
 function hasitem(arr, item) {
     for (var i = 0; i < arr.length; i++) {
         if (arr[i] == item) {
@@ -198,71 +270,19 @@ Date.prototype.format = function (format) {
   }
   return format;
 }
+//获取企业列表
+export const getCompanyList = (nextfn) => {
+  let compListPost = post(urlData.iotCompanyList, {}, wx.getStorageSync('TOKEN'));
 
-const serverUrl = {
-  '0': 'https://zaiottest.snkoudai.com/api/',
-  '1': 'https://zaiot.snkoudai.com/api/'
+  compListPost.then(function (resp) {
+    if(nextfn){
+      nextfn(resp)
+    }
+  });
+  return compListPost;
 }
-const httpServer = serverUrl[0];
-
-export const urlData = {
-  // ====摄像头模块====
-  'iotCameraEditGroup': httpServer + 'iot/co/camera/edit/group', //修改企业摄像头所属区域
-  'iotCameraEditName': httpServer + 'iot/co/camera/edit/name', //修改摄像头名称
-  'iotCameraList': httpServer + 'iot/co/camera/list', //获取企业设备/个人设备----按照区域获取企业摄像头列表
-
-  // ====团队/企业模块====
-  'iotCompanyAdd': httpServer + 'iot/co/company/add', //创建团队/企业
-  'iotCompanyDel': httpServer + 'iot/co/company/del', //删除团队/企业
-  'iotCompanyEditName': httpServer + 'iot/co/company/edit/name', //修改团队/企业名称
-  'iotCompanyGet': httpServer + 'iot/co/company/get', //获取企业详情
-  'iotCompanyList': httpServer + 'iot/co/company/list', //获取用户的企业列表
-
-  // ====企业角色模块====
-  'iotCompanyRoleList': httpServer + 'iot/co/companyrole/list', //获取企业角色列表
-
-  // ====企业用户模块====
-  'iotCompanyUserEditMy': httpServer + 'iot/co/companyuser/edit/my', //修改自己的用户昵称或头像，保证昵称和头像有一个字段不为空
-  'iotCompanyUserGet': httpServer + 'iot/co/companyuser/get', //使用accesstoken获取个人信息
-  'iotCompanyUserRefEdit': httpServer + 'iot/co/companyuser/ref/edit', //修改企业下某员工的角色
-  'iotCompanyUserRefGet': httpServer + 'iot/co/companyuser/ref/get', //获取某一企业下某一个员工的详细信息
-  'iotCompanyUserRefGetMyPerm': httpServer + 'iot/co/companyuser/ref/get/myperm', //获取员工在企业下权限标识列表
-  'iotCompanyUserRefJoin': httpServer + 'iot/co/companyuser/ref/join', //添加企业成员
-  'iotCompanyUserRefList': httpServer + 'iot/co/companyuser/ref/list', //获取企业成员列表
-  'iotCompanyUserRefQuit': httpServer + 'iot/co/companyuser/ref/quit', //退出企业
-  'iotCompanyUserRefRemove': httpServer + 'iot/co/companyuser/ref/remove', //删除企业下某员工
-  'iotCompanyUserRefTransfer': httpServer + 'iot/co/companyuser/ref/transfer', //移交团队
-
-  // ====控制器分类模块====
-  'iotControllerCateList': httpServer + 'iot/co/controllercategory/list', //获取分类列表
-
-  // ====设备模块====
-  'iotDeviceCountByProType': httpServer + 'iot/co/device/count/byProductType', //获取企业设备/个人设备数量（按照产品类型，区域）
-  'iotDeviceEditContCate': httpServer + 'iot/co/device/edit/controllerCategory', //修改控制器类型设备所属分类
-  'iotDeviceEditGroup': httpServer + 'iot/co/device/edit/group', //修改设备所属区域
-  'iotDeviceEditName': httpServer + 'iot/co/device/edit/name', //修改设备显示名称
-  'iotDeviceGetDetail': httpServer + 'iot/co/device/get/detail', //获取设备的详细信息
-  'iotDeviceSListByProType': httpServer + 'iot/co/device/stateList/byProductType', //获取企业设备/个人设备-设备列表(包含当前的设备实时状态)
-
-  // ====区域模块====
-  'iotDeviceGroupAdd': httpServer + 'iot/co/devicegroup/add', //企业下添加区域
-  'iotDeviceGroupDel': httpServer + 'iot/co/devicegroup/del', //企业下删除区域
-  'iotDeviceGroupEdit': httpServer + 'iot/co/devicegroup/edit', //企业下修改区域名称
-  'iotDeviceGroupList': httpServer + 'iot/co/devicegroup/list', //获取企业下区域列表
-  'iotDeviceGroupListCount': httpServer + 'iot/co/devicegroup/list/count', //获取企业下区域列表即该区域下设备数量
-
-  // ====登录模块====
-  'iotLoginLogout': httpServer + 'iot/co/login/logout', //退出登录
-  'iotLoginPhone': httpServer + 'iot/co/login/phone', //手机号验证码登录
-
-  // ====短信模块====
-  'baseSmsSendSmsVcode': httpServer + 'foundation/sms/sendSmsVcode', //发送短信验证码
-
-    // ====短信模块====
-    'baseSmsSendSmsVcode': httpServer + 'foundation/sms/sendSmsVcode',  //发送短信验证码
-
-}
-export const getCompany = (cid) => { //获取企业详情
+//获取企业详情
+export const getCompany = (cid,nextfn) => { 
   let companyPost = post(urlData.iotCompanyGet, {
     "companyId": cid
   }, wx.getStorageSync('TOKEN'));
@@ -270,7 +290,13 @@ export const getCompany = (cid) => { //获取企业详情
   companyPost.then(function (resp) {
     if (resp.data.respCode == 0) {
       wx.setStorageSync('CID', cid);
+      resp.data.obj.powerTime = new Date().getTime(); //存入当前最新获取权限的时间
       wx.setStorageSync('COMPANYINFO', resp.data.obj)
+      setTimeout(()=>{
+        if (nextfn) {
+          nextfn();
+        }
+      },0)
     }
   });
 

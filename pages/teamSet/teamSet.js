@@ -1,11 +1,12 @@
 // pages/teamSet/teamSet.js
-import { post, urlData, checkBt } from '../../utils/util.js'
+import { post, urlData, checkBt, ishasPower} from '../../utils/util.js'
 Page({
     /**
      * 页面的初始数据
      */
     data: {
-        role:true,
+        viewable:false,
+        companyId: wx.getStorageSync("CID"),
         originTit:'',
         companyTit:'',
         editRight:true,
@@ -20,11 +21,14 @@ Page({
             {
                 name: '确定',
                 color: '#456EAD'
-            },
+            }
         ],
         errorCode:0//1为团队名称未填写，2为团队名称超长
     },
     openModal(e) {
+        // if (this.data.viewable){
+        //     return 
+        // }
         const key = e.currentTarget.dataset.modal;
         if (key == 'editModal' && !this.data.editRight){
             return
@@ -71,7 +75,7 @@ Page({
     submitName(){//提交修改的团队名称
         let _this = this;
         post(urlData.iotCompanyEditName, {
-            "companyId": wx.getStorageSync("CID"),
+            "companyId": this.data.companyId,
             "companyName": this.data.companyTit
         }, wx.getStorageSync('TOKEN')).then(function (resp) {
             if (resp.data.respCode === 0) {
@@ -98,6 +102,7 @@ Page({
      */
     onLoad: function (options) {
         this.setData({
+            companyId: options.cid,
             companyTit: options.cname,
             originTit: options.cname
         });
@@ -114,7 +119,14 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        let _this = this;
+        ishasPower(['user:company:get'], function (res) {
+            if (res[0]) {
+                _this.setData({
+                    viewable: true
+                });
+            }
+        });
     },
 
     /**

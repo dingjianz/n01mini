@@ -1,9 +1,9 @@
 <!--components/ctrol-pan/ctrol-pan.wxml-->
 <view class="pancon">
     <view class="pantit">
-        <view class="config" catchtap='intoSet'>
+        <navigator class="config" url="/pages/videoSet/videoSet?deviceId={{deviceId}}&&deviceTit={{deviceTit}}">
             <view class="iconfont iconset"></view>
-        </view>
+        </navigator>
         <text>摄像头控制</text>
         <view class="exit" catchtap="closeCtrl">退出控制</view>
     </view>

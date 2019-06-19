@@ -16,6 +16,6 @@
         </view>    
     </view>
     <view class="pannel">
-        <ctrolPan bindctrol="ctrolEvent"></ctrolPan>
+        <ctrolPan bindctrol="ctrolEvent" bindexitCtrl="exitCtrl"></ctrolPan>
     </view>
 </view>

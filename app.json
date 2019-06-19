@@ -27,7 +27,9 @@
         "pages/userSet/userSet",
         "pages/teamList/teamList",
         "pages/teamSet/teamSet",
-        "pages/handOver/handOver"
+        "pages/handOver/handOver",
+        "pages/videoSet/videoSet",
+        "pages/videoArea/videoArea"
     ],
     "window": {
         "backgroundColor": "#001434",

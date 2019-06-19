@@ -3,8 +3,8 @@
   管理员：可管理团队、查看设备数据、对设备
   管控员：可查看设备数据、对设备进行控制
   观察员：可查看设备数据、不能控制设备 -->
-<i-radio-group i-class="custom-radio-group" current="{{current}}" bindchange="handleRoleChange">
-  <i-radio i-class="custom-radio {{'custom-radio-' + index}} {{ current === item.name ? 'checked' : '' }}" color="transparent" wx:for="{{role}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}"></i-radio>
+<i-radio-group i-class="custom-radio-group" current="{{current}}">
+  <i-radio i-class="custom-radio {{'custom-radio-' + index}} {{ current === item.name ? 'checked' : '' }}" color="transparent" wx:for="{{role}}" position="{{position}}" wx:key="{{item.id}}" disabled="{{true}}" data-id="{{item.id}}" data-name="{{item.name}}" value="{{item.name}}" bindtap="handleRoleChange"></i-radio>
 </i-radio-group>
 <view class="f-power-tips" bind:tap="openModal" data-modal="roleModal.visible">
   <text class="tip">人员权限</text>

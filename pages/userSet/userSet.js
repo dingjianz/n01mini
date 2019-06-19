@@ -1,5 +1,5 @@
 // pages/userSet/userSet.js
-import { post, urlData } from '../../utils/util.js'
+import { post, urlData, ishasPower as hasPower} from '../../utils/util.js'
 Page({
 
     /**

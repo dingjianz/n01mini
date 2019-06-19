@@ -50,6 +50,11 @@ Page({
             });
         }
     },
+    exitCtrl(){
+        wx.navigateBack({
+            url: '/pages/multiVideo/multiVideo'
+        });
+    },
     /**
      * 生命周期函数--监听页面加载
      */

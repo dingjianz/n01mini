@@ -299,7 +299,9 @@ Page({
       }
     })
     this.initClientRect();
-
+    ishasPower(["111", "user:company:list",],function(result){
+      console.log(result)
+    },false);
   },
 
   /**

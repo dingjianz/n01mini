@@ -21,7 +21,7 @@
             </i-cell>
         </i-cell-group>        
     </block>
-    <i-cell-group i-class="custom-cell-group clearfix" wx:if="{{role}}">
+    <i-cell-group i-class="custom-cell-group clearfix" wx:if="{{viewable}}">
         <i-cell i-class="custom-cell" bind:click="openModal" data-modal="exitModal">
             <button class="f-button exit">
             <text class="iconfont icontuichu"></text>退出团队
