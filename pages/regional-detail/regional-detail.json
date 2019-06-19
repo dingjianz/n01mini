@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "i-modal": "../../components/i-view/modal/index"
+  },
   "navigationBarTitleText": "区域详情"
 }

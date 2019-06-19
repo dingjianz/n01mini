@@ -1,1 +1,297 @@
 /* pages/regional-detail/regional-detail.wxss */
+.regional-name-cell {
+  width: 710rpx;
+  height: 110rpx;
+  margin: 30rpx auto 8rpx;
+  border-radius: 10rpx;
+  background-color: #102957;
+  box-sizing: border-box;
+  padding: 34rpx 29rpx;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.regional-name-cell .cell-title {
+  color: #84a5e0;
+  font-size: 30rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  flex: 1;
+  font-weight: 400;
+}
+.regional-name-cell .cell-name {
+  color: #456ead;
+  font-size: 26rpx;
+  font-weight: 400;
+  height: 37rpx;
+  line-height: 37rpx;
+  margin-right: 19rpx;
+}
+.regional-name-cell .cell-suffix {
+  font-size: 26rpx;
+  color: #354e75;
+}
+.device-num-tips {
+  text-align: center;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: #456ead;
+  box-sizing: border-box;
+  margin: 25rpx 0;
+  font-weight: 400;
+}
+.device-num-tips .device-num {
+  color: #29b6f6;
+}
+.device-tabs {
+  border-radius: 10rpx;
+  overflow: hidden;
+  width: 710rpx;
+  margin: 5rpx auto 0;
+  box-sizing: border-box;
+  height: calc(100vh - 243rpx);
+  padding-bottom: 98rpx;
+}
+.device-tabs.add-device-tabs {
+  height: calc(100vh - 95rpx);
+}
+.device-tabs.noAdmin{
+  padding-bottom: 15rpx;
+}
+.device-tabs .tabs-head {
+  padding: 50rpx 70rpx 26rpx;
+  display: flex;
+  justify-content: space-between;
+  background-color: #102957;
+}
+.device-tabs .tabs-head .tab-btn::before,
+.device-tabs .tabs-head .tab-btn::after {
+  border: 0 none;
+}
+.device-tabs .tabs-head .tab-btn {
+  flex: 1;
+  height: 90rpx;
+  line-height: 88rpx;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 400;
+  background-color: transparent;
+  color: #456ead;
+  border: 0 none;
+  border-radius: 10rpx;
+  overflow: hidden;
+  position: relative;
+}
+.device-tabs .tabs-head .tab-btn:first-child::before{
+  content: '';
+  width: 1rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #273F64;
+}
+.device-tabs .tabs-head .tab-btn.active {
+  color: #15e9fc;
+  border: 0 none;
+}
+.device-tabs .tabs-content {
+  height: calc(100% - 166rpx);
+}
+.device-tabs .tabs-content .devices {
+}
+.device-tabs .tabs-content .devices .device-cell {
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: #102957;
+}
+.device-tabs .tabs-content .devices .device-cell::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 0;
+  width: 680rpx;
+  border-top: 1px solid #001f50;
+}
+.device-tabs .tabs-content .devices .device-cell.last::after {
+  width: 0;
+}
+.device-tabs .tabs-content .devices .device-cell .device-icon {
+  width: 90rpx;
+  height: 90rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 45rpx;
+  overflow: hidden;
+  background-color: #09224a;
+  margin-right: 25rpx;
+}
+.device-tabs .tabs-content .devices .device-cell .device-icon .icon {
+  width: 34rpx;
+  height: 34rpx;
+}
+.device-tabs .tabs-content .devices .device-cell .device-content {
+  flex: 1;
+  font-weight: 400;
+}
+.device-tabs .tabs-content .devices .device-cell .device-content .device-name {
+  font-size: 28rpx;
+  color: #8babe7;
+  height: 40rpx;
+  line-height: 40rpx;
+  margin-bottom: 10rpx;
+  display: block;
+}
+.device-tabs
+  .tabs-content
+  .devices
+  .device-cell
+  .device-content
+  .device-status {
+  font-size: 24rpx;
+  color: #456ead;
+  height: 33rpx;
+  line-height: 33rpx;
+  display: block;
+}
+/* checkbox样式 */
+.device-tabs
+  .tabs-content
+  .devices
+  .device-cell
+  .device-check
+  .wx-checkbox-input {
+  width: 46rpx;
+  height: 46rpx;
+  display: block;
+  text-align: center;
+  line-height: 44rpx;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1rpx solid #395094;
+  color: #fff;
+  box-sizing: border-box;
+  font-family: "iconfont";
+  font-size: 30rpx;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* 其他区域的样式 */
+.device-tabs
+  .tabs-content
+  .devices
+  .device-cell
+  .device-check.other-check
+  .wx-checkbox-input {
+  background-color: #071f50;
+  color: #456ead;
+}
+.device-tabs
+  .tabs-content
+  .devices
+  .device-cell
+  .device-check.other-check
+  .wx-checkbox-input:before {
+  content: "\e634";
+}
+/* 选中的样式 */
+.device-tabs
+  .tabs-content
+  .devices
+  .device-cell
+  .device-check.device-check
+  .wx-checkbox-input.wx-checkbox-input-checked {
+  border: 1rpx solid transparent;
+  background-color: #2057ac;
+}
+/* 选中图标的样式 */
+.device-tabs
+  .tabs-content
+  .devices
+  .device-cell
+  .device-check
+  .wx-checkbox-input.wx-checkbox-input-checked:before {
+  font-size: 30rpx;
+  content: "";
+}
+/*  */
+.device-tabs
+  .tabs-content
+  .devices
+  .device-cell
+  .device-check
+  .wx-checkbox-input.wx-checkbox-input-checked:after {
+  content: "\e634";
+  color: #fff;
+}
+.regional-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 98rpx;
+  line-height: 95rpx;
+  box-sizing: border-box;
+  border-width: 3rpx 0 0 0;
+  border-style: solid;
+  border-color: #123470;
+  border-radius: 0;
+  background-color: #0f2c60;
+  font-size: 32rpx;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+.regional-btn.complete-btn{
+  color: #4D7BC1;
+}
+.regional-btn.del-btn{
+  color: #742424;
+}
+
+/* modal */
+
+.f-input-label{
+  width: 400rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border: 1rpx solid #294166;
+  background-color: transparent;
+  padding: 10rpx 20rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 8rpx;
+  margin-bottom: 23rpx;
+}
+.f-input-label .f-input{
+  flex: 1;
+  font-size: 26rpx;
+  line-height: 50rpx;
+  height: 50rpx;
+  display: block;
+  color: #15E9FC;
+  border: 0 none;
+  outline: none;
+  background-color: transparent;
+}
+.f-input-label .f-input .f-input-placeholder{
+  color: #3F639C;
+}
+.modal-c{
+  color: #7696D3;
+  font-size: 32rpx;
+  line-height: 48rpx;
+  margin-right: -36rpx;
+}

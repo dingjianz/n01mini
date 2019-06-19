@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "设备详情",
+  "usingComponents": {
+    "iconfont": "../../components/iconfont/iconfont",
+    "onoff": "../../components/switch-self/switch-self",
+    "i-row": "../../components/i-view/row/index",
+    "i-col": "../../components/i-view/col/index",
+    "i-modal": "../../components/i-view/modal/index"
+  }
+}

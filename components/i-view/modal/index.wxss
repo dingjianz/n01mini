@@ -60,7 +60,6 @@
   text-align: center;
 }
 .i-modal-body {
-  max-height: 100px;
   padding: 26rpx 49rpx 0;
   margin-bottom: 24rpx;
   font-size: 26rpx;
@@ -70,6 +69,7 @@
   overflow: auto;
   text-align: left;
 }
+
 .i-modal-actions {
   margin: 0 2rpx;
 }

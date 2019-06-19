@@ -1,0 +1,53 @@
+<!--components/ctrol-pan/ctrol-pan.wxml-->
+<view class="pancon">
+    <view class="pantit">
+        <view class="config" catchtap='intoSet'>
+            <view class="iconfont iconset"></view>
+        </view>
+        <text>摄像头控制</text>
+        <view class="exit" catchtap="closeCtrl">退出控制</view>
+    </view>
+    <view class="control-container">
+        <view class="ctrl-steering-wheel {{keys.top ? 'topactive' : ''}}  {{keys.right ? 'rightactive' : ''}} {{keys.btm ? 'btmactive' : ''}} {{keys.left ? 'leftactive' : ''}}">
+            <view
+            class="arrow-key key-top"
+            bindtouchstart="handleStart"
+            bindtouchend="handleEnd"
+            data-key="top"
+            ></view>
+            <view
+            class="arrow-key key-right" 
+            bindtouchstart="handleStart" 
+            bindtouchend="handleEnd" 
+            data-key="right"
+            ></view>
+            <view
+            class="arrow-key key-btm" 
+            bindtouchstart="handleStart" 
+            bindtouchend="handleEnd"
+            data-key="btm"
+            ></view>
+            <view
+            class="arrow-key key-left" 
+            bindtouchstart="handleStart" 
+            bindtouchend="handleEnd" 
+            data-key="left"
+            ></view>
+        </view>
+        <view class="ctrl-scale">
+            <view
+            class="scale-key zoom-out {{keys.out ? 'active' : ''}}" 
+            bindtouchstart="handleStart" 
+            bindtouchend="handleEnd" 
+            data-key="out"
+            ></view>
+            <view
+            class="scale-key zoom-in {{keys.in ? 'active' : ''}}"
+            bindtouchstart="handleStart" 
+            bindtouchend="handleEnd" 
+            data-key="in"
+            ></view>
+        </view>
+    
+    </view>
+</view>

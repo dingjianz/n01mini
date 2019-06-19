@@ -1,2 +1,14 @@
-<!--pages/member-add/member-add.wxml-->
-<text>pages/member-add/member-add.wxml</text>
+<!-- pages/member-add/member-add.wxml -->
+<i-cell-group i-class="custom-cell-group clearfix">
+  <view class="f-input">
+    <input class="f-input-input t-ellipsis" placeholder="请输入成员手机号" placeholder-class="f-input-placeholder" maxlength="11" type="number" />
+  </view>
+  <i-cell i-class="custom-cell" is-link url="../member-role/member-role">
+    <view class="cell-title">请选择成员角色</view>
+    <view slot="footer" class="cell-footer-wrap">
+      <view class="suffix-icon iconfont iconjiantou"></view>
+    </view>
+  </i-cell>
+</i-cell-group>
+<text class="f-tips"> Tips：手机号作为成员登录账号。</text>
+<button class="f-button">确定</button>

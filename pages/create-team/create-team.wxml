@@ -1,7 +1,21 @@
-<!--pages/create-team/create-team.wxml-->
+<!-- pages/create-team/create-team.wxml -->
 <view class="f-input">
-    <input class="f-input-input t-ellipsis" placeholder="请输入团队名称" placeholder-class="f-input-placeholder" />
-    <text class="f-input-title">安徽左岸</text>
+    <input class="f-input-input t-ellipsis" bindinput="inputedit" value="{{inputtxt}}" data-txt="inputtxt" placeholder="请输入团队名称" placeholder-class="f-input-placeholder"/>
+    <!-- <text class="f-input-title">安徽左岸</text> -->
 </view>
-<text class="f-tips"> Tips：创建团队后，已经添加的设备将全部转移至团队下。</text>
-<button class="f-button">立即创建</button>
+<text class="f-tips">Tips：创建团队后，已经添加的设备将全部转移至团队下。</text>
+<button class="f-button" bind:tap="handleCreated">立即创建</button>
+<template is="success-tip-modal" data="{{...sucModal}}"></template>
+
+<template name="success-tip-modal">
+    <view class="suc-tip-modal" animation="{{animationData}}" wx:if="{{visible}}">
+        <view class="suc-tip">
+            <view class="suc-tip-icon iconfont iconcheck"></view>
+            <text class="suc-tip-t">团队创建成功</text>
+        </view>
+        <view class="btn-group clearfix">
+            <button class="tip-btn add-member-btn" bind:tap="redirectTo" data-url="../member-add/member-add">添加成员</button>
+            <button class="tip-btn back-home-btn" bind:tap="goHome" data-url="../index/index">返回首页</button>
+        </view>
+    </view>
+</template>

@@ -130,12 +130,8 @@ Page({
         })
     },
     login: function () {//跳转登录页
-    console.log('login')
-        // wx.redirectTo({
-        //     url: '/pages/login/login'
-        // });
-        wx.switchTab({
-            url: '/pages/index/index',
-        })
+      wx.navigateTo({
+            url: '/pages/login/login'
+        });
     }
 })

@@ -1,0 +1,36 @@
+<view class="container">
+  <view class="wind-direct">
+    <view class="wind-name">
+      东南<text class="sub-name" decode>&nbsp;风向</text>
+    </view>
+    <view class="update-time">10小时前更新</view>
+  </view>
+
+  <view class="wind-log">
+    <view class="wind-log-title">
+      <text class="operate-name">风向记录</text>
+    </view>
+    <view class="divede-border"></view>
+
+    <view class="control-detail">
+      <!-- 时间轴 -->
+      <view class="border-left">
+        <block wx:for="{{axis}}" wx:key="{{index}}">
+          <view class="cell-circle"></view>
+          <view class="border-item" hidden="{{index === (axis.length - 1) ? 'lineHidden' : ''}}"></view>
+        </block>
+      </view>
+      <!-- 具体记录内容 -->
+      <view class="log-detail">
+        <block wx:for="{{axis}}" wx:key="{{index}}">
+          <view class="log-wrapper">
+            <view class="log-time">{{item.time}}</view>
+            <view class="log-status">
+                {{item.name}}
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,3 +1,4 @@
+import { ifDate } from '../../utils/util'
 // pages/deviceDetail/deviceDetail.js
 Page({
 
@@ -6,35 +7,53 @@ Page({
    */
   data: {
     axis: [{
-        time: '今天 14:37',
+        date: '2019-06-18 14:37',
+        time: '14:37',
         name: '暂停',
         event: '13735479486'
       },
       {
-        time: '前天 14:37',
+        date: '2019-06-16 14:37',
+        time: '14:37',
         name: '开启',
         event: '13735479486'
       },
       {
-        time: '今天 14:37',
+        date: '2019-06-14 14:37',
+        time: '14:37',
         name: '关闭',
         event: '13735479486'
       },
       {
-        time: '今天 14:37',
+        date: '2019-05-31 14:37',
+        time: '14:37',
         name: '开启',
         event: '13735479486'
       }
-    ]
+    ],
+    loadFlag: false, // 底部加载控制器
+    zhsbFlag: false // 是否是综合设备入口进入
   },
-  returnStatusName(name) {
-    console.log(name)
+  turnToDeviceInstall() {
+    wx.navigateTo({
+      url: '/pages/deviceInstall/deviceInstall'
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // console.log(options)
+    this.setData({
+      zhsbFlag: options.close
+    })
+    console.log(this.data.zhsbFlag)
+    for (let item of this.data.axis) {
+      item.date = ifDate(new Date(item.date))
+    }
+    this.setData({
+      axis: this.data.axis
+    })
   },
 
   /**
@@ -76,7 +95,15 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log(45454)
+    this.setData({
+      loadFlag: true
+    })
+    setTimeout(() => {
+      this.setData({
+        loadFlag: false
+      })
+    }, 1000)
   },
 
   /**

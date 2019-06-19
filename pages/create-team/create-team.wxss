@@ -7,8 +7,10 @@
     justify-content: space-between;
     padding: 15rpx 30rpx;
     color: #84A5E0;
-    margin-top: 30rpx;
     box-sizing: border-box;
+    width: 710rpx;
+    margin: 30rpx auto 0;
+    border-radius: 10rpx;
 }
 .f-input .f-input-input{
     flex: 1;
@@ -41,7 +43,8 @@
 .f-button{
     width: 690rpx;
     display: block;
-    margin: 137rpx auto 0;
+    width: 710rpx;
+    margin: 120rpx auto 0;
     height: 98rpx;
     border: 2rpx solid #0D295B;
     background: #0B224A;
@@ -51,4 +54,71 @@
     font-weight: 400;
     line-height: 98rpx;
     padding: 0;
+}
+
+.suc-tip-modal{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #001434;
+    z-index: 999;
+}
+.suc-tip-modal .suc-tip{
+    margin-top: 160rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.suc-tip-modal .suc-tip .suc-tip-icon{
+    width: 140rpx;
+    height: 140rpx;
+    text-align: center;
+    line-height: 140rpx;
+    border-radius: 70rpx;
+    background-color: #15E9FC;
+    overflow: hidden;
+    font-size: 80rpx;
+}
+.suc-tip-modal .suc-tip .suc-tip-t{
+    margin-top: 38rpx;
+    font-size: 32rpx;
+    color: #15E9FC;
+    height: 45rpx;
+    line-height: 45rpx;
+    font-weight: 400;
+}
+.suc-tip-modal .btn-group{
+    margin-top: 170rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.suc-tip-modal .btn-group .tip-btn{
+    margin-top: 13rpx;
+    border: 0 none;
+    padding: 0;
+    background-color: transparent;
+}
+.suc-tip-modal .btn-group .tip-btn:after{
+    border: 0 none;
+}
+.suc-tip-modal .btn-group .add-member-btn{
+    width: 460rpx;
+    height: 90rpx;
+    box-sizing: border-box;
+    border: 3rpx solid #123470;
+    background-color: #0F2C60;
+    border-radius: 10rpx;
+    line-height: 87rpx;
+    font-size: 32rpx;
+    color: #4D7BC1;
+}
+.suc-tip-modal .btn-group .back-home-btn{
+    height: 45rpx;
+    line-height: 45rpx;
+    margin-top: 58rpx;
+    font-size: 32rpx;
+    color: #2E4E82;
 }

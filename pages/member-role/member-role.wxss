@@ -1,0 +1,125 @@
+/* pages/member-role/member-role.wxss */
+.custom-radio-group{
+  margin: 30rpx auto 0;
+  width: 710rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  display: block;
+}
+.custom-radio-group .custom-radio{
+  background-color: #102957;
+  color: #8BABE7;
+  font-size: 30rpx;
+  height: 110rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.custom-radio-group .custom-radio::after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 0;
+  width: 670rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid #001434;
+  z-index: 1;
+}
+.custom-radio-group .custom-radio.custom-radio-0::after{
+  border-top: 0 none;
+} 
+.custom-radio-group .custom-radio.checked{
+  color: #15E9FC;
+}
+.f-power-tips{
+  font-size: 28rpx;
+  color: #2E4E82;
+  height: 42rpx;
+  line-height: 42rpx;
+  text-align: right;
+  font-weight: 400;
+  margin-top: 16rpx;
+  padding: 10rpx 20rpx;
+}
+.f-power-tips .tip-icon{
+  margin-left: 7rpx;
+  font-size: 32rpx;
+}
+radio .wx-radio-input{
+  background: transparent;
+  border: 0 none;
+}
+radio .wx-radio-input.wx-radio-input-checked::before{
+  color: #15E9FC;
+  font-size: 38rpx;
+}
+/* 弹框模板 */
+.f-modal-container{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .7);
+  z-index: 999;
+}
+.f-modal-container .f-tips-modal{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 660rpx;
+}
+.f-modal-container .f-tips-modal .f-modal{
+  padding: 25rpx 50rpx;
+  background-color: #102957;
+  box-sizing: border-box;
+  border-radius: 10rpx; 
+}
+.f-modal-container .f-tips-modal .f-modal .f-modal-cell{
+  height: 150rpx;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+}
+.f-modal-container .f-tips-modal .f-modal .f-modal-cell:after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1rpx solid #001434;
+}
+.f-modal-container .f-tips-modal .f-modal .f-modal-cell.last:after{
+  z-index: -1;
+}
+.f-modal-container .f-tips-modal .f-modal .f-modal-cell .f-modal-cell-title{
+  display: block;
+  font-size: 28rpx;
+  color: #7696D3;
+  height: 42rpx;
+  line-height: 42rpx;
+}
+.f-modal-container .f-tips-modal .f-modal .f-modal-cell .f-modal-cell-desc{
+  display: block;
+  font-size: 28rpx;
+  color: #456EAD;
+  height: 42rpx;
+  line-height: 42rpx;
+}
+.f-modal-container .f-tips-modal .f-modal-close{
+  margin: 60rpx auto 0;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  border: 1rpx solid #7696D3;
+  background-color: transparent;
+  font-size: 38rpx;
+  color: #456EAD;
+  text-align: center;
+  line-height: 70rpx;
+  box-sizing: border-box;
+}

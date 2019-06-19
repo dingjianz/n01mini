@@ -1,0 +1,21 @@
+<!--pages/videoCtrol/videoCtrol.wxml-->
+<view class="videopage">
+    <view class="grid"></view>
+    <view class="videotit">
+        <text>{{title}}</text>
+        <text class="plot">生产示范基地</text>
+    </view>
+    <view class="hole_video">
+        <video id="myVideo" title="{{title}}" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" object-fit="cover" binderror="videoErrorCallback" show-center-play-btn='{{false}}' show-play-btn="{{true}}" controls='{{control}}' show-progress="{{false}}" bindfullscreenchange="fullListen" bindtap="tapcover"></video>
+        <view class="videoctrol">
+            <view class="left_ctrol playbtn iconfont iconzanting" bindtap="playfn"></view>
+            <view class="right_ctrol">
+                <view class="ctrolbtn iconfont iconjiankong"></view>
+                <view class="fullscreen iconfont iconquanping" bindtap="fullfn"></view>
+            </view>
+        </view>    
+    </view>
+    <view class="pannel">
+        <ctrolPan bindctrol="ctrolEvent"></ctrolPan>
+    </view>
+</view>

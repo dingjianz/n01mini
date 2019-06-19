@@ -77,7 +77,7 @@
   width: 100%;
   height: 160rpx;
   color: #15FC71;
-  border: 1px solid #273F64;
+  border: 1rpx solid #273F64;
   border-radius: 10rpx;
   box-sizing: border-box;
   display: flex;
@@ -121,7 +121,7 @@
   justify-content: space-between;
   align-items: center;
   flex-flow: row nowrap;
-  border-bottom: 1px solid #001434;
+  border-bottom: 1rpx solid #001434;
 }
 
 .part_b .opts .opts-left {
@@ -170,7 +170,7 @@
 
 .part_b .echart .temperature-humidity text.active {
   color: #8BABE7;
-  border: 1px solid #8BABE7;
+  border: 1rpx solid #8BABE7;
 }
 
 .part_b ec-canvas {

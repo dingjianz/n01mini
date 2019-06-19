@@ -1,4 +1,8 @@
 {
   "navigationBarTitleText": "设备详情",
-  "usingComponents": {}
+  "usingComponents": {
+    "iconfont": "../../components/iconfont/iconfont",
+    "i-load-more": "../../components/i-view/load-more/index"
+  },
+  "enablePullDownRefresh": true
 }

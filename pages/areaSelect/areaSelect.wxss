@@ -22,7 +22,7 @@
 .divede-border {
   width: 670rpx;
   margin: 0 auto;
-  border: 1px solid #001434;
+  border-bottom: 1rpx solid #001434;
 }
 .type-list .type-name {
   color:#8BABE7;

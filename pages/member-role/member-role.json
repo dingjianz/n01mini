@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "i-radio-group": "../../components/i-view/radio-group/index",
+    "i-radio": "../../components/i-view/radio/index"
+  },
+  "navigationBarTitleText": "选择成员角色"
+}

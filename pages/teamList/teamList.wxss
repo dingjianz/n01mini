@@ -1,0 +1,78 @@
+/* pages/teamList/teamList.wxss */
+@import "../../assets/default-skin/cell.wxss";
+
+.custom-cell-group{
+    margin: 30rpx auto 140rpx;
+    padding: 0;
+    width: 710rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+.custom-cell-group .custom-cell{
+    width:100%;
+    border-radius: 0;
+    margin-top: 0;
+    position: relative;
+}
+.custom-cell-group .custom-cell:after{
+    height: 100%;
+    width: 680rpx;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #001434;
+}
+.custom-cell-group .custom-cell .cell-title{
+    display:flex;
+    display:-webkit-flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-flow:row nowrap;
+}
+.custom-cell .cell-title .cname{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    max-width:420rpx;
+}
+.custom-cell.active .cell-title .cname{
+    color:#15E9FC;
+}
+.custom-cell .cell-title .setbtn{
+    border:1px solid #456EAD;
+    border-radius:4rpx;
+    display:inline-block;
+    font-size:22rpx;
+    color:#456EAD;
+    padding:0 10rpx;
+    margin-left:20rpx;
+}
+.custom-cell-group .custom-cell .cell-title .suffix-icon{
+    color:transparent;
+    margin-right:20rpx;
+}
+.custom-cell-group .custom-cell.active .cell-title .suffix-icon{
+    color:#15E9FC;
+}
+.f-button{
+    display: block;
+    height: 98rpx;
+    margin: 0 auto 0;
+    box-sizing: border-box;
+    background: #102957;
+    color: #4D7BC1;
+    font-size: 32rpx;
+    font-weight: 400;
+    line-height: 98rpx;
+    border: 0 none;
+    padding: 0;
+}
+.f-button::after{
+    border: 0 none;
+}
+.f-button .iconfont{
+    width:30rpx;
+    font-size: 32rpx;
+    vertical-align: middle
+}

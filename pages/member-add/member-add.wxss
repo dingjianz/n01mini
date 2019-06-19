@@ -1,1 +1,78 @@
 /* pages/member-add/member-add.wxss */
+@import "../../assets/default-skin/cell.wxss";
+.custom-cell-group{
+  margin: 30rpx auto 0;
+  width: 710rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  padding: 0;
+}
+.custom-cell-group .custom-cell{
+  margin-top: 0;
+  border-radius: 0;
+  color: #395A8F;
+  font-size: 26rpx;
+}
+.f-input{
+  height: 110rpx;
+  background-color: #102957;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15rpx 30rpx;
+  color: #84A5E0;
+  box-sizing: border-box;
+  position: relative;
+}
+.f-input:after{
+  content: '';
+  height: 100%;
+  width: 670rpx;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #001434;
+}
+.f-input .f-input-input{
+  flex: 1;
+  font-size: 26rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #84A5E0;
+  font-weight: 400;
+}
+.f-input .f-input-placeholder{
+  color: #395787;
+}
+.f-input .f-input-title{
+  font-size: 30rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  font-weight: 400;
+}
+.f-tips{
+  padding: 0 14rpx;
+  height: 33rpx;
+  line-height: 33rpx;
+  font-size: 24rpx;
+  color: #2E4E82;
+  display: block;
+  font-weight: 400;
+  margin-top: 25rpx;
+  text-indent: 24rpx
+}
+
+.f-button{
+  display: block;
+  height: 98rpx;
+  width: 710rpx;
+  margin: 120rpx auto 0;
+  border: 2rpx solid #0D295B;
+  background: #0B224A;
+  color: #456EAD;
+  font-size: 32rpx;
+  font-weight: 400;
+  border-radius: 10rpx;
+  line-height: 98rpx;
+} 

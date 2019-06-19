@@ -18,10 +18,25 @@ var filter = {
     strExchange : function(val,newval){//字符为空时可自定义文案
         var text = val ? val : newval;
         return text;
+    },
+    classExchange: function (val, fixedval, classstr) {//val有值，并且不等于fixedval时返回classstr
+        var flag = val && (val != fixedval);
+        return flag ? classstr:'';
+    },
+    datelimit: function (dateStr, today) {//日期最大值限定，无数值时限定最大为today
+        return dateStr == '结束日期' ? today: dateStr; 
+    },
+    numberHide: function (num){//手机号中间隐藏
+        var newnum = num.toString();
+        var reg = getRegExp("(\d{3})(\d{4})(\d{4})");
+        return newnum.replace(reg,'$1****$3');
     }
 }
 
 module.exports = {
     numTofixed: filter.numTofixed,
-    strExchange: filter.strExchange
+    strExchange: filter.strExchange,
+    classExchange: filter.classExchange,
+    datelimit: filter.datelimit,
+    numberHide: filter.numberHide
 }

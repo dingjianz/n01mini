@@ -1,14 +1,18 @@
 <wxs module="filter" src="../../utils/detail.wxs"></wxs>
 <view class="container">
-  <view class="device-status">
-    <view class="status-top">
+  <view class="device-status {{ zhsbFlag ? 'device-status-height' : ''}}">
+    <view class="status-top" wx:if="{{ !zhsbFlag }}">
       <view class="device-positionDes">生产示范基地</view>
-      <icon class="iconfont iconshezhi"></icon>
+      <icon class="iconfont iconshezhi" bindtap="turnToDeviceInstall"></icon>
     </view>
     <view class="status-middle {{filter.returnstatusName('暂停')}}">
       暂停
     </view>
     <view class="status-bottom">内遮阳一号开关</view>
+    <!-- <view class="car-wrapper">
+      <iconfont dataNum="39.9" color="#15FC71" fontSize="60"></iconfont>
+      <view class="car-des">温度控制器一号</view>
+    </view> -->
   </view>
   <view class="control-log">
     <view class="control-title">操作记录</view>
@@ -26,7 +30,8 @@
       <view class="log-detail">
         <block wx:for="{{axis}}" wx:key="{{index}}">
           <view class="log-wrapper">
-            <view class="log-time">{{item.time}}</view>
+            <view class="log-time" decode>{{item.date}}<text decode> &nbsp; </text>
+              {{item.time}}</view>
             <view class="log-status">
               <text class="z-open {{filter.returnClassName(item.name)}}" decode>{{item.name}}&nbsp;&nbsp;</text>({{item.event}})
             </view>
@@ -34,5 +39,6 @@
         </block>
       </view>
     </view>
+    <i-load-more i-class="i-load" wx:if="{{ loadFlag }}" loading="{{ loadFlag }}" />
   </view>
 </view>

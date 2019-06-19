@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="rain-direct">
+    <view class="rain-name">
+      <iconfont dataNum="284" color="#30E034" fontSize="50"></iconfont>
+      <text class="sub-name" decode>&nbsp;降雨量</text>
+    </view>
+    <view class="update-time">10小时前更新</view>
+  </view>
+
+  <view class="rain-chart">
+    <view class="opts">
+      <!-- 1天 7天 30天 -->
+      <view class="opts-left">
+        <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
+          wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}"
+          wx:if="{{index < 3}}">{{item.txt}}</view>
+      </view>
+      <!-- 自定义  -->
+      <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
+        wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}"
+        wx:if="{{index === 3}}" bindtap="turnToDatePicker">
+        {{item.txt}}</view>
+    </view>
+    <ec-canvas id="rainchart-dom-line" canvas-id="rainchart-line" ec="{{ ecLine }}"></ec-canvas>
+  </view>
+</view>

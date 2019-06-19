@@ -1,0 +1,59 @@
+/* pages/multiVideo/multiVideo.wxss */
+.container{
+    padding:10rpx;
+    display:flex;
+    display:-webkit-flex;
+    justify-content:flex-start;
+    align-items: flex-start;
+    flex-flow:row wrap;
+}
+.video_item{
+    border-radius:5rpx;
+    overflow:hidden;
+    width:50%;
+    padding:10rpx;
+    box-sizing:border-box;
+}
+.hole_video,.myVideo{
+    width:100%;
+    height:200rpx;
+    position:relative;
+}
+.hole_video .videotit,.hole_video .videoctrol{
+    width:100%;
+    position:absolute;
+    left:0;
+    bottom:15rpx;
+    z-index:99;
+    padding:0 15rpx; 
+    box-sizing:border-box;
+}
+.hole_video .videotit{
+    font-size:20rpx;
+    bottom:auto;
+    top:0; 
+    height: 60rpx;
+    line-height: 60rpx;
+    background: linear-gradient(to bottom, rgba(0, 0, 0,0.6),rgba(0, 0, 0,0));
+}
+.hole_video .videoctrol,.hole_video .videoctrol .right_ctrol{
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow:row nowrap;
+}
+.hole_video .videoctrol .right_ctrol view{
+    justify-content:flex-start;
+    margin-left: 23rpx;
+}
+.playbtn,.ctrolbtn,.fullscreen{
+  width:42rpx;
+  height:42rpx;
+  text-align: center;
+  line-height:42rpx;
+  border-radius: 100%;
+  font-size: 22rpx;
+  color: #fff;
+  background-color: rgba(0,0,0,.5)
+}

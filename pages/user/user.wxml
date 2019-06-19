@@ -1,15 +1,20 @@
 <!-- pages/user/user.wxml -->
+<wxs module="filter" src="../../utils/filter.wxs"></wxs>
 <view class="user-info-container">
     <view class="user-info">
         <view class="user-icon">
             <image class="user-pic" src="../../assets/images/head-icon.png" />
         </view>
-        <text class="user-phone">137****9486</text>
+        <text class="user-phone">{{filter.numberHide(phone)}}</text>
     </view>
-    <button class="user-setting-btn">
+    <!-- <button class="user-setting-btn">
         <view class="iconfont iconshezhi"></view>
         <text class="t-setting">设置</text>
-    </button>
+    </button> -->
+    <navigator class="user-setting-btn" url="/pages/userSet/userSet">
+        <view class="iconfont iconshezhi"></view>
+        <text class="t-setting">设置</text>
+    </navigator>
 </view>
 <i-cell-group wx:if="{{ownedTeam}}" i-class="custom-cell-group clearfix">
     <i-cell i-class="custom-cell" is-link url="../membership/membership">
@@ -30,7 +35,8 @@
     </i-cell>
 </i-cell-group>
 <i-cell-group wx:else i-class="custom-cell-group clearfix">
-    <i-cell i-class="custom-cell" is-link url="../create-team/create-team">
+    <!-- 该入口页功能暂时只做提示 -->
+    <i-cell i-class="custom-cell" bind:tap="goCreatedTeam" is-link="{{false}}" url="../create-team/create-team">
         <text class="cell-title">邀请他人一起管理设备</text>
         <view slot="footer" class="cell-footer-wrap">
             <text class="cell-desc">创建团队</text>
@@ -38,8 +44,3 @@
         </view>
     </i-cell>
 </i-cell-group>
-<i-modal visible title="确定删除“13735479486”吗？" actions="{{actions}}" bind:click="handleBtn">
-
-    <view class="modal-c">删除后，该成员将失去在团队中的所有 权限。</view>
-    
-</i-modal>

@@ -46,7 +46,8 @@ Component({
       // console.log(this.data.keys);
     },
     leaveHandleKey(e){
-      this.data.keys[e.target.dataset.key] = false;this.setData({
+      this.data.keys[e.target.dataset.key] = false;
+      this.setData({
         keys : this.data.keys
       });
     },

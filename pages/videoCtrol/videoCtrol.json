@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+      "ctrolPan": "../../components/ctrol-pan/ctrol-pan"
+  },
+  "navigationBarTitleText": "设备详情",
+  "disableScroll": true
+}

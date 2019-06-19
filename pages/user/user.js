@@ -7,41 +7,45 @@ Page({
     data: {
         // 拥有团队
         ownedTeam: true,
-        actions: [
-            {
-                name: '我再想想',
-                color: '#395787'
-            },
-            {
-                name: '确定删除',
-                color: '#C23634'
-            }
-        ],
+        phone: wx.getStorageSync('USERPHONE')
     },
 
     handleBtn(e) {
         console.log(e);
     },
 
+    goCreatedTeam(){
+        // console.log(e);
+        wx.showToast({
+            title: '请添加设备后再创建团队',
+            icon: 'none',
+            duration: 3000
+        })
+    },
+    checkOwnedTeam(){
+        this.setData({
+            ownedTeam: wx.getStorageSync('CID')
+        });
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.checkOwnedTeam();
     },
-
+    
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
+        
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        
     },
 
     /**

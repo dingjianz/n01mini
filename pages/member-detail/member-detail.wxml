@@ -1,2 +1,24 @@
 <!--pages/member-detail/member-detail.wxml-->
-<text>pages/member-detail/member-detail.wxml</text>
+<!-- 
+  成员信息显示规则
+  管理员可以删除其他非超级管理员用户（管理员可以互相伤害）
+  自己无法看见按钮
+ -->
+<view class="member-panel">
+  <image class="panel-pic" src="../../assets/images/head-icon.png" />
+  <text class="panel-prefix">{{delRoleModal.title}}</text>
+  <text class="panel-suffix">{{role}}</text>
+</view>
+
+<button class="f-button change-role-btn" wx:if="{{!self}}" bind:tap="navigateTo" data-url="../member-role/member-role">
+  更换角色
+</button>
+<button class="f-button delete-role-btn"  wx:if="{{!self}}" bind:tap="openModal" data-modal="delRoleModal.visible">
+  删除
+</button>
+
+<i-modal visible="{{delRoleModal.visible}}" title="确定删除“{{delRoleModal.title}}”吗？" actions="{{delRoleModal.actions}}" bind:click="handleDelRoleBtn">
+
+    <view class="modal-c">{{delRoleModal.tip}}</view>
+    
+</i-modal>

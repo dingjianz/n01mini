@@ -6,7 +6,6 @@
         <view class="equiptit">土壤温湿度</view>
         <view class="area">生产示范基地</view>
       </view>
-      <!-- <image src="/assets/images/weixin@2x.png"></image> -->
       <icon class="iconfont iconshezhi" bindtap="turnToDeviceInstall"></icon>
 
     </view>
@@ -15,7 +14,6 @@
         <view class="card">
           <view class="wrap">
             <iconfont dataNum="28.4" color="#15FC71" fontSize="60"><text class="unit">℃</text></iconfont>
-            <!-- <text class="num">28.4<text class="unit">℃</text></text> -->
             <view class="name">温度</view>
           </view>
         </view>

@@ -1,1 +1,24 @@
-.i-radio-cell::after{display:block}.i-radio-radio-left{float:left}.i-radio-radio-right{float:right}.i-radio-radio{vertical-align:middle}.i-radio-title{display:inline-block;vertical-align:middle}
+.i-radio-cell{
+  background-color: transparent;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+}
+.i-radio-cell::after {
+  display: block;
+  border-bottom: 0 none;
+}
+.i-radio-radio-left {
+  float: left;
+}
+.i-radio-radio-right {
+  float: right;
+}
+.i-radio-radio {
+  vertical-align: middle;
+}
+.i-radio-title {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 30rpx;
+}

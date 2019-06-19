@@ -6,9 +6,14 @@
 
 .device-status {
   height: 300rpx;
+  box-sizing: border-box;
   background-color: #102957;
   border-radius: 10rpx;
   padding: 30rpx 19rpx 0 20rpx;
+}
+
+.device-status.device-status-height {
+  height: 260rpx;
 }
 
 .device-status .status-top {
@@ -41,7 +46,6 @@
   height: 144rpx;
   border-radius: 50%;
   margin: 0 auto;
- 
   box-sizing: border-box;
   display: flex;
   display: -webkit-flex;
@@ -53,17 +57,43 @@
   color: rgba(255, 255, 255, 1);
   line-height: 59px;
 }
+
+.device-status .car-wrapper {
+  width: 360rpx;
+  height: 140rpx;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: 1rpx solid rgba(39, 63, 100, 1);
+  box-sizing: border-box;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.device-status .car-wrapper .car-des {
+  height: 37rpx;
+  font-size: 26rpx;
+  font-weight: 400;
+  color: rgba(21, 252, 113, 1);
+  line-height: 37rpx;
+  margin-top: 10rpx;
+}
+
 .z-status-open {
   background: linear-gradient(360deg, rgba(29, 197, 37, 1) 0%, rgba(37, 240, 132, 1) 100%);
-  border: 1px solid rgba(46, 215, 81, 1);
+  border: 1rpx solid rgba(46, 215, 81, 1);
 }
+
 .z-status-close {
-  background:linear-gradient(360deg,rgba(254,77,77,1) 0%,rgba(252,136,109,1) 100%);
-  border:1px solid rgba(220,51,51,1);
+  background: linear-gradient(360deg, rgba(254, 77, 77, 1) 0%, rgba(252, 136, 109, 1) 100%);
+  border: 1rpx solid rgba(220, 51, 51, 1);
 }
+
 .z-status-pause {
-  background:linear-gradient(360deg,rgba(254,148,77,1) 0%,rgba(254,189,77,1) 100%);
-border:1px solid rgba(220,116,31,1);
+  background: linear-gradient(360deg, rgba(254, 148, 77, 1) 0%, rgba(254, 189, 77, 1) 100%);
+  border: 1rpx solid rgba(220, 116, 31, 1);
 }
 
 .device-status .status-bottom {
@@ -71,9 +101,9 @@ border:1px solid rgba(220,116,31,1);
   height: 36rpx;
   font-size: 25rpx;
   line-height: 36rpx;
-  color: #15FC71;
+  color: #8BABE7;
   font-weight: 400;
-  margin-top: 20rpx;
+  margin-top: 12rpx;
 }
 
 .control-log {
@@ -83,11 +113,6 @@ border:1px solid rgba(220,116,31,1);
   margin-top: 20rpx;
   padding-bottom: 180rpx;
 }
-
-.control-log .control-detail {
-  padding-top: 20rpx;
-}
-
 
 .control-log .control-title {
   height: 108rpx;
@@ -100,19 +125,21 @@ border:1px solid rgba(220,116,31,1);
 
 .control-log .divde-border {
   margin: 0 31rpx 0 29rpx;
-  border-bottom: 1px solid rgba(0, 20, 52, 1);
+  border-bottom: 1rpx solid rgba(0, 20, 52, 1);
 }
 
 .control-detail {
   display: flex;
   display: -webkit-flex;
   justify-content: space-between;
+  padding-top: 20rpx;
+
 }
 
 .cell-circle {
   width: 12rpx;
   height: 12rpx;
-  margin-left: 31rpx;
+  margin-left: 31.5rpx;
   background-color: rgba(21, 233, 252, 1);
   border-radius: 50%;
 }
@@ -132,7 +159,7 @@ border:1px solid rgba(220,116,31,1);
   margin-right: 30rpx;
   margin-bottom: 40rpx;
   padding: 30rpx;
-  color:#456EAD;
+  color: #456EAD;
 }
 
 .log-wrapper .log-time {

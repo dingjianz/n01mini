@@ -1,15 +1,19 @@
 <!--pages/datePicker/datePicker.wxml-->
 <wxs module="filter" src="../../utils/filter.wxs"></wxs>
 <view class="container">
-    <view class="datebox">
-        <!-- data-index字段取值分别为1或2，用于区分是开始还是结束日期选择器 -->
-        <picker  class="dateSt {{active==1 ? 'active':''}} {{dateSt ? 'hasval':''}}"  data-index="1" mode="date" value="{{dateSt}}" start="{{minDate}}"  bindtap="getDate" end="{{dateOv}}" bindchange="bindDateChange" bindcancel="cancelPick">
-              <view class="weui-input">{{dateSt}}</view>
-        </picker>
-        <view class="connector">至</view>
-        <picker  class="dateOv {{active==2 ? 'active':''}} {{dateOv ? 'hasval':''}}" data-index="2" mode="date" value="{{filter.strExchange(dateOv,'结束日期')}}" start="{{dateSt}}"  bindtap="getDate" end="{{maxDate}}" bindchange="bindDateChange" bindcancel="cancelPick">
-              <view class="weui-input">{{dateOv}}</view>
-        </picker>
-    </view>
-    <view class="submit">确定</view>
+  <view class="datebox">
+    <!-- data-index字段取值分别为1或2，用于区分是开始还是结束日期选择器 -->
+    <picker class="dateSt {{active==1 ? 'active':''}} {{dateSt ? 'hasval':''}}" data-index="1" mode="date"
+      value="{{dateSt}}" start="{{minDate}}" bindtap="getDate" end="{{filter.datelimit(dateOv,today)}}"
+      bindchange="bindDateChange" bindcancel="cancelPick">
+      <view class="weui-input">{{dateSt}}</view>
+    </picker>
+    <view class="connector">至</view>
+    <picker class="dateOv {{active==2 ? 'active':''}} {{filter.classExchange(dateOv,'结束日期','hasval')}}" data-index="2"
+      mode="date" value="{{dateOv}}" start="{{dateSt}}" bindtap="getDate" end="{{maxDate}}" bindchange="bindDateChange"
+      bindcancel="cancelPick">
+      <view class="weui-input">{{dateOv}}</view>
+    </picker>
+  </view>
+  <view class="submit">确定</view>
 </view>

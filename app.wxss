@@ -1,5 +1,6 @@
 /**app.wxss**/
 @import './assets/css/icon.wxss';
+@import './utils/animate.wxss';
 
 .container {
   height: 100%;

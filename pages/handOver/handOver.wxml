@@ -1,0 +1,14 @@
+<!--pages/handOver/handOver.wxml-->
+<view>
+    <i-cell-group i-class="custom-cell-group clearfix">
+        <i-cell bind:click="changePerson" data-index="{{idx}}" i-class="custom-cell {{selected==idx ? 'active':''}}" wx:for="{{clist}}" wx:for-index="idx" wx:for-item="item">
+            <view class="cell-title">{{item.phone}}</view>
+            <view slot="footer" class="cell-footer-wrap" wx:if="{{selected==idx}}">
+                <view class="suffix-icon iconfont iconcheck"></view>
+            </view>
+        </i-cell>
+    </i-cell-group>
+</view>
+<i-modal title="确定移交给“{{modaltit}}”吗？" visible="{{modal}}" actions="{{ actions }}" bind:click="handleClick">
+    <view class="modaltip">移交团队后，你将不再是团队的拥有者，团队的所有设备都将被移交。</view>
+</i-modal>

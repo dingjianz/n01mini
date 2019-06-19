@@ -17,9 +17,20 @@ function initChart(canvas, width, height) {
     },
     color: ['#16BD6C'],
     tooltip: {
-      show: false,
-      // show: true,
-      trigger: 'axis'
+        show: true,
+        trigger: 'axis'
+        // position: function (pos, params, dom, rect, size) {
+        //     console.log(params);
+        //     // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+        //     var obj = { top:'30%'};
+        //     if (pos[0] > (size.viewSize[0]/2)){
+        //         obj['left'] = pos[0] - size.contentSize[0]+30;
+        //     }else{
+        //         obj['left'] = pos[0]
+        //     }
+        //     console.log(obj);
+        //     return obj;
+        // }
     },
     xAxis: {
       type: 'category',
@@ -98,7 +109,6 @@ function initChart(canvas, width, height) {
         }
       }
     }],
-    currentIndex: 0
   };
 
   chart.setOption(option);
@@ -123,7 +133,8 @@ Page({
       id: 4,
       txt: '自定义'
     }],
-    thflag: true // 土壤湿温度设备详情时，折线表先显示温度
+    thflag: true, // 土壤湿温度设备详情时，折线表先显示温度
+    currentIndex: 0
   },
   onShareAppMessage: function (res) {
     return {

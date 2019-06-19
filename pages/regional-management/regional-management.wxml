@@ -1,2 +1,37 @@
-<!--pages/regional-management/regional-management.wxml-->
-<text>pages/regional-management/regional-management.wxml</text>
+<!-- pages/regional-management/regional-management.wxml -->
+<!-- 区域管理规则
+    普通用户不允许添加区域 -->
+<i-cell-group i-class="custom-cell-group clearfix">
+    <i-cell i-class="custom-cell" is-link url="../regional-detail/regional-detail">
+        <view class="cell-title">生产示范基地</view>
+        <view slot="footer" class="cell-footer-wrap">
+            <text class="cell-desc">10个设备</text>
+            <view class="suffix-icon iconfont iconjiantou"></view>
+        </view>
+    </i-cell>
+    <i-cell i-class="custom-cell" is-link url="../regional-detail/regional-detail">
+        <view class="cell-title">云智能检测区</view>
+        <view slot="footer" class="cell-footer-wrap">
+            <text class="cell-desc">20个设备</text>
+            <view class="suffix-icon iconfont iconjiantou"></view>
+        </view>
+    </i-cell>
+    <i-cell i-class="custom-cell" is-link url="../regional-detail/regional-detail">
+        <view class="cell-title">默认区域</view>
+        <view slot="footer" class="cell-footer-wrap">
+            <text class="cell-desc">12个设备</text>
+            <view class="suffix-icon iconfont iconjiantou"></view>
+        </view>
+    </i-cell>
+    <i-cell i-class="custom-cell" is-link wx:if="{{isAdmin}}">
+        <button class="f-button" bindtap="openModal" data-modal="addRegionModal">
+            <text class="iconfont iconadd"></text>
+            添加区域
+        </button>
+    </i-cell>
+</i-cell-group>
+<i-modal visible="{{addRegionModal}}" title="添加区域" actions="{{actions}}" bind:click="handleRegionalModal">
+    <label class="f-input-label">
+        <input class="f-input" placeholder="请输入区域名称" maxlength="20" placeholder-class="f-input-placeholder" />
+    </label>
+</i-modal>

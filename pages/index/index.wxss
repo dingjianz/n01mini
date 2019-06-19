@@ -1,17 +1,46 @@
+page{
+  width: 100%;
+  height: 100%;
+}
 .container {
   color:#456EAD;
   font-size:28rpx;
 } 
-.area_check{
+.container.overHidden{
+  overflow: hidden;
+}
+.dis_ib{
+  display: inline-block;
+}
+.area_check,.videoPlot,.fixedSelectArea>.content>.title{
     width:100%;
     height:82rpx;
     line-height:82rpx;
     color:#15E9FC;
     text-align:center;
 }
-.area_check>.iconfont{
-  font-size: 14rpx;
-  vertical-align: top;  
+.area_check>.iconfont,.fixedSelectArea>.content>.title>.iconfont{
+  font-size: 12rpx;
+  vertical-align: top;
+  margin-left: 15rpx;
+}
+.videoPlot{
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+.videoPlot>.plotName{
+  color: #15E9FC;
+}
+.videoPlot>.areaName{
+  background-color: #0B224A;
+  color: #395787;
+  padding: 0 15rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  border-radius: 38rpx;
 }
 /* 视频监控 */
 .hole_video,#myVideo{
@@ -58,13 +87,16 @@
   box-shadow: 0 6rpx 10rpx 0 rgba(0, 20, 52, .5);
   background-color: #001434;
 }
-.videoAndTab.fixed .topbtn{
-  background-color: #fff;
-  color: #000;
+.videoAndTab.fixed .topbtn,.ctrolbtn.active{
+  background-color: rgba(21,233,252,.9);
 }
 .videoAndTabHolder{
   width: 100%;
   height: 640rpx;
+}
+.videoContlPan{
+  height: calc(100% - 504rpx);
+  background-color: #102957;
 }
 /* 视频列表 */
 .video_section{
@@ -142,16 +174,12 @@
     margin-bottom: 7rpx;
 }
 .video_section .shadow{
-    width:18rpx;
-    height:50rpx;
-    background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0, 20, 52, .5) 100%);
-    background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0, 20, 52, .5) 100%);
-    background: -o-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0, 20, 52, .5) 100%);
-    background: -ms-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0, 20, 52, .5) 100%);
-    background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0, 20, 52, .5) 100%);
+    width:26rpx;
+    height:76rpx;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAABMCAMAAABEQ1cWAAAAgVBMVEUAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDQAFDSIkjYyAAAAK3RSTlMBBgoPFBkePTMjKrMuwESuV5ZJoSZ/cbxsTreEemJSZqk3il6dkXWNWpmlC7ksLwAAAahJREFUSMfEzsmagjAQBGBmVUAnIgRRwh7C8v4PONUhMSCHOU4d+/+qu73/zNszu7nLHt5tHNj5nix8PLMVgk+blVj4MnFEouffJi+Cue/7CeL7G0ED8yA4IUGwkJME86POyZW0BJg3B53GlvQdVAh+dA6mhHVLB3C961xNyUhDUF50SpAtJacjpLyMXYF047p0bEi6osqQqnCUYB1JlaWpUmmaEZkS1t1JlBCcC6FeSlp4jnBhaSmNRaZ43g5Imy//YR/eo1Iq8raPkL4F2X24VGSCQyYpp6j3zCnaV45VyvM+kjEiI8+dwr5M5QOkRmK5EE7hv0uBS/0U1wypY291iva1kZwZC0PGZkd0SvEhQil8PEJWW8IXOEX7ZhIyQ+YLkCS63Yjcg/RFi32Q8xm2Jf4XQWAbqjSxPf32VSc3AIAgEEXrsAK1/waFKBdintcJLjj8GSnN3aRoRpNQ5bNwQ70L3UAP0Xn8F34Z3oCj4EO4F57HpGC+MJWYZRAA3PjTZq2gDRhFsoVUW3YeVtnVsvAtsBfEBueRDsgUJBHzy6nnrHTC9nUAySBWU6K3DpwAAAAASUVORK5CYII=) no-repeat right center/100% 100%;
     position:absolute;
-    top:25rpx;
-    bottom:25rpx;
+    top:12rpx;
+    bottom:12rpx;
     right:100rpx;
 }
 .tabconBox.fixed{
@@ -220,6 +248,16 @@
     border-radius:8rpx;
     padding:0 18rpx;
     box-sizing:border-box;
+    position: relative;
+}
+
+.sensorlist .wrap .bgView{
+  width: 124rpx;
+  height: 79rpx;
+  bottom: 0;
+  right: 65rpx;
+  position: absolute;
+  z-index: 99;
 }
 .sensorlist .equip_icon{
     width:80rpx;
@@ -260,11 +298,6 @@
     color:#15FC71;
     line-height:40rpx;
 }
-.sensorlist .desc text{
-    font-size:24rpx;
-    color:#15FC71;
-    margin-left:16rpx;
-}
 
 /* 控制设备 */
 .control_tabcon{
@@ -288,7 +321,7 @@
 }
 .control_tabcon>.item .listItem{
   border-bottom: 1rpx solid #001434;
-  padding: 15rpx 20rpx;
+  padding: 18rpx 20rpx;
 }
 
 .control_tabcon>.item .listItem .iconImg{
@@ -301,10 +334,10 @@
 
 .control_tabcon>.item .listItem>.leftBox{
   width: 575rpx;
-  line-height: 62rpx;
+  line-height: 80rpx;
 }
 .control_tabcon>.item .listItem>.rightBox{
-  line-height: 62rpx;
+  line-height: 80rpx;
   width: 60rpx;
   text-align: center;
   margin-right: -20rpx;
@@ -332,23 +365,23 @@
 /* 数值型控制器 */
 .controlTemp{
   width: 202rpx;
-  height:62rpx;
+  height:80rpx;
   display: flex;
   display: -webkit-flex;
   justify-content: space-between;
   align-items: center;
   font-size: 30rpx;
-  border-radius: 60rpx;
+  border-radius: 80rpx;
   border: 1rpx solid #1E3C73;
   padding: 0 20rpx 0 30rpx;
   background-color: #001434;
   box-sizing: border-box;
 }
 .controlTemp>.iconfont{
-  font-size: 16rpx;
-  width: 22rpx;
-  height: 22rpx;
-  line-height: 22rpx;
+  font-size: 24rpx;
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
   text-align: center;
   border: 1rpx solid #30E034;
   color: #30E034;
@@ -393,4 +426,70 @@
 }
 .common_equip>.item>.item-state.offline{
   color: #FCAD15;
+}
+
+/* 数值型控制器弹窗 */
+.modelInput{
+  width: 340rpx;
+  height: 80rpx;
+  border: 2rpx solid #294166;
+  border-radius: 8rpx;
+  margin: 5rpx auto 11rpx;
+  text-align: center;
+  color: #15E9FC;
+  font-size: 32rpx;
+  box-sizing: border-box;
+}
+.rangeInput{
+  text-align: center;
+  color: #395787;
+  font-size: 24rpx;
+}
+
+/* 开关确认弹窗 */
+.ques_tit{
+  text-align: center;
+  padding-bottom: 20rpx;
+  color: #7696D3;
+  font-size: 32rpx;
+}
+
+/* 区域选择 浮窗 */
+.fixedSelectArea{
+  position: fixed;
+  z-index: 1099;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.85);
+}
+.fixedSelectArea>.content{
+  height: 100%;
+}
+.fixedSelectArea>.content>.title{
+  border-bottom: 3rpx solid #102957;
+  background-color: #011434;
+}
+.fixedSelectArea .arealist{
+  max-height: calc(100% - 82rpx);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 25rpx 0;
+  box-sizing: border-box;
+  line-height: 80rpx;
+  color: #395787;
+  font-size: 26rpx;
+  background-color: #011434;
+}
+.fixedSelectArea .area_item{
+  padding: 0 45rpx;
+  box-sizing: border-box;
+}
+.fixedSelectArea .area_item.active{
+  color: #15E9FC;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAxUlEQVQ4T6XT3Q2CMBSG4e8Q6jXEH7zTDWQD4yaM4CbGCQwbOAIj4AZeIsTYa0s8BiPFH4Qive77pDltCT0X9ezxFzBO2VcCUrp07AwM0zywGDuAD5kn/E5AFQM35u15KtbGwGsMIMw8OyjmZwT8io2AplgDo1O+J/BMDeyVdEmWV9sWV0CiIiJaAhyXiEmsAefCjrjmEUCLAmG2QiLePE+iB1b36PQQ3xG9tTH+GuIH0hrX3sIDUZhnE4pN/onRO2iCegN3whljETlLpksAAAAASUVORK5CYII=");
+  background-position: 94% center;
+  background-size: 30rpx auto;
+  background-repeat: no-repeat;
 }

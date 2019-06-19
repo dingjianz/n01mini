@@ -1,0 +1,85 @@
+.container {
+  padding: 31rpx 19rpx 20rpx 21rpx;
+}
+
+.rain-direct {
+  height: 126rpx;
+  background: rgba(16, 41, 87, 1);
+  border-radius: 10rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 31rpx 0 29rpx;
+}
+
+.rain-direct .rain-name {
+  height: 59rpx;
+  font-size: 42rpx;
+  font-weight: 500;
+  color: rgba(21, 252, 113, 1);
+  line-height: 59rpx;
+  display: flex;
+  display: -webkit-flex;
+  align-items: baseline;
+}
+
+.rain-direct .rain-name .sub-name {
+  height: 37rpx;
+  font-size: 26rpx;
+  font-weight: 400;
+  line-height: 37rpx;
+}
+
+.rain-direct .update-time {
+  height: 33rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: rgba(56, 80, 118, 1);
+  line-height: 33rpx;
+}
+
+/* 折线图 */
+.rain-chart {
+  height: 610rpx;
+  background-color: #102957;
+  margin-top: 30rpx;
+  padding: 21rpx;
+}
+
+.rain-chart .opts {
+  box-sizing: border-box;
+  color: #15E9FC;
+  height: 88rpx;
+  font-size: 26rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
+  border-bottom: 1rpx solid #001434;
+}
+
+.rain-chart .opts .opts-left {
+  width: 60%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+}
+
+.rain-chart .optitem {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 25rpx;
+  text-align: center;
+}
+
+.rain-chart .optitem.active {
+  background: #001434;
+}
+
+.rain-chart ec-canvas {
+  width: 100%;
+  height: 100%;
+}

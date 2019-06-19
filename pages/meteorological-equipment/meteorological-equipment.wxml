@@ -1,0 +1,71 @@
+<view class="container">
+  <view class="euip-wrapper">
+    <!-- 设备名称 -->
+    <view class="equip-title">
+      <view class="equip-des">
+        <text class="euip-name">水肥机</text>
+        <text class="euip-basePosition">生产示范基地</text>
+      </view>
+      <view class="iconfont iconshezhi" bindtap="turnToDeviceInstall"></view>
+    </view>
+    <!-- EC 值列表 -->
+    <view class="ec-value">
+      <i-row>
+        <i-col span="12" i-class="col-class">
+          <view class="val-wrapper">
+            <view class="val-name">EC值</view>
+            <iconfont dataNum="7.5" color="#15FC71" fontSize="30" bindtap="turnToRain"></iconfont>
+          </view>
+        </i-col>
+        <i-col span="12" i-class="col-class">
+          <view class="val-wrapper">
+            <view class="val-name">EC值</view>
+            <iconfont dataNum="7.5" color="#15FC71" fontSize="30" bindtap="turnToRain"><text class="val-unit">us/cm</text></iconfont>
+          </view>
+        </i-col>
+        <i-col span="12" i-class="col-class">
+          <view class="val-wrapper">
+            <view class="val-name">EC值</view>
+            <iconfont dataNum="7.5" color="#15FC71" fontSize="30" bindtap="turnToRain"></iconfont>
+          </view>
+        </i-col>
+        <i-col span="12" i-class="col-class">
+          <view class="val-wrapper">
+            <view class="val-name">EC值</view>
+            <iconfont dataNum="7.5" color="#15FC71" fontSize="30" bindtap="turnToRain"><text class="val-unit">us/cm</text></iconfont>
+          </view>
+        </i-col>
+      </i-row>
+    </view>
+
+    <!-- 设备开关 -->
+    <view class="euip-switch-list">
+      <view class="euip-switch-item">
+        <view class="switch-name">水泵</view>
+        <view class="switch-onoff">
+          <onoff type="2" selectedIndex="1" bind:changeSwitch="openSwitchToast" id="waterpump" data-domid="waterpump"></onoff>
+          <text class='iconfont iconjiantou' bindtap="turnToDeviceDetail"></text>
+        </view>
+      </view>
+      <view class="euip-switch-item">
+        <view class="switch-name">水肥机控制器</view>
+        <view class="switch-onoff">
+          <onoff type="2" selectedIndex="1" bind:changeSwitch="openSwitchToast" id="watercontrol1" data-domid="watercontrol1"></onoff>
+          <text class='iconfont iconjiantou' bindtap="turnToDeviceDetail"></text>
+        </view>
+      </view>
+      <view class="euip-switch-item">
+        <view class="switch-name">二号水肥机控制器</view>
+        <view class="switch-onoff">
+          <onoff type="2" selectedIndex="1" bind:changeSwitch="openSwitchToast" id="watercontrol2" data-domid="watercontrol2"></onoff>
+          <text class='iconfont iconjiantou' bindtap="turnToDeviceDetail"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 开关确认弹窗 -->
+  <i-modal visible="{{isVisibleSwitch}}" bind:ok="handleBtnOk" bind:cancel="handleBtnCancel">
+    <view class="ques_tit">确定{{actionType}}“内遮阳开关#1”吗？</view>
+  </i-modal>
+</view>

@@ -1,0 +1,22 @@
+<!--pages/teamList/teamList.wxml-->
+<view>
+    <i-cell-group i-class="custom-cell-group clearfix">
+        <i-cell bind:click="changeCompany" data-index="{{idx}}" i-class="custom-cell {{activeId==item.id ? 'active':''}}" wx:for="{{clist}}" wx:for-index="idx" wx:for-item="item">
+            <view class="cell-title">
+                <view class="suffix-icon iconfont iconcheck"></view>
+                <view class="cname">{{item.companyName}}</view>    
+            </view>
+            <view slot="footer" class="cell-footer-wrap" wx:if="{{item.id!=0}}">
+                <view class="setbtn iconfont iconset" catchtap="companySet" data-id="{{item.id}}"  data-cname="{{item.companyName}}"></view>
+            </view>
+        </i-cell>
+    </i-cell-group>
+    <i-cell-group i-class="custom-cell-group clearfix" wx:if="{{false}}">
+        <i-cell i-class="custom-cell" is-link wx:if="{{true}}" url="/pages/create-team/create-team">
+            <button class="f-button">
+                <text class="iconfont iconadd"></text>
+                添加团队
+            </button>
+        </i-cell>
+    </i-cell-group>
+</view>

@@ -6,6 +6,8 @@
     padding-top: 34rpx;
     padding-left: 30rpx;
     position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 .user-info-container::after{
     content: '12';
@@ -55,8 +57,9 @@
 .user-info-container > .user-setting-btn .iconfont{
     font-size: 24rpx;
     display: inline-block;
-    margin-left: -15rpx;
-    margin-right: 5rpx;
+    /* margin-left: -15rpx;
+    margin-right: 5rpx; */
+    margin:0 10rpx 0 15rpx;
 }
 .custom-cell-group .custom-cell .prefix-icon.iconchengyuanguanli{
     font-size: 30rpx;

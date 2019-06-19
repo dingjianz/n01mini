@@ -1,5 +1,6 @@
 {
   "usingComponents": {
   },
-  "navigationBarTitleText": "创建团队"
+  "navigationBarTitleText": "创建团队",
+  "disableScroll": true
 }

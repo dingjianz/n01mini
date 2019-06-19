@@ -1,0 +1,69 @@
+/* pages/videoCtrol/videoCtrol.wxss */
+page {
+  display: block;
+  min-height: 100%;
+  background-color: #102957;
+}
+.grid{
+    width:100%;
+    height:30rpx;
+    background:#001434;
+}
+.videotit{
+    padding:0 20rpx;
+    display:flex;
+    display:-webkit-flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-flow:row nowrap;
+    height:90rpx;
+    line-height:90rpx;
+    font-size:30rpx;
+    color:#15E9FC;
+}
+.videotit .plot{
+    color:#395787;
+    font-size:24rpx;
+    height:40rpx;
+    line-height:40rpx;
+    border-radius:20rpx;
+    background: #0B224A;
+    padding:0 16rpx;
+}
+.hole_video,#myVideo{
+    width:100%;
+    position:relative;
+}
+.hole_video .videoctrol{
+    width:100%;
+    position:absolute;
+    left:0;
+    bottom:15rpx;
+    z-index:99;
+    padding:0 15rpx; 
+    box-sizing:border-box;
+}
+.hole_video .videoctrol,.hole_video .videoctrol .right_ctrol{
+    display:flex;
+    display:-webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow:row nowrap;
+}
+.hole_video .videoctrol .right_ctrol view{
+    justify-content:flex-start;
+    margin-left: 23rpx;
+}
+.videoctrol .playbtn,.videoctrol .ctrolbtn,.videoctrol .fullscreen{
+  width: 60rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 100%;
+  font-size: 24rpx;
+  color: #fff;
+  background-color: rgba(0,0,0,.5)
+}
+.videoctrol .ctrolbtn{
+    background:#2ED5E0;
+}

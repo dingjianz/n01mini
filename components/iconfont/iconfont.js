@@ -14,7 +14,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    iconArr: ['iconnumber-0', 'iconnumber-1', 'iconnumber-2', 'iconnumber-3', 'iconnumber-4', 'iconnumber-5', 'iconnumber-6', 'iconnumber-7', 'iconnumber-8', 'iconnumber-9', 'iconnumber-point'],
+    iconArr: ['iconnumber-0', 'iconnumber-1', 'iconnumber-2', 'iconnumber-3', 'iconnumber-4', 'iconnumber-5', 'iconnumber-6', 'iconnumber-7', 'iconnumber-8', 'iconnumber-9', 'iconnumber-point','iconnumber-path'],
 
     fontArr:[],
   },
@@ -31,6 +31,8 @@ Component({
       num.forEach((item,index)=>{
         if(item=='.'){
           arr.push(10)
+        } else if(item == '-'){
+          arr.push(11)
         }else{
           arr.push(Number(item))
         }

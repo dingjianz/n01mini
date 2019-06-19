@@ -19,7 +19,9 @@
     text-align:center;
 }
 .datebox .dateSt,.datebox .dateOv{
+    width:230rpx;
     height:68rpx;
+    text-align:center;
     line-height:68rpx;
     border-bottom:2rpx solid #456EAD;
 }
@@ -41,7 +43,7 @@
     font-size:32rpx;
     text-align:center;
     color:#8BABE7;
-    background:rgba(11,34,74,1);
+    background:rgba(15,44,96,1);
     border-radius:10rpx;
     margin-top:40rpx;
 }

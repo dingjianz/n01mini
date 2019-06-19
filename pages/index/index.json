@@ -1,6 +1,9 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "iconfont": "../../components/iconfont/iconfont",
-    "onoff": "../../components/switch-self/switch-self"
+    "onoff": "../../components/switch-self/switch-self",
+    "i-modal": "../../components/i-view/modal/index",
+    "ctrolPan": "../../components/ctrol-pan/ctrol-pan"
   }
 }

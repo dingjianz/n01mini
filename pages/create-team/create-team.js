@@ -1,13 +1,63 @@
 // pages/create-team/create-team.js
+import { post, urlData } from '../../utils/util.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    sucModal: {
+      visible: false,
+      animationData: null,
+      inputtxt:''
+    }
   },
+    inputedit(e){
+        let datatxt = e.currentTarget.dataset.txt;
+        let detail = e.detail.value;
+        this.setData({
+            inputtxt: detail
+        });
+    },
+  // 创建团队
+  handleCreated() {
+      let _this = this;
+      post(urlData.iotCompanyAdd, {
+          "companyName": this.data.inputtxt
+      }, wx.getStorageSync('TOKEN')).then(function (resp) {
+          if (resp.data.respCode === 0) {
+            console.log('创建成功');
+          }
+      });
 
+    //创建动画
+    const animation = wx.createAnimation({
+      duration: 300,
+      timingFunction: "ease-in",
+    });
+
+    this.setData({
+      ['sucModal.visible']: true
+    });
+    animation.top('0%').step();
+
+    // 一定要返回动画实例否则没有效果
+    this.setData({
+      ['sucModal.animationData']: animation.export(),
+    })
+  },
+  // 跳转页面
+  redirectTo({ currentTarget }) {
+    wx.redirectTo({
+      url: currentTarget.dataset.url
+    })
+  },
+  // go home
+  goHome({ currentTarget }) {
+    wx.switchTab({
+      url: currentTarget.dataset.url
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
