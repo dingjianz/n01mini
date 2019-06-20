@@ -15,5 +15,5 @@
       <view class="weui-input">{{dateOv}}</view>
     </picker>
   </view>
-  <view class="submit">确定</view>
+  <view class="submit" bindtap="backAndSubmit">确定</view>
 </view>

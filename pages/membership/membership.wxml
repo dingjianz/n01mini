@@ -5,7 +5,7 @@
     管理员和超级用户可以进入详情页（超级用户无法被查看详情）
  -->
 <i-cell-group i-class="custom-cell-group clearfix">
-    <i-cell i-class="custom-cell" wx:for="{{memberList}}" wx:key="{{index}}" is-link="{{ownedAdmin && (item.ownFlag !== 1)}}" url="../member-detail/member-detail?userId={{item.userVO.id}}">
+    <i-cell i-class="custom-cell" wx:for="{{memberList}}" wx:key="{{index}}" bind:tap="navigateTo" data-own-flag="{{item.ownFlag}}" data-url="../member-detail/member-detail?userId={{item.userVO.id}}">
         <view class="cell-title">
             {{item.userVO.phone}}
             <text class="remarks iconfont iconyongyouzhe" wx:if="{{item.ownFlag === 1}}"></text>

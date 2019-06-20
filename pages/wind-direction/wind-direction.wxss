@@ -45,11 +45,36 @@
 
 .wind-log .wind-log-title {
   height: 108rpx;
-  padding-left: 30rpx;
+  color: #15E9FC;
+  font-size: 26rpx;
+  padding-left: 20rpx;
+  padding-right: 31rpx;
+  box-sizing: border-box;
+  display: flex;
   display: -webkit-flex;
+  justify-content: space-between;
   align-items: center;
+  flex-flow: row nowrap;
+}
+.wind-log .wind-log-title .opts-left{
+  width: 60%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+.wind-log .wind-log-title .optitem {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 25rpx;
+  text-align: center;
 }
 
+.wind-log .wind-log-title .optitem.active {
+  background: #001434;
+}
 .wind-log .wind-log-title .operate-name {
   height: 40rpx;
   font-size: 28rpx;

@@ -1,5 +1,5 @@
 // pages/membership/membership.js
-import { post, urlData } from '../../utils/util.js'
+import { post, urlData, throttle } from '../../utils/util.js'
 
 Page({
 
@@ -11,6 +11,14 @@ Page({
     memberList: []
   },
 
+  navigateTo: throttle(function({ currentTarget }) {
+    if (this.data.ownedAdmin && (currentTarget.dataset.ownFlag !== 1)) {
+      wx.navigateTo({
+        url: currentTarget.dataset.url
+      })
+    }
+  }),
+
   getMemberList() {
     let companyId = wx.getStorageSync('CID');
     let accessToken = wx.getStorageSync('TOKEN');
@@ -19,7 +27,8 @@ Page({
     }, accessToken)
       .then((response) => {
         let res = response.data;
-        if(res.respCode === 0){
+        if (res.respCode === 0) {
+          wx.hideLoading();
           this.setData({
             memberList: res.obj.list
           });
@@ -27,13 +36,12 @@ Page({
       })
   },
 
-  getUserInfo(){
+  getUserInfo() {
     let userInfo = wx.getStorageSync('COMPANYINFO').userCompanyVO;
     this.setData({
-      ownedAdmin: userInfo.roleVO.roleIdentity === 'manage'
+      ownedAdmin: true
     })
   },
-
 
   /**
    * 生命周期函数--监听页面加载
@@ -51,6 +59,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
     this.getUserInfo();
     this.getMemberList();
   },

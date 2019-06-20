@@ -30,6 +30,10 @@
     box-sizing: border-box;
     border-bottom: 1rpx solid #001434;
 }
+.custom-cell-group .custom-cell .cell-title{
+    display: block;
+    width: 470rpx;
+}
 .custom-cell-group .custom-cell .cell-title .remarks{
     width: 44rpx;
     height: 44rpx;
@@ -63,7 +67,7 @@
   height: 80rpx;
   margin: 0 auto;
   box-sizing: border-box;
-  border: 1rpx solid #294166;
+  border: 2rpx solid #294166;
   background-color: transparent;
   padding: 10rpx 20rpx;
   display: flex;

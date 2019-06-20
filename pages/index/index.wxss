@@ -104,6 +104,7 @@ page{
     width:100%;
     height:100rpx;
     padding:10rpx;
+    margin-bottom: 30rpx;
     box-sizing:border-box;
     background-color:#102957;
     display:flex;
@@ -117,6 +118,9 @@ page{
 .video_list{
     width:calc(100% - 100rpx);
     height:100%;
+}
+.video_list.onlyOne{
+  width: 100%;
 }
 .scroll-view_X{
     width:100%;
@@ -192,7 +196,6 @@ page{
 /* 传感器列表 */
 .equip_tab{
     width:100%;
-    margin-top:30rpx;
     height:88rpx;
     line-height:88rpx;
     display:flex;
@@ -201,6 +204,7 @@ page{
     align-items: center;
     flex-flow:row nowrap;
     background-color:#102957;
+    border-top: 1rpx solid #001434;
 }
 .equip_tab .active{
     color:#15E9FC;
@@ -224,6 +228,10 @@ page{
     height:65rpx;
     line-height:65rpx;
     text-align:center;
+}
+.sensortit>.iconfont{
+  font-size: 30rpx;
+  margin-right: 10rpx;
 }
 .sensorlist,.sensorlist .wrap{
     display:flex;
@@ -279,6 +287,10 @@ page{
     display:-webkit-flex;
     flex-flow:column;
     text-align: left;
+}
+.sensorlist .desc>.outline{
+  font-size: 24rpx;
+  color: #FCAD15;
 }
 .sensorlist .desc .tit{
     font-size:28rpx;
@@ -472,7 +484,7 @@ page{
   background-color: #011434;
 }
 .fixedSelectArea .arealist{
-  max-height: calc(100% - 82rpx);
+  max-height: 460rpx;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   padding: 25rpx 0;

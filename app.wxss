@@ -38,7 +38,7 @@ page{
 }
 .t-ellipsis{
   text-overflow: ellipsis;
-  white-space: nowrapl;
+  white-space: nowrap;
   overflow: hidden;
 }
 

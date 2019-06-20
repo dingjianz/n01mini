@@ -33,7 +33,7 @@
             <view class="log-time" decode>{{item.date}}<text decode> &nbsp; </text>
               {{item.time}}</view>
             <view class="log-status">
-              <text class="z-open {{filter.returnClassName(item.name)}}" decode>{{item.name}}&nbsp;&nbsp;</text>({{item.event}})
+              <text class="z-open" decode>设置为{{item.name}}&nbsp;&nbsp;</text>({{item.event}})
             </view>
           </view>
         </block>

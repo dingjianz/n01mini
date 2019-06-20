@@ -5,8 +5,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        id:'',
-        title:'',
+        deviceId:'',
+        deviceTit:'',
         videoContext: null,
         isPlay:false,
         control:false//视频默认control按钮
@@ -60,8 +60,8 @@ Page({
      */
     onLoad: function (options) {
         this.setData({
-            id: options.id,
-            title: options.videotit
+            deviceId: options.deviceid,
+            deviceTit: options.videotit
         });    
     },
 

@@ -1,15 +1,16 @@
 <!--pages/index/index.wxml-->
 <wxs module="filter" src="../../utils/todealName.wxs"></wxs>
 <view class="container {{isShowAreaSwitch?'overHidden':''}}">
-    <view bindtap="slideDownArea" wx:if="{{!isVideoContl}}" class="area_check {{isVideoFixed?'hidden':''}}">
-      <view class="dis_ib">全部区域</view>
-      <view class='iconfont icondown dis_ib'></view> </view>
-    <view wx:else class="videoPlot" >
+    <view bindtap="getAreaList" wx:if="{{!isVideoContl&&!isCidPerson}}" class="area_check {{isVideoFixed?'hidden':''}}">
+      <view class="dis_ib">{{areaName}}</view>
+      <view class='iconfont icondown dis_ib'></view>
+    </view>
+    <view wx:if="{{isVideoContl}}" class="videoPlot" >
       <view class='plotName'>N2地块</view>
       <view class='areaName'>生产示范基地</view>
     </view>
     <view class="videoAndTab {{isVideoFixed?'fixed':''}}">
-      <view class="hole_video">
+      <view wx:if="{{videoList.length!=0}}" class="hole_video">
           <video id="myVideo" src="{{videoList[videoIndex].hlsUrl}}" object-fit="contain" binderror="videoErrorCallback" bindplay="videoPlay" show-center-play-btn='{{false}}' show-play-btn="{{isControl}}" show-fullscreen-btn="{{isControl}}" autoplay="{{isAutoplay}}" enable-play-gesture danmu-btn='{{false}}' controls='{{isControl}}' bindfullscreenchange="isFullScreenState"></video>
           <view class="videoctrol">
               <view class="left_ctrol playbtn iconfont {{videoPlay?'iconzanting':'iconplay'}}" bindtap="playfn"></view>
@@ -21,22 +22,22 @@
           </view>
       </view>
       <!-- 直播视频列表 -->
-      <view wx:if="{{!isVideoContl}}" class="video_section">
-          <view class="video_list">
+      <view wx:if="{{!isVideoContl&&videoList.length!=0}}" class="video_section">
+          <view class="video_list {{videoList.length>1?'':'onlyOne'}}">
               <scroll-view class="scroll-view_X" scroll-x="true" bindscroll="scroll" lower-threshold="50" bindscrolltolower="rightListen">
                   <view bindtap='changeVideoUrl' data-index="{{index}}" data-url="{{item.hlsUrl}}" class="video_item {{videoIndex==index?'active':''}}" wx:key="{{index}}" wx:for="{{videoList}}"><view class="name">{{item.displayName}}</view></view>
               </scroll-view>
           </view>
-          <view class="shadow" wx:if="{{shadowHide}}"></view>
-          <view class="multibtn" bindtap='toMultiVideo'>
+          <view class="shadow" wx:if="{{videoList.length>1}}"></view>
+          <view class="multibtn" wx:if="{{videoList.length>1}}" bindtap='toMultiVideo'>
               <view class="iconfont iconweibiaoti-"></view>
               <view>多窗口</view>
           </view>
       </view>
       
       <!-- 传感、控制和综合设备分类 -->
-      <view wx:if="{{!isVideoContl}}" id="equip_tab" class="equip_tab {{isTabCanFixed&&!isVideoFixed?'fixed':''}}">
-          <view class="{{activeTab==index ? 'active':''}}"  data-index="{{index}}" wx:for="{{tabs}}" wx:key="{{index}}" bindtap="changeTab">{{item.title}}·{{item.num}}</view>
+      <view wx:if="{{!isVideoContl&&activeTab}}" id="equip_tab" class="equip_tab {{isTabCanFixed&&!isVideoFixed?'fixed':''}}">
+          <view class="{{activeTab==item.productType ? 'active':''}}" data-type="{{item.productType}}" wx:for="{{tabs}}" wx:key="{{index}}" bindtap="changeTab">{{item.title}}·{{item.count}}</view>
       </view>
     </view>
     <!-- ↓ 这个以防videoAndTab变为fixed后 脱出文档流 -->
@@ -46,116 +47,60 @@
       <view class="equip_tab  {{isTabCanFixed&&!isVideoFixed?'':'hidden'}}"></view>
 
       <scroll-view scroll-y class="tabconBox {{isVideoFixed?'fixed':''}}">
-        <!------ 传感器 ------>
-        <view class="equip_tabcon" wx:if="{{activeTab==0}}">
-            <view class="sensortype">
-                <view class="sensortit">土壤类</view>
+        <!-- 传感器 -->
+        <view class="equip_tabcon" wx:if="{{activeTab=='SENSOR'}}">
+        <!-- 循环所有分类 -->
+          <block wx:for="{{sensorList}}" wx:for-index="index" wx:for-item="item" wx:key="{{index}}">
+            <view wx:if="{{item.length>0}}" class="sensortype" >
+                <view class="sensortit" style="color:{{sensorIcons[index].color}}"><text class="iconfont {{sensorIcons[index].icon}}"></text>{{sensorIcons[index].name}}</view>
                 <view class="sensorlist">
-                    <view class="half_item">
-                        <view class="wrap" bindtap="deviceInfo">
-                            <view class="equip_icon" style="background-color:{{filter.todealName('土壤温湿度')}}">
-                                <image class="label" src="/assets/images/1.png"></image> 
-                            </view>
-                            <view class="desc">
-                                <view class="tit">土壤温湿度</view>
-                                <view  class="indicator d-flex"><view class='dataName'>温度</view><iconfont dataNum="--" fontSize="20"><text style="font-size:24rpx;">°C</text></iconfont></view>
-                                <view class="indicator d-flex"><view class='dataName'>湿度</view><iconfont dataNum="60" fontSize="20">%</iconfont></view>
-                            </view>
-                        </view>
-                    </view>
-                    <view class="half_item">
-                        <view class="wrap" bindtap="deviceInfo">
-                            <view class="equip_icon" style="background-color:{{filter.todealName('钾离子浓度')}}">
-                                <image class="label" src="/assets/images/1.png"></image> 
-                            </view>
-                            <view class="desc">
-                                <view class="tit">钾离子浓度</view>
-                                <view class="value"><iconfont dataNum="28.32" fontSize="28"><text style="font-size:24rpx;">ppm</text></iconfont></view>
-                            </view>
-                        </view>
-                    </view>
-                    <view class="half_item">
-                        <view class="wrap" bindtap="deviceInfo">
-                            <view class="equip_icon" style="background-color:{{filter.todealName('二氧化碳浓度')}}">
-                                <image class="label" src="/assets/images/1.png"></image> 
-                            </view>
-                            <view class="desc">
-                                <view class="tit">二氧化碳浓度</view>
-                                <view class="value"><iconfont dataNum="28.32" fontSize="28"> <text style="font-size:24rpx;">ppm</text></iconfont></view>
-                            </view>
-                        </view>
-                    </view>
-                    <view class="half_item">
-                        <view class="wrap" bindtap="deviceInfo">
-                            <view class="equip_icon" style="background-color:{{filter.todealName('二氧化硫浓度')}}">
-                                <image class="label" src="/assets/images/1.png"></image> 
-                            </view>
-                            <view class="desc">
-                                <view class="tit">二氧化硫浓度</view>
-                                <view class="value"><iconfont dataNum="28.32" fontSize="28"> <text style="font-size:24rpx;">ppm</text></iconfont></view>
-                            </view>
-                        </view>
-                    </view>
+                <!-- 循环每个分类下的传感器列表 -->
+                  <block wx:for="{{item}}" wx:for-index="zInx" wx:for-item="zItm" wx:key="{{zInx}}">
+                    
+                      <view class="{{item.length==1?'hole_item':'half_item'}}">
+                          <view class="wrap" bindtap="deviceInfo" data-zItm="{{zItm}}">
+                              <view class="equip_icon" style="background-color:{{filter.todealName(zItm.name)}}">
+                                  <image class="label" src="{{zItm.logo}}"></image> 
+                              </view>
+                              <!-- 根据设备的属性的个数有不同展示方法 ↓ -->
+                              <view class="desc" wx:if="{{zItm.proList.length==1}}">
+                                  <view class="tit">{{zItm.name}}</view>
+                                  <view wx:if="{{!zItm.isOnline}}" class="outline" >
+                                    离线
+                                  </view>
+                                  <!-- 循环 设备的属性 -->
+                                  <block wx:if="{{zItm.isOnline}}" wx:for="{{zItm.proList}}" wx:key="{{idx}}" wx:for-index="idx" wx:for-item="its">
+                                    <view class="value"><iconfont dataNum="{{its.propertyValue?its.propertyValue:'--'}}" fontSize="28"><text style="font-size:24rpx;margin-left:10rpx;">{{its.specsNumber.unit}}</text></iconfont></view>
+                                  </block>
+                              </view>
 
-                    <view class="half_item">
-                        <view class="wrap" bindtap="deviceInfo">
-                            <view class="equip_icon" style="background-color:{{filter.todealName('PM2.5')}}">
-                                <image class="label" src="/assets/images/1.png"></image> 
-                            </view>
-                            <view class="desc">
-                                <view class="tit">PM2.5</view>
-                                <view class="value"><iconfont dataNum="28.32" fontSize="28"> <text style="font-size:24rpx;">ppm</text></iconfont></view>
-                            </view>
-                        </view>
-                    </view>
+                              <view class="desc" wx:if="{{zItm.proList.length==2}}">
+                                  <view class="tit">{{zItm.name}}</view>
+                                  <view wx:if="{{!zItm.isOnline}}" class="outline" >
+                                    离线
+                                  </view>
+                                  <!-- 循环 设备的属性 -->
+                                  <block wx:if="{{zItm.isOnline}}" wx:for="{{zItm.proList}}" wx:key="{{idx}}" wx:for-index="idx" wx:for-item="its">
+                                    <view class="indicator d-flex">
+                                      <view class='dataName'>{{its.name}}</view>
+                                      <iconfont dataNum="{{its.propertyValue?its.propertyValue:'--'}}" fontSize="20"><text style="font-size:24rpx;margin-left:10rpx;">{{its.specsNumber.unit}}</text></iconfont>
+                                    </view>
+                                  </block>
+                              </view>
+                              
+                              <!-- 这个图片是 该分类下只有一个设备 才显示 -->
+                              <image wx:if="{{item.length==1}}" class="bgView" src="/assets/images/ico_direct.png"></image> 
+                          </view>
+                      </view>
 
-                    <view class="half_item">
-                        <view class="wrap" bindtap="deviceInfo">
-                            <view class="equip_icon" style="background-color:{{filter.todealName('PM10')}}">
-                                <image class="label" src="/assets/images/1.png"></image> 
-                            </view>
-                            <view class="desc">
-                                <view class="tit">PM10</view>
-                                <view class="value"><iconfont dataNum="28.32" fontSize="28"> <text style="font-size:24rpx;">ppm</text></iconfont></view>
-                            </view>
-                        </view>
-                    </view>
-
-                    <view class="half_item">
-                        <view class="wrap" bindtap="deviceInfo">
-                            <view class="equip_icon" style="background-color:{{filter.todealName('水质铜离子')}}">
-                                <image class="label" src="/assets/images/1.png"></image> 
-                            </view>
-                            <view class="desc">
-                                <view class="tit">水质铜离子</view>
-                                <view class="value"><iconfont dataNum="28.32" fontSize="28"> <text style="font-size:24rpx;">ppm</text></iconfont></view>
-                            </view>
-                        </view>
-                    </view>
-                </view>     
+                      
+                  </block>
+                </view>
             </view>
-            <view class="sensortype">
-                <view class="sensortit">其他类</view>
-                <view class="sensorlist">
-                    <view class="hole_item">
-                        <view class="wrap">
-                            <view class="equip_icon" style="background-color:{{filter.todealName('土壤温湿度')}}">
-                                <image class="label" src="/assets/images/1.png"></image> 
-                            </view>
-                            <view class="desc">
-                                <view class='tit'>土壤温湿度</view>
-                                <view class="indicator d-flex"><view class='dataName'>温度</view><iconfont dataNum="25" fontSize="20">°C</iconfont></view>
-                                <view class="indicator d-flex"><view class='dataName'>湿度</view><iconfont dataNum="60" fontSize="20">%</iconfont></view>
-                            </view>
-
-                            <image class="bgView" src="/assets/images/ico_direct.png"></image> 
-                        </view>
-                    </view>
-                </view>     
-            </view>
+          </block>
         </view>
-        <!------ 控制设备 ------>
-        <view class="control_tabcon" wx:if="{{activeTab==1}}">
+        <!-- 控制设备 -->
+        <view class="control_tabcon" wx:if="{{activeTab=='CONTROLLER'}}">
             <!-- 哪个控制设备类型 -item -->
             <view class="item">
                 <view class='title listItem clearfix'>
@@ -266,8 +211,8 @@
             </view>
         </view>
 
-        <!------ 综合设备 ------>
-        <view class='common_equip' wx:if="{{activeTab==2}}">
+        <!-- 综合设备 -->
+        <view class='common_equip' wx:if="{{activeTab=='INTEGRATED'}}">
           <view class='item clearfix' bindtap="turnToWind">
             <view class='f-l'>
               <view class='iconBg f-l'>
@@ -324,17 +269,15 @@
 
     <!-- 选择区域 -->
     <view class="fixedSelectArea" wx:if="{{isShowAreaSwitch}}">
-      <view class="content">
-        <view class="title" bindtap='slideupArea'>
-          <view class="dis_ib">全部区域</view>
+      <view class="content" bindtap='slideupArea'>
+        <view class="title" >
+          <view class="dis_ib">{{areaName}}</view>
           <view class='iconfont iconup dis_ib'></view> 
         </view>
         <view class="arealist">
-          <view class="area_item active">全部区域</view>
-          <view class="area_item">全部区域</view>
-          <view class="area_item">全部区域</view>
-          <view class="area_item">全部区域</view>
-          <view class="area_item">全部区域</view>
+          <block wx:for="{{areaList}}" wx:key="{{index}}">
+            <view catchtap="switchArea"  data-id="{{item.id}}" data-name="{{item.groupName}}" class="area_item {{areaActiveId==item.id?'active':''}}">{{item.groupName}}</view>
+          </block>
         </view>
       </view>
     </view>

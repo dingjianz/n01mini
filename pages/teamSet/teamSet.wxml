@@ -33,8 +33,6 @@
     <label class="f-input-label">
         <input class="f-input" placeholder="请输入团队名称" bindinput="inputedit" value="{{companyTit}}" data-txt="companyTit" placeholder-class="f-input-placeholder" />
     </label>
-    <text wx:if="{{errorCode == 1}}" class="errortip">请输入团队名称</text>
-    <text wx:elif="{{errorCode == 2}}" class="errortip">团队名称最多20个字</text>
 </i-modal>
 <i-modal title="确定退出团队？" visible="{{exitModal}}" actions="{{ actions }}" bind:click="handleClick" data-modal="exitModal">
     <view class="modaltip">退出后，该团队下的所有设备都将转移至“个人设备”下。</view>

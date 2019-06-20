@@ -2,7 +2,7 @@
 <view class="videopage">
     <view class="grid"></view>
     <view class="videotit">
-        <text>{{title}}</text>
+        <text>{{deviceTit}}</text>
         <text class="plot">生产示范基地</text>
     </view>
     <view class="hole_video">
@@ -16,6 +16,6 @@
         </view>    
     </view>
     <view class="pannel">
-        <ctrolPan bindctrol="ctrolEvent" bindexitCtrl="exitCtrl"></ctrolPan>
+        <ctrolPan device-id="{{deviceId}}" device-tit="{{deviceTit}}" bindctrol="ctrolEvent" bindexitCtrl="exitCtrl"></ctrolPan>
     </view>
 </view>

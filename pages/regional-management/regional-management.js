@@ -1,4 +1,6 @@
 // pages/regional-management/regional-management.js
+import { post, urlData, throttle } from '../../utils/util'
+
 Page({
 
   /**
@@ -6,9 +8,10 @@ Page({
    */
   data: {
     // 管理员时为true
-    isAdmin: true,
-    // 区域管理
+    ownAdmin: false,
+    // 添加区域弹框
     addRegionModal: false,
+    regionalName: '',
     // 弹框的按钮以及样式
     actions: [
       {
@@ -19,8 +22,15 @@ Page({
         name: '确定',
         color: '#456EAD'
       },
-    ]
+    ],
+    // 区域列表
+    regionalList: null
   },
+  navigateTo: throttle(({ currentTarget }) => {
+    wx.navigateTo({
+      url: currentTarget.dataset.url
+    })
+  }),
   // 弹框的按钮操作
   handleRegionalModal({ currentTarget, detail }) {
     currentTarget.dataset.modal = 'addRegionModal'
@@ -28,9 +38,12 @@ Page({
       case 0: // 取消
         this.closeModal({ currentTarget });
         break;
-      case 1: // 确认
+      case 1: // 确认 添加区域
         // 此处需要逻辑处理
-        this.closeModal({ currentTarget });
+        this.addRegional()
+          .then(() => {
+            this.closeModal({ currentTarget });
+          })
         break;
       default:
         break;
@@ -47,6 +60,58 @@ Page({
     this.setData({
       [currentTarget.dataset.modal]: false
     })
+  },
+  changeRegionalName({ detail }) {
+    this.setData({
+      regionalName: detail.value
+    })
+  },
+  getRegionalList() {
+    // console.log(wx.getStorageSync('CID'));
+    post(urlData.iotDeviceGroupListCount, {
+      companyId: wx.getStorageSync('CID')
+    }, wx.getStorageSync('TOKEN'))
+      .then((response) => {
+        let res = response.data;
+        if (res.respCode === 0) {
+          wx.hideLoading();
+          this.setData({
+            regionalList: res.obj
+          })
+        }
+      })
+  },
+  addRegional() {
+    return new Promise((resolve, reject) => {
+      if (!this.data.regionalName.trim()) {
+        wx.showToast({
+          title: '请输入区域名称',
+          icon: 'none',
+          duration: 3000
+        });
+        return false;
+      }
+      post(urlData.iotDeviceGroupAdd, {
+        companyId: wx.getStorageSync('CID'),
+        groupName: this.data.regionalName
+      }, wx.getStorageSync('TOKEN'))
+        .then((response) => {
+          let res = response.data;
+          if (res.respCode === 0) {
+            resolve();
+            wx.navigateTo({
+              url: `../regional-detail/regional-detail?regionalId=${res.obj.id}&fn=add&regionalName=${res.obj.groupName}&devicesNum=${0}`
+            })
+            return true;
+          }
+          wx.showToast({
+            title: res.respDesc,
+            icon: 'none',
+            duration: 3000
+          });
+        })
+    })
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -66,7 +131,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
+    this.getRegionalList();
+    this.setData({
+      ownAdmin: true
+    })
   },
 
   /**

@@ -17,8 +17,8 @@
       </view>
       <!-- 自定义  -->
       <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
-        wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}"
-        wx:if="{{index === 3}}" bindtap="turnToDatePicker">
+        wx:for-item="item" wx:key="{{index}}" data-currentIndex="{{index}}"
+        wx:if="{{index === 3}}" bindtap="conveyCurrentIndex" bindtap="turnToDatePicker">
         {{item.txt}}</view>
     </view>
     <ec-canvas id="rainchart-dom-line" canvas-id="rainchart-line" ec="{{ ecLine }}"></ec-canvas>

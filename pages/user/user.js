@@ -1,4 +1,6 @@
 // pages/user/user.js
+import { throttle } from '../../utils/util';
+
 Page({
 
     /**
@@ -10,11 +12,20 @@ Page({
         phone: ''
     },
 
-    handleBtn(e) {
-        console.log(e);
-    },
+    // navigateTo({ currentTarget }) {
+    //     throttle((e) => {
+    //         wx.navigateTo({
+    //             url: currentTarget.dataset.url
+    //         })
+    //     })()
+    // },
+    navigateTo: throttle(({ currentTarget }) => {
+        wx.navigateTo({
+            url: currentTarget.dataset.url
+        })
+    }),
 
-    goCreatedTeam(){
+    goCreatedTeam() {
         // console.log(e);
         wx.showToast({
             title: '请添加设备后再创建团队',
@@ -22,7 +33,7 @@ Page({
             duration: 3000
         })
     },
-    checkOwnedTeam(){
+    checkOwnedTeam() {
         this.setData({
             ownedTeam: wx.getStorageSync('CID')
         });
@@ -32,12 +43,12 @@ Page({
      */
     onLoad: function (options) {
     },
-    
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        
+
     },
 
     /**

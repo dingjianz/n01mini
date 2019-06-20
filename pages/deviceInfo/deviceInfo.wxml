@@ -3,28 +3,38 @@
   <view class="part_a">
     <view class="title">
       <view class="left">
-        <view class="equiptit">土壤温湿度</view>
-        <view class="area">生产示范基地</view>
+        <!-- 温度湿度时，展示名称 -->
+        <view class="equiptit" wx:if="{{proLength === 2}}">
+          {{deviceInfo.devicePropertyDTOList[0].name}}{{deviceInfo.devicePropertyDTOList[1].name}}</view>
+        <view class="area">{{deviceGroupVO.groupName || '默认区域' }}</view>
       </view>
       <icon class="iconfont iconshezhi" bindtap="turnToDeviceInstall"></icon>
 
     </view>
     <view class="indicator">
       <view class="line">
-        <view class="card">
+        <view class="card" wx:for="{{deviceInfo.devicePropertyDTOList}}" wx:key="{{index}}" wx:if="{{isOnline}}">
           <view class="wrap">
-            <iconfont dataNum="28.4" color="#15FC71" fontSize="60"><text class="unit">℃</text></iconfont>
-            <view class="name">温度</view>
+            <iconfont dataNum="{{item.propertyValue || '--'}}" color="#15FC71" fontSize="60">
+              <text class="unit">{{item.specsNumber.unit || ''}}</text>
+            </iconfont>
+            <view class="name">{{deviceInfo.devicePropertyDTOList[0].name}}</view>
           </view>
         </view>
-        <view class="card">
+        <view class="card" wx:if="{{!isOnline}}">
+          <view class="wrap">
+            <view style="font-size:54rpx;">离线</view>
+            <view class="name">{{deviceInfo.devicePropertyDTOList[0].name}}</view>
+          </view>
+        </view>
+        <!-- <view class="card">
           <view class="wrap">
             <iconfont dataNum="39.9" color="#15FC71" fontSize="60"><text class="unit">%</text></iconfont>
             <view class="name">湿度</view>
           </view>
-        </view>
+        </view> -->
       </view>
-      <view class="update">10小时前更新</view>
+      <view class="update">{{valueLastTime}}更新</view>
     </view>
   </view>
   <!-- 折线图 -->
@@ -32,16 +42,27 @@
     <view class="opts">
       <!-- 1天 7天 30天 -->
       <view class="opts-left">
-        <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index" wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}" wx:if="{{index < 3}}"> {{item.txt}}</view>
+        <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
+          wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}"
+          wx:if="{{index < 3}}"> {{item.txt}}</view>
       </view>
       <!-- 自定义  -->
-      <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
-        wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}"
-        wx:if="{{index === 3}}">
-        {{item.txt}}</view>
+      <view class="opts-right">
+        <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
+          wx:for-item="item" wx:key="{{index}}" data-currentIndex="{{index}}" wx:if="{{index === 3}}"
+          bindtap="turnToDatePicker">
+          <text wx:if="{{!startDateStr && !endDateStr}}">
+            {{item.txt}}
+          </text>
+          <text wx:else>
+            {{startDateStr}}~{{endDateStr}}
+          </text>
+        </view>
+      </view>
+
     </view>
     <view class="echart">
-      <view class="temperature-humidity">
+      <view class="temperature-humidity" wx:if="{{proLength === 2}}">
         <text class="temperature {{thflag ? 'active' : ''}}" bindtap="selectThFlag" data-thflag="{{true}}">温度</text>
         <text class="humidity {{thflag ? '' : 'active'}}" bindtap="selectThFlag" data-thflag="{{false}}">湿度</text>
       </view>

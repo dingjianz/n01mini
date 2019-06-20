@@ -26,6 +26,8 @@
   height: 37rpx;
   line-height: 37rpx;
   margin-right: 19rpx;
+  width: 470rpx;
+  text-align: right;
 }
 .regional-name-cell .cell-suffix {
   font-size: 26rpx;
@@ -56,14 +58,15 @@
 .device-tabs.add-device-tabs {
   height: calc(100vh - 95rpx);
 }
-.device-tabs.noAdmin{
+.device-tabs.noAdmin {
   padding-bottom: 15rpx;
 }
 .device-tabs .tabs-head {
-  padding: 50rpx 70rpx 26rpx;
+  padding: 44rpx 15rpx;
   display: flex;
   justify-content: space-between;
   background-color: #102957;
+  border-bottom: 1px solid #001f50;
 }
 .device-tabs .tabs-head .tab-btn::before,
 .device-tabs .tabs-head .tab-btn::after {
@@ -71,8 +74,8 @@
 }
 .device-tabs .tabs-head .tab-btn {
   flex: 1;
-  height: 90rpx;
-  line-height: 88rpx;
+  height: 42rpx;
+  line-height: 40rpx;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -86,15 +89,15 @@
   overflow: hidden;
   position: relative;
 }
-.device-tabs .tabs-head .tab-btn:first-child::before{
-  content: '';
+.device-tabs .tabs-head .tab-btn.line::before {
+  content: "";
   width: 1rpx;
   height: 40rpx;
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #273F64;
+  background-color: #273f64;
 }
 .device-tabs .tabs-head .tab-btn.active {
   color: #15e9fc;
@@ -111,6 +114,7 @@
   align-items: center;
   position: relative;
   background-color: #102957;
+  overflow: hidden;
 }
 .device-tabs .tabs-content .devices .device-cell::after {
   content: "";
@@ -121,6 +125,10 @@
   height: 0;
   width: 680rpx;
   border-top: 1px solid #001f50;
+}
+.device-tabs .tabs-content .devices .device-cell.last {
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
 }
 .device-tabs .tabs-content .devices .device-cell.last::after {
   width: 0;
@@ -137,8 +145,10 @@
   margin-right: 25rpx;
 }
 .device-tabs .tabs-content .devices .device-cell .device-icon .icon {
-  width: 34rpx;
-  height: 34rpx;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0 none;
 }
 .device-tabs .tabs-content .devices .device-cell .device-content {
   flex: 1;
@@ -253,21 +263,21 @@
   padding: 0;
   margin: 0;
 }
-.regional-btn.complete-btn{
-  color: #4D7BC1;
+.regional-btn.complete-btn {
+  color: #4d7bc1;
 }
-.regional-btn.del-btn{
+.regional-btn.del-btn {
   color: #742424;
 }
 
 /* modal */
 
-.f-input-label{
+.f-input-label {
   width: 400rpx;
   height: 80rpx;
   margin: 0 auto;
   box-sizing: border-box;
-  border: 1rpx solid #294166;
+  border: 2rpx solid #294166;
   background-color: transparent;
   padding: 10rpx 20rpx;
   display: flex;
@@ -275,23 +285,55 @@
   border-radius: 8rpx;
   margin-bottom: 23rpx;
 }
-.f-input-label .f-input{
+.f-input-label .f-input {
   flex: 1;
   font-size: 26rpx;
   line-height: 50rpx;
   height: 50rpx;
   display: block;
-  color: #15E9FC;
+  color: #15e9fc;
   border: 0 none;
   outline: none;
   background-color: transparent;
 }
-.f-input-label .f-input .f-input-placeholder{
-  color: #3F639C;
+.f-input-label .f-input .f-input-placeholder {
+  color: #3f639c;
 }
-.modal-c{
-  color: #7696D3;
+.modal-c {
+  color: #7696d3;
   font-size: 32rpx;
   line-height: 48rpx;
   margin-right: -36rpx;
+}
+.no-device {
+  height: calc(100vh - 185rpx);
+  margin: 22rpx auto 0;
+  width: 710rpx;
+  background-color: #102957;
+  border-radius: 10rpx;
+  overflow: hidden;
+  position: relative;
+}
+.no-device.add {
+  height: calc(100vh - 60rpx);
+  margin: 30rpx auto;
+}
+.no-device .no-device-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.no-device image {
+  width: 340rpx;
+  height: 195rpx;
+}
+.no-device text {
+  display: block;
+  text-align: center;
+  font-size: 28rpx;
+  color: #3f639c;
+  line-height: 40rpx;
+  height: 40rpx;
 }

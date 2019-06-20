@@ -177,16 +177,8 @@
 }
 
 .log-wrapper .z-open {
-  color: #15FC71;
+  color: #8BABE7;
   line-height: 37rpx;
   font-size: 26rpx;
   font-weight: 400;
-}
-
-.log-wrapper .z-pause {
-  color: #FCAD15;
-}
-
-.log-wrapper .z-close {
-  color: #FE5250;
 }

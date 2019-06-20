@@ -14,7 +14,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.1",
-	"appid": "wx83c7f001cfe12345",
+	"appid": "wx9fe0ebad4b3156ef",
 	"projectname": "iot",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 15,
 			"list": [
 				{
 					"id": -1,
@@ -79,9 +79,9 @@
 				},
 				{
 					"id": 5,
-					"name": "视频控制",
+					"name": "多视频",
 					"pathName": "pages/videoCtrol/videoCtrol",
-					"query": "",
+					"query": "deviceid=1&videotit=大棚1",
 					"scene": null
 				},
 				{
@@ -137,6 +137,21 @@
 					"id": -1,
 					"name": "添加成员",
 					"pathName": "pages/member-add/member-add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "wind",
+					"pathName": "pages/wind-direction/wind-direction",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "detailInfo",
+					"pathName": "pages/deviceInfo/deviceInfo",
+					"query": "",
 					"scene": null
 				}
 			]

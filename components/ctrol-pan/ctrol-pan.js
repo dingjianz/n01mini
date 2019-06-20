@@ -6,7 +6,7 @@ Component({
     properties: {
         deviceId: {//设备id
             type: Number,
-            value:12
+            value:0
         },
         deviceTit: {//设备名称
             type: String,

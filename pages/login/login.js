@@ -1,4 +1,4 @@
-import { post, urlData, getCompany} from '../../utils/util.js'
+import { post, urlData, getCompany, getCompanyList} from '../../utils/util.js'
 
 const app = getApp()
 
@@ -82,29 +82,25 @@ Page({
     let _this = this;
 
     let loginPost = post(urlData.iotLoginPhone, e.detail.value);
-    loginPost.then(function (resp) {
-        if (resp.data.respCode === 0) {
-            wx.setStorageSync('TOKEN', resp.data.obj.accessToken);
-            wx.setStorageSync('USERPHONE', resp.data.obj.user.phone);
-            wx.switchTab({
-            url: '/pages/index/index',
-            })
-        } else {
-            wx.showToast({
-            title: resp.data.respDesc,
-            icon: 'none'
-            })
-        }
-        return loginPost;
-    }).then(function (resp){
-        _this.getTotalCompany(resp.data.obj.accessToken);
-    });
-  },
-  getTotalCompany(token){//获取企业列表
-      post(urlData.iotCompanyList, {}, token).then(function (resp) {
-          if (resp.data.respCode == 0 && resp.data.obj.totalCount>=1) {
-              getCompany(resp.data.obj.list[0].id);
-          }
+    loginPost.then(function (resp){
+        wx.setStorageSync('TOKEN', resp.data.obj.accessToken);
+        wx.setStorageSync('USERPHONE', resp.data.obj.user.phone);
+        getCompanyList((res)=>{
+            if (res.data.obj.totalCount >= 1) {
+                getCompany(res.data.obj.list[0].id).then(function (callback) {
+                    if (callback.data.respCode === 0) {
+                        wx.switchTab({
+                            url: '/pages/index/index',
+                        })
+                    } else {
+                        wx.showToast({
+                            title: callback.data.respDesc,
+                            icon: 'none'
+                        })
+                    }
+                })
+            }
+        });
       });
   },
   // 验证码倒计时

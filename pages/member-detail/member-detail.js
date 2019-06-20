@@ -1,5 +1,5 @@
 // pages/member-detail/member-detail.js
-import {post, urlData} from '../../utils/util'
+import { post, urlData, throttle } from '../../utils/util'
 
 Page({
 
@@ -40,15 +40,15 @@ Page({
           companyId: wx.getStorageSync('CID'),
           userId: this.data.params.userId
         }, wx.getStorageSync('TOKEN'))
-        .then((response) => {
-          let res = response.data;
-          if(res.respCode === 0){
-            wx.navigateBack({
-              delta: 1
-            });
-            this.closeModal({ currentTarget });
-          }
-        })
+          .then((response) => {
+            let res = response.data;
+            if (res.respCode === 0) {
+              wx.navigateBack({
+                delta: 1
+              });
+              this.closeModal({ currentTarget });
+            }
+          })
         break;
       default:
         break;
@@ -70,13 +70,13 @@ Page({
   },
 
   // 跳转页面
-  navigateTo({ currentTarget }) {
+  navigateTo: throttle(({ currentTarget }) => {
     wx.navigateTo({
       url: `${currentTarget.dataset.url}`
     });
-  },
-  
-  getMemberInfo(userId){
+  }),
+
+  getMemberInfo(userId) {
     // console.log(userId);
     let companyId = wx.getStorageSync('CID');
     let accessToken = wx.getStorageSync('TOKEN');
@@ -87,18 +87,19 @@ Page({
       userId,
       companyId
     }, accessToken)
-    .then((response) => {
-      let res = response.data;
-      if(res.respCode === 0){
-        // console.log(res);
-        this.setData({
-          ['delRoleModal.title']: res.obj.userVO.phone,
-          role: res.obj.roleVO.roleName,
-          self: res.obj.userVO.phone === userInfo.userVO.phone,
-          userId: res.obj.userVO.id
-        })
-      }
-    })
+      .then((response) => {
+        let res = response.data;
+        if (res.respCode === 0) {
+          // console.log(res);
+          wx.hideLoading();
+          this.setData({
+            ['delRoleModal.title']: res.obj.userVO.phone,
+            role: res.obj.roleVO.roleName,
+            self: res.obj.userVO.phone === userInfo.userVO.phone,
+            userId: res.obj.userVO.id
+          })
+        }
+      })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -120,6 +121,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
     this.getMemberInfo(this.data.params.userId);
   },
 

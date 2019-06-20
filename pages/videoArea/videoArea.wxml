@@ -1,2 +1,12 @@
 <!--pages/videoArea/videoArea.wxml-->
-<text>pages/videoArea/videoArea.wxml</text>
+<view class="container">
+  <view class="type-wrapper">
+    <block wx:for="{{arealist}}" wx:key="{{idnex}}">
+      <view class="type-list" bindtap="changeArea" data-areaid="{{item.id}}">
+        <view class="type-name {{selectedId === item.id ? 'active' : ''}}">{{item.groupName }}</view>
+        <i-icon type="right" size="20" color="#15E9FC" class="u-icon {{selectedId !== item.id ? 'icon-hidden' : ''}}" />
+      </view>
+      <view class="divede-border"></view>
+    </block>
+  </view>
+</view>

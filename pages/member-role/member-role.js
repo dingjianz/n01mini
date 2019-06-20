@@ -64,6 +64,7 @@ Page({
       .then((response) => {
         let res = response.data;
         if (res.respCode === 0) {
+          wx.hideLoading();
           this.setData({
             role: res.obj.list.map((item) => {
               return {
@@ -110,7 +111,10 @@ Page({
       && this.setData({
         current: options.roleName
       })
-
+      wx.showLoading({
+        title: '加载中',
+        mask: true
+      });
     this.getRoleList();
   },
 

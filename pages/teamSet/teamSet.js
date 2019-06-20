@@ -22,8 +22,7 @@ Page({
                 name: '确定',
                 color: '#456EAD'
             }
-        ],
-        errorCode:0//1为团队名称未填写，2为团队名称超长
+        ]
     },
     openModal(e) {
         // if (this.data.viewable){
@@ -42,14 +41,15 @@ Page({
         if (e.detail.index === 0) {//取消
             this.setData({
                 [key]: false,
-                companyTit:this.data.originTit,
-                errorCode:0
+                companyTit:this.data.originTit
             });
         }else{//确定
             if (!this.data.companyTit.length) {
-                this.setData({
-                    errorCode: 1
-                });
+                wx.showToast({
+                    title: '请输入团队名称',
+                    icon: 'none',
+                    duration: 2000
+                })
                 return
             }
 
@@ -63,9 +63,13 @@ Page({
             if (!checkBt(this.data.companyTit,20)){
                 action[1].loading = false;
                 this.setData({
-                    actions: action,
-                    errorCode:2
+                    actions: action
                 });
+                wx.showToast({
+                    title: '团队名称最多20个字',
+                    icon: 'none',
+                    duration: 2000
+                })
                 return 
             }
 
@@ -83,8 +87,7 @@ Page({
                 _this.setData({
                     editModal: false,
                     actions: _this.data.actions,
-                    originTit: _this.data.companyTit,
-                    errorCode:0
+                    originTit: _this.data.companyTit
                 });
             }
         });
@@ -93,8 +96,7 @@ Page({
         let datatxt = e.currentTarget.dataset.txt;
         let detail = e.detail.value;
         this.setData({
-            companyTit: detail,
-            errorCode:0
+            companyTit: detail
         });
     },
     /**

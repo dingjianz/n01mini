@@ -8,7 +8,16 @@
 
   <view class="wind-log">
     <view class="wind-log-title">
-      <text class="operate-name">风向记录</text>
+      <!-- 1天 7天 30天 -->
+      <view class="opts-left">
+        <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index" wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}" wx:if="{{index < 3}}"> {{item.txt}}</view>
+      </view>
+      <!-- 自定义  -->
+      <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
+        wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}"
+        wx:if="{{index === 3}}">
+        {{item.txt}}
+      </view>
     </view>
     <view class="divede-border"></view>
 
@@ -26,7 +35,7 @@
           <view class="log-wrapper">
             <view class="log-time">{{item.time}}</view>
             <view class="log-status">
-                {{item.name}}
+                设置为{{item.name}}<text style="color:#456EAD;" decode>&nbsp;&nbsp;(18365452545)</text>
             </view>
           </view>
         </block>

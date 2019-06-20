@@ -99,7 +99,7 @@
 
 .part_a .indicator .name {
   height: 40rpx;
-  line-height: 40rpx;
+  line-height: 60rpx;
   font-size: 26rpx;
 }
 
@@ -125,14 +125,15 @@
 }
 
 .part_b .opts .opts-left {
-  width: 60%;
+  width: 40%;
+  box-sizing: border-box;
   display: flex;
   display: -webkit-flex;
   justify-content: space-between;
 }
 
 .part_b .optitem {
-  width: 120rpx;
+  min-width: 120rpx;
   height: 50rpx;
   line-height: 50rpx;
   border-radius: 25rpx;
@@ -141,6 +142,24 @@
 
 .part_b .optitem.active {
   background: #001434;
+}
+
+.part_b .opts .opts-right {
+  width: 55%;
+  /* box-sizing: border-box; */
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content:flex-end;
+}
+
+.part_b .opts .opts-right .optitem.active {
+  width: 90%;
+}
+
+.part_b .opts .opts-right text {
+  margin-top: -60rpx;
+  display: inline-block;
 }
 
 .part_b .echart {

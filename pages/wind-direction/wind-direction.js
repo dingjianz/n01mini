@@ -5,6 +5,20 @@ Page({
    * 页面的初始数据
    */
   data: {
+    currentIndex: 0,
+    opts: [{
+      id: 1,
+      txt: '1天'
+    }, {
+      id: 2,
+      txt: '7天'
+    }, {
+      id: 3,
+      txt: '30天'
+    }, {
+      id: 4,
+      txt: '自定义'
+    }],
     axis: [{
       time: '今天 14:37',
       name: '东南'
@@ -24,6 +38,11 @@ Page({
   ]
   },
 
+  conveyCurrentIndex(e) {
+    this.setData({
+      currentIndex: e.target.dataset.currentindex
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

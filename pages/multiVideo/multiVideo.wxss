@@ -10,7 +10,8 @@
 .video_item{
     border-radius:5rpx;
     overflow:hidden;
-    width:50%;
+    width:365rpx;
+    height:225rpx;
     padding:10rpx;
     box-sizing:border-box;
 }
@@ -19,11 +20,11 @@
     height:200rpx;
     position:relative;
 }
-.hole_video .videotit,.hole_video .videoctrol{
+.hole_video .videotit,.hole_video .videoctrol,.hole_video .centerplay{
     width:100%;
     position:absolute;
     left:0;
-    bottom:15rpx;
+    bottom:-200rpx;
     z-index:99;
     padding:0 15rpx; 
     box-sizing:border-box;
@@ -31,10 +32,29 @@
 .hole_video .videotit{
     font-size:20rpx;
     bottom:auto;
-    top:0; 
+    top:-200rpx; 
     height: 60rpx;
     line-height: 60rpx;
-    background: linear-gradient(to bottom, rgba(0, 0, 0,0.6),rgba(0, 0, 0,0));
+    background: linear-gradient(to bottom, rgba(0, 0, 0,0.9),rgba(0, 0, 0,0));
+    transition: all 500ms;
+}
+.hole_video .videotit.show{
+    top:0;
+}
+.hole_video .centerplay{
+    color:#fff;
+    font-size:40rpx;
+    width:64rpx;
+    text-align:center;
+    height:64rpx;
+    line-height:64rpx;
+    border-radius:50%;
+    left:50%;
+    top:50%;
+    margin-top:-32rpx;
+    margin-left:-32rpx;
+    bottom:auto;
+    background:rgba(0,0,0,0.5);
 }
 .hole_video .videoctrol,.hole_video .videoctrol .right_ctrol{
     display:flex;
@@ -42,16 +62,20 @@
     justify-content: space-between;
     align-items: center;
     flex-flow:row nowrap;
+    transition: all 500ms;
+}
+.hole_video .videoctrol.show{
+    bottom:15rpx;
 }
 .hole_video .videoctrol .right_ctrol view{
     justify-content:flex-start;
     margin-left: 23rpx;
 }
 .playbtn,.ctrolbtn,.fullscreen{
-  width:42rpx;
-  height:42rpx;
+  width:52rpx;
+  height:52rpx;
   text-align: center;
-  line-height:42rpx;
+  line-height:52rpx;
   border-radius: 100%;
   font-size: 22rpx;
   color: #fff;

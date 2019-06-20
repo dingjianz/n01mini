@@ -83,17 +83,6 @@
 .f-input-label .f-input .f-input-placeholder{
   color: #3F639C;
 }
-.i-modal-body{
-    height:138rpx!important;
-}
-.i-modal-body .errortip{
-    color:#7A2221;
-    text-align:center;
-    display:block;
-    height:24rpx;
-    line-height:24rpx;
-    width:100%;
-}
 .i-modal-body .modaltip{
     color:#4974B6;
 }
