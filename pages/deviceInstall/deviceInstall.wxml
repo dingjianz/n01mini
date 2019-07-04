@@ -2,30 +2,32 @@
   <view class="install-wrapper">
     <view class="device-wrapper" bindtap="handleOpen">
       <view class="device-name">设备名称</view>
-      <view class="device-data">土壤温湿度
-        <icon class="iconfont iconjiantou u-jiantou"></icon>
+      <view class="device-data">
+        <text class="name">{{deviceName}}</text>
+        <text wx:if="{{power_name}}" class="iconfont iconjiantou u-jiantou"></text>
       </view>
     </view>
-    <view class="wrapper-botBorder"></view>
-    <view class="device-wrapper" bindtap="turnToSelectType">
+    <view class="wrapper-botBorder" wx:if="{{selectFlag}}"></view>
+    <view class="device-wrapper" bindtap="turnToSelectType" wx:if="{{selectFlag}}">
       <view class="device-name">设备分类</view>
-      <view class="device-data">内遮阳
-        <icon class="iconfont iconjiantou u-jiantou"></icon>
+      <view class="device-data">
+        <text class="name">{{ categoryName }}</text>
+        <text wx:if="{{power_cate}}" class="iconfont iconjiantou u-jiantou"></text>
       </view>
     </view>
-    <view class="wrapper-botBorder"></view>
-    <view class="device-wrapper" bindtap="turnToAreaSelect">
+    <view class="wrapper-botBorder" wx:if="{{companyOrPerson}}"></view>
+    <view class="device-wrapper" bindtap="turnToAreaSelect" wx:if="{{companyOrPerson}}">
       <view class="device-name">所属区域</view>
-      <view class="device-data">生产示范基地
-        <icon class="iconfont iconjiantou u-jiantou"></icon>
+      <view class="device-data">
+        <text class="name">{{groupName || '默认区域'}}</text>
+        <text wx:if="{{power_area}}" class="iconfont iconjiantou u-jiantou"></text>
       </view>
     </view>
-    <view class="wrapper-botBorder"></view>
   </view>
 </view>
 
-<i-modal visible="{{ visible }}" title="修改设备名称" bind:ok="handleClose" bind:cancel="handleClose">
+<i-modal visible="{{ visible }}" title="修改设备名称" bind:ok="handleEnsure" bind:cancel="handleCancel">
   <view class="input-wrapper">
-    <input class="u-input" type="text" maxlength="16" placeholder="请输入设备名称"></input>
+    <input cursor-spacing="160" class="u-input" type="text" focus="{{isFocus}}" value="{{editDeviceName}}" placeholder="请输入设备名称" bindinput="inputeidt" placeholder-class="f-input-placeholder"></input>
   </view>
 </i-modal>

@@ -1,0 +1,5 @@
+<!--components/no-data.wxml-->
+<view class='no-data-wrap'>
+  <image class='images' style='width:{{imgWidth}}rpx;height:{{imgHeight}}rpx;' src='{{imgUrl}}'></image>
+  <view class='tips'>{{tips}}</view>
+</view>

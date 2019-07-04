@@ -1,31 +1,24 @@
 <!-- pages/membership/membership.wxml -->
-<!-- 
-    成员列表显示规则
+<!-- 成员列表显示规则
     普通用户不允许进入详情页面
-    管理员和超级用户可以进入详情页（超级用户无法被查看详情）
- -->
-<i-cell-group i-class="custom-cell-group clearfix">
-    <i-cell i-class="custom-cell" wx:for="{{memberList}}" wx:key="{{index}}" bind:tap="navigateTo" data-own-flag="{{item.ownFlag}}" data-url="../member-detail/member-detail?userId={{item.userVO.id}}">
-        <view class="cell-title">
-            {{item.userVO.phone}}
-            <text class="remarks iconfont iconyongyouzhe" wx:if="{{item.ownFlag === 1}}"></text>
-        </view>
-        <view slot="footer" class="cell-footer-wrap" wx:if="{{item.ownFlag !== 1}}">
-            <text class="cell-desc">{{item.roleVO.roleName}}</text>
-            <view wx:if="{{ownedAdmin}}" class="suffix-icon iconfont iconjiantou"></view>
-        </view>
-    </i-cell>
-    <!-- <i-cell i-class="custom-cell" is-link="{{isAdmin}}" url="../member-detail/member-detail">
-        <view class="cell-title">18123643331</view>
-        <view slot="footer" class="cell-footer-wrap">
-            <text class="cell-desc">管理员</text>
-            <view wx:if="{{isAdmin}}" class="suffix-icon iconfont iconjiantou"></view>
-        </view>
-    </i-cell> -->
-    <i-cell i-class="custom-cell" is-link wx:if="{{ownedAdmin}}" url="../member-add/member-add">
-        <button class="f-button">
-            <text class="iconfont iconadd"></text>
-            添加成员
-        </button>
-    </i-cell>
-</i-cell-group>
+    管理员和超级用户可以进入详情页（超级用户无法被查看详情） -->
+<view class="content-container {{isIPX ? 'isIPX' : ''}}">
+    <i-cell-group i-class="custom-cell-group clearfix">
+        <i-cell i-class="custom-cell" wx:for="{{memberList}}" wx:key="{{index}}" bind:tap="navigateTo" data-own-flag="{{item.ownFlag}}" data-url="../member-detail/member-detail?userId={{item.userVO.id}}">
+            <view class="cell-title">
+                {{item.userVO.phone}}
+                <text class="remarks iconfont iconyongyouzhe" wx:if="{{item.ownFlag === 1}}"></text>
+            </view>
+            <view slot="footer" class="cell-footer-wrap" wx:if="{{item.ownFlag !== 1}}">
+                <text class="cell-desc">{{item.roleVO.roleName}}</text>
+                <view class="suffix-icon iconfont iconjiantou" wx:if="{{power.canDetaile}}"></view>
+            </view>
+        </i-cell>
+        <i-cell i-class="custom-cell" is-link wx:if="{{power.ownedAddMember}}" url="../member-add/member-add">
+            <button class="f-button">
+                <text class="iconfont iconadd"></text>
+                添加成员
+            </button>
+        </i-cell>
+    </i-cell-group>
+</view>

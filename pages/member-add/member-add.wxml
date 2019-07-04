@@ -1,9 +1,9 @@
 <!-- pages/member-add/member-add.wxml -->
 <i-cell-group i-class="custom-cell-group clearfix">
   <view class="f-input">
-    <input class="f-input-input t-ellipsis" placeholder="请输入成员手机号" placeholder-class="f-input-placeholder" value="{{userPhone}}" maxlength="11" type="number" bindblur="getUserPhone" />
+    <input cursor-spacing="160" class="f-input-input t-ellipsis" placeholder="请输入成员手机号" placeholder-class="f-input-placeholder" value="{{userPhone}}" maxlength="11" type="number" bindinput="getUserPhone" />
   </view>
-  <i-cell i-class="custom-cell" is-link url="../member-role/member-role?roleName={{role.name}}">
+  <i-cell i-class="custom-cell" data-url="../member-role/member-role?roleName={{role.name}}" bind:tap="navigateTo">
     <view class="cell-title {{role.name ? 'checked' : ''}}">{{role.name || '请选择成员角色'}}</view>
     <view slot="footer" class="cell-footer-wrap">
       <view class="suffix-icon iconfont iconjiantou"></view>

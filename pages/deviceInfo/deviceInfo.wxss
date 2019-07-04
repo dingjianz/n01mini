@@ -1,42 +1,43 @@
-/* pages/deviceInfo/deviceInfo.wxss */
 .container {
+  height: 100vh;
   padding: 30rpx 20rpx;
-  height: 1000rpx;
   color: #385076;
   font-size: 24rpx;
 }
 
-.part_a,
-.part_b {
+.part_a {
+  height: 350rpx;   
+  box-sizing: border-box;
   background: #102957;
   border-radius: 10rpx;
   margin-bottom: 20rpx;
-  padding: 20rpx;
-}
-
-.part_a .title,
-.part_a .title .left {
-  display: flex;
-  display: -webkit-flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-flow: row nowrap;
-  font-size: 30rpx;
-}
-
-.part_a .title,
-.part_a .title .iconshezhi {
-  font-size: 36rpx;
-  margin-right: 8rpx;
 }
 
 .part_a .title {
-  height: 106rpx;
-  line-height: 106rpx;
+  height: 70rpx;
+  box-sizing: border-box;
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
+
 .part_a .title .left {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 30rpx;
   justify-content: flex-start;
+  padding-left: 20rpx;
+}
+
+.part_a .title .iconshezhi {
+  font-size: 36rpx;
+  margin-right: 19rpx;
 }
 
 .part_a .title image {
@@ -47,7 +48,7 @@
 .part_a .title .equiptit {
   color: #15E9FC;
   font-size: 30rpx;
-  margin-right: 20rpx;
+  margin-right: 8rpx;
 }
 
 .part_a .title .area {
@@ -55,37 +56,55 @@
   height: 38rpx;
   line-height: 38rpx;
   border-radius: 19rpx;
-  padding: 0 20rpx;
+  padding: 0 15rpx;
   color: #395787;
+  font-size: 24rpx;
 }
 
+.part_a .indicator {
+  height: 284rpx;
+  box-sizing: border-box;
+  padding-top: 41rpx;
+}
 .part_a .indicator .line {
   display: flex;
   display: -webkit-flex;
   justify-content: center;
   align-items: center;
   flex-flow: row nowrap;
+  height: 160rpx;
+  box-sizing: border-box;
 }
 
 .part_a .indicator .card {
-  width: 50%;
-  padding: 0 16rpx;
+  min-width:360rpx;
+  height: 160rpx;
+  border: 2rpx solid #273F64;
   box-sizing: border-box;
+  border-radius: 10rpx;
 }
 
 .part_a .indicator .wrap {
   width: 100%;
-  height: 160rpx;
+  height:100%;
   color: #15FC71;
-  border: 1rpx solid #273F64;
-  border-radius: 10rpx;
-  box-sizing: border-box;
   display: flex;
   display: -webkit-flex;
   justify-content: center;
   align-items: center;
   flex-flow: column;
+  box-sizing: border-box;
+  padding: 0 15rpx;
 }
+.part_a .indicator .wrap .iconfont-box{
+  width: 100%;
+  height:73rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 
 .part_a .indicator .num {
   height: 60rpx;
@@ -99,18 +118,31 @@
 
 .part_a .indicator .name {
   height: 40rpx;
-  line-height: 60rpx;
+  margin-top: 19rpx;
   font-size: 26rpx;
+  max-width: 330rpx;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .part_a .indicator .update {
-  height: 80rpx;
-  line-height: 100rpx;
+  height: 83rpx;
+  line-height: 83rpx;
   font-size: 24rpx;
+  color: #344B70;
   text-align: center;
 }
 
-
+.part_b {
+  height: calc(100% - 380rpx);
+  box-sizing: border-box;
+  border-radius: 10rpx;
+  background: #102957;
+}
+.part_b.IPX{
+  height: calc(100% - 448‬rpx);
+}
 .part_b .opts {
   box-sizing: border-box;
   color: #15E9FC;
@@ -121,11 +153,11 @@
   justify-content: space-between;
   align-items: center;
   flex-flow: row nowrap;
+  margin: 0 20rpx;
   border-bottom: 1rpx solid #001434;
 }
 
 .part_b .opts .opts-left {
-  width: 40%;
   box-sizing: border-box;
   display: flex;
   display: -webkit-flex;
@@ -133,11 +165,15 @@
 }
 
 .part_b .optitem {
-  min-width: 120rpx;
+  min-width: 102rpx;
   height: 50rpx;
   line-height: 50rpx;
   border-radius: 25rpx;
   text-align: center;
+  margin-right: 10rpx;
+}
+.part_b .optitem:last-child{
+  margin-right: 0;
 }
 
 .part_b .optitem.active {
@@ -145,8 +181,6 @@
 }
 
 .part_b .opts .opts-right {
-  width: 55%;
-  /* box-sizing: border-box; */
   display: flex;
   display: -webkit-flex;
   align-items: center;
@@ -154,7 +188,7 @@
 }
 
 .part_b .opts .opts-right .optitem.active {
-  width: 90%;
+  padding: 0 20rpx;
 }
 
 .part_b .opts .opts-right text {
@@ -164,35 +198,27 @@
 
 .part_b .echart {
   width: 100%;
-  height: 610rpx;
+  height:610rpx;
   position: relative;
 }
-
-.part_b .echart .temperature-humidity {
-  position: absolute;
-  top: 30rpx;
-  right: 34rpx;
-  color: #395787;
-  z-index: 9999;
+.echartInner{
+  width: 100%;
+  height: 0;
+  overflow: hidden;
 }
-
-.part_b .echart .temperature-humidity text {
-  width: 84rpx;
-  height: 36rpx;
-  font-size: 26rpx;
-  display: inline-block;
-  line-height: 33rpx;
-  text-align: center;
-  border-radius: 18rpx;
-  box-sizing: border-box;
-}
-
-.part_b .echart .temperature-humidity text.active {
-  color: #8BABE7;
-  border: 1rpx solid #8BABE7;
-}
-
 .part_b ec-canvas {
   width: 100%;
+  height: 610rpx;
+}
+
+.no-data-ww{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

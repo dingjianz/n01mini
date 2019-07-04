@@ -1,7 +1,8 @@
 <!--pages/userSet/userSet.wxml-->
+<wxs module="filter" src="../../utils/filter.wxs"></wxs>
 <view>
     <i-cell-group i-class="custom-cell-group clearfix">
-        <i-cell i-class="custom-cell" is-link url="/pages/teamList/teamList" wx:if="{{teamNum>1}}">
+        <i-cell i-class="custom-cell" bindtap="navigateTo" data-url="/pages/teamList/teamList" wx:if="{{teamNum > 1}}">
             <view class="cell-title">切换团队</view>
             <view slot="footer" class="cell-footer-wrap">
                 <view class="suffix-icon iconfont iconjiantou"></view>
@@ -10,7 +11,7 @@
         <i-cell i-class="custom-cell">
             <view class="cell-title">手机号</view>
             <view slot="footer" class="cell-footer-wrap">
-                <text class="cell-desc">{{userphone}}</text>
+                <text class="cell-desc">{{filter.numberHide(userphone)}}</text>
             </view>
         </i-cell>
     </i-cell-group>

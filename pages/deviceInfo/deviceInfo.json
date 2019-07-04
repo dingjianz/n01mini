@@ -1,7 +1,9 @@
 {
     "usingComponents": {
         "ec-canvas": "../../components/ec-canvas/ec-canvas",
-        "iconfont": "../../components/iconfont/iconfont"
+        "iconfont": "../../components/iconfont/iconfont",
+        "lsxChart": "../../components/lsx-chart/lsx-chart",
+        "no-data": "../../components/no-data/no-data"
     },
     "navigationBarTitleText": "设备详情"
 }

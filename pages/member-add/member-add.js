@@ -1,5 +1,5 @@
 // pages/member-add/member-add.js
-import { post, urlData, checkPhone } from '../../utils/util'
+import { post, urlData, checkPhone, throttle } from '../../utils/util'
 Page({
 
   /**
@@ -18,9 +18,12 @@ Page({
       userPhone: detail.value
     })
   },
-
-  joinMember() {
-    // console.log(this.data.userPhone);
+  navigateTo: throttle(({ currentTarget }) => {
+    wx.navigateTo({
+      url: currentTarget.dataset.url
+    })
+  }),
+  joinMember:throttle(function() {
     if (!(this.data.userPhone && this.data.userPhone.trim())) {
       wx.showToast({
         title: '请输入手机号',
@@ -52,7 +55,7 @@ Page({
     }, wx.getStorageSync('TOKEN'))
       .then((response) => {
         let res = response.data;
-        if(res.respCode === 0){
+        if (res.respCode === 0) {
           // return wx.showToast({
           //   icon: 'none',
           //   title: '添加成功',
@@ -62,14 +65,8 @@ Page({
             delta: 1
           });
         }
-        wx.showToast({
-          icon: 'none',
-          title: res.respDesc,
-          duration: 3000
-        })
-
       })
-  },
+  }),
 
   /**
    * 生命周期函数--监听页面加载

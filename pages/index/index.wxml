@@ -1,31 +1,35 @@
 <!--pages/index/index.wxml-->
 <wxs module="filter" src="../../utils/todealName.wxs"></wxs>
 <view class="container {{isShowAreaSwitch?'overHidden':''}}">
-    <view bindtap="getAreaList" wx:if="{{!isVideoContl&&!isCidPerson}}" class="area_check {{isVideoFixed?'hidden':''}}">
+    <view bindtap="getAreaList" wx:if="{{!isCidPerson}}" class="area_check {{isVideoFixed?'hidden':''}}">
       <view class="dis_ib">{{areaName}}</view>
       <view class='iconfont icondown dis_ib'></view>
     </view>
-    <view wx:if="{{isVideoContl}}" class="videoPlot" >
-      <view class='plotName'>N2地块</view>
-      <view class='areaName'>生产示范基地</view>
-    </view>
     <view class="videoAndTab {{isVideoFixed?'fixed':''}}">
       <view wx:if="{{videoList.length!=0}}" class="hole_video">
-          <video id="myVideo" src="{{videoList[videoIndex].hlsUrl}}" object-fit="contain" binderror="videoErrorCallback" bindplay="videoPlay" show-center-play-btn='{{false}}' show-play-btn="{{isControl}}" show-fullscreen-btn="{{isControl}}" autoplay="{{isAutoplay}}" enable-play-gesture danmu-btn='{{false}}' controls='{{isControl}}' bindfullscreenchange="isFullScreenState"></video>
+          <!-- 有标清就标清，没有就高清 -->
+          <video id="myVideo" data-src="{{videoUrl}}" src="{{videoUrl}}" object-fit="fill" bindpause="videoPause" bindplay="videoPlay" show-center-play-btn='{{false}}' show-play-btn="{{isControl}}" show-fullscreen-btn="{{isControl}}" autoplay="{{isAutoplay}}" enable-play-gesture danmu-btn='{{false}}' controls='{{isControl}}' bindfullscreenchange="isFullScreenState"></video>
+          <!-- 还未播放时 有一个loading -->
+          <view class="iconLoad" wx:if="{{isShowVideoLoad}}">
+            <view class="loading"></view>
+          </view>
+          <!-- 视频控制 -->
           <view class="videoctrol">
-              <view class="left_ctrol playbtn iconfont {{videoPlay?'iconzanting':'iconplay'}}" bindtap="playfn"></view>
+              <view class="left_ctrol playbtn iconfont {{isVideoPlay?'iconzanting':'iconplay'}}" bindtap="playfn"></view>
               <view class="right_ctrol">
-                  <view bindtap='openVideoControl' class="ctrolbtn iconfont iconjiankong {{isVideoContl?'active':''}}"></view>
-                  <view wx:if="{{!isVideoContl}}" bindtap='setVideoFixed' class="topbtn iconfont iconzhiding"></view>
+                  <view bindtap='openVideoControl' class="ctrolbtn iconfont iconjiankong"></view>
+                  <view bindtap='setVideoFixed' class="topbtn iconfont iconzhiding"></view>
                   <view bindtap="intoFullScreen" class="fullscreen iconfont iconquanping"></view>
               </view>
           </view>
+
+          <view class="posterImg" wx:if="{{!isVideoPlay}}"></view>
       </view>
       <!-- 直播视频列表 -->
-      <view wx:if="{{!isVideoContl&&videoList.length!=0}}" class="video_section">
+      <view wx:if="{{videoList.length!=0}}" class="video_section">
           <view class="video_list {{videoList.length>1?'':'onlyOne'}}">
-              <scroll-view class="scroll-view_X" scroll-x="true" bindscroll="scroll" lower-threshold="50" bindscrolltolower="rightListen">
-                  <view bindtap='changeVideoUrl' data-index="{{index}}" data-url="{{item.hlsUrl}}" class="video_item {{videoIndex==index?'active':''}}" wx:key="{{index}}" wx:for="{{videoList}}"><view class="name">{{item.displayName}}</view></view>
+              <scroll-view bindscroll="videoListScroll" scroll-left="{{videoScrollLeft}}" class="scroll-view_X" scroll-x="true" lower-threshold="50" bindscrolltolower="rightListen">
+                  <view bindtap='changeVideoUrl' data-index="{{index}}" data-id="{{item.id}}" class="video_item {{videoId==item.id?'active':''}}" wx:key="{{index}}" wx:for="{{videoList}}"><view class="name">{{item.displayName}}</view></view>
               </scroll-view>
           </view>
           <view class="shadow" wx:if="{{videoList.length>1}}"></view>
@@ -36,59 +40,67 @@
       </view>
       
       <!-- 传感、控制和综合设备分类 -->
-      <view wx:if="{{!isVideoContl&&activeTab}}" id="equip_tab" class="equip_tab {{isTabCanFixed&&!isVideoFixed?'fixed':''}}">
+      <view wx:if="{{activeTab}}" id="equip_tab" class="equip_tab {{isTabCanFixed&&!isVideoFixed?'fixed':''}}">
           <view class="{{activeTab==item.productType ? 'active':''}}" data-type="{{item.productType}}" wx:for="{{tabs}}" wx:key="{{index}}" bindtap="changeTab">{{item.title}}·{{item.count}}</view>
       </view>
     </view>
-    <!-- ↓ 这个以防videoAndTab变为fixed后 脱出文档流 -->
-    <!-- <view class="videoAndTabHolder {{isVideoFixed?'':'hidden'}}" ></view> -->
-    <!-- ↓ 这个以防equip_tab变为fixed后 脱出文档流 -->
-    <block wx:if="{{!isVideoContl}}">
+    <block>
+      <!-- ↓ 这个以防equip_tab变为fixed后 脱出文档流 -->
       <view class="equip_tab  {{isTabCanFixed&&!isVideoFixed?'':'hidden'}}"></view>
 
       <scroll-view scroll-y class="tabconBox {{isVideoFixed?'fixed':''}}">
         <!-- 传感器 -->
         <view class="equip_tabcon" wx:if="{{activeTab=='SENSOR'}}">
-        <!-- 循环所有分类 -->
+        <!-- 一、循环所有分类 -->
           <block wx:for="{{sensorList}}" wx:for-index="index" wx:for-item="item" wx:key="{{index}}">
             <view wx:if="{{item.length>0}}" class="sensortype" >
                 <view class="sensortit" style="color:{{sensorIcons[index].color}}"><text class="iconfont {{sensorIcons[index].icon}}"></text>{{sensorIcons[index].name}}</view>
                 <view class="sensorlist">
-                <!-- 循环每个分类下的传感器列表 -->
+                <!-- 二、循环每个分类下的传感器列表 -->
                   <block wx:for="{{item}}" wx:for-index="zInx" wx:for-item="zItm" wx:key="{{zInx}}">
                     
                       <view class="{{item.length==1?'hole_item':'half_item'}}">
                           <view class="wrap" bindtap="deviceInfo" data-zItm="{{zItm}}">
-                              <view class="equip_icon" style="background-color:{{filter.todealName(zItm.name)}}">
+                              <!-- 1.logo -->
+                              <view class="equip_icon" style="background-color:{{filter.todealName(zItm.name)}};box-shadow:0px 2px 20px 0px {{filter.todealName(zItm.name,true)}};">
                                   <image class="label" src="{{zItm.logo}}"></image> 
                               </view>
-                              <!-- 根据设备的属性的个数有不同展示方法 ↓ -->
+                              <!-- 2.根据设备的属性的个数有不同展示方法 ↓ -->
                               <view class="desc" wx:if="{{zItm.proList.length==1}}">
-                                  <view class="tit">{{zItm.name}}</view>
+                                  <view style="max-width:{{item.length==1?450:180}}rpx" class="tit t-ellipsis">{{zItm.name}}</view>
+                                  <!-- 离线 -->
                                   <view wx:if="{{!zItm.isOnline}}" class="outline" >
                                     离线
                                   </view>
-                                  <!-- 循环 设备的属性 -->
+                                  <!-- 三、循环 设备的属性 -->
                                   <block wx:if="{{zItm.isOnline}}" wx:for="{{zItm.proList}}" wx:key="{{idx}}" wx:for-index="idx" wx:for-item="its">
-                                    <view class="value"><iconfont dataNum="{{its.propertyValue?its.propertyValue:'--'}}" fontSize="28"><text style="font-size:24rpx;margin-left:10rpx;">{{its.specsNumber.unit}}</text></iconfont></view>
+                                    <view wx:if="{{its.dataType=='int'||its.dataType=='float'||its.dataType=='double'}}" class="value"><iconfont dataNum="{{(its.propertyValue||its.propertyValue==0)?its.propertyValue:'--'}}" fontSize="{{its.proItem.valueLen>6?18:28}}"><text style="font-size:{{its.proItem.valueLen>6?18:24}}rpx;margin-left:10rpx;" wx:if="{{its.specsNumber.unit}}">{{its.specsNumber.unit}}</text></iconfont></view>
+                                    
+                                    <!-- 枚举型 value显示 -->
+                                    <view wx:elif="{{its.dataType=='bool'||its.dataType=='enum'}}" class="enumValue t-ellipsis" >
+                                      <block wx:if="{{its.proItem.enumNumber}}">
+                                        {{its.proItem.enumNumber}}
+                                      </block>
+                                      <iconfont wx:else dataNum="--" fontSize="28"></iconfont>
+                                    </view>
                                   </block>
                               </view>
 
                               <view class="desc" wx:if="{{zItm.proList.length==2}}">
-                                  <view class="tit">{{zItm.name}}</view>
+                                  <view style="max-width:{{item.length==1?450:180}}rpx" class="tit t-ellipsis">{{zItm.name}}</view>
                                   <view wx:if="{{!zItm.isOnline}}" class="outline" >
                                     离线
                                   </view>
-                                  <!-- 循环 设备的属性 -->
+                                  <!-- 三、循环 设备的属性 -->
                                   <block wx:if="{{zItm.isOnline}}" wx:for="{{zItm.proList}}" wx:key="{{idx}}" wx:for-index="idx" wx:for-item="its">
                                     <view class="indicator d-flex">
                                       <view class='dataName'>{{its.name}}</view>
-                                      <iconfont dataNum="{{its.propertyValue?its.propertyValue:'--'}}" fontSize="20"><text style="font-size:24rpx;margin-left:10rpx;">{{its.specsNumber.unit}}</text></iconfont>
+                                      <iconfont dataNum="{{(its.propertyValue||its.propertyValue==0)?its.propertyValue:'--'}}" fontSize="20"><text style="font-size:24rpx;margin-left:10rpx;" wx:if="{{its.specsNumber.unit}}">{{its.specsNumber.unit}}</text></iconfont>
                                     </view>
                                   </block>
                               </view>
                               
-                              <!-- 这个图片是 该分类下只有一个设备 才显示 -->
+                              <!-- 3.这个图片是 该分类下只有一个设备 才显示 -->
                               <image wx:if="{{item.length==1}}" class="bgView" src="/assets/images/ico_direct.png"></image> 
                           </view>
                       </view>
@@ -102,169 +114,79 @@
         <!-- 控制设备 -->
         <view class="control_tabcon" wx:if="{{activeTab=='CONTROLLER'}}">
             <!-- 哪个控制设备类型 -item -->
-            <view class="item">
-                <view class='title listItem clearfix'>
-                  <view class='f-l'>
-                    <image class='iconImg' src="/assets/images/weixin@2x.png"></image>
-                    <text>内遮阳</text>
-                  </view>
-                  <view class='f-r iconfont icondown2'></view>
-                </view>
-                <!-- 设备的某一个控制 -listItem -->
-                <view >
-                  <view class='listItem clearfix'>
-                    <view class='leftBox f-l'>
-                      <view class="f-l">蘑菇大棚1#内遮阳</view>
-                      <view class='f-r'>
-                        <onoff bind:changeSwitch="openSwitchToast" id="onoff1" data-domid="onoff1" data-type="1" data-oldIndex="2" type="1" selectedIndex="2"></onoff>
-                      </view>
+            <block wx:for="{{controlList}}" wx:for-item="cItem" wx:for-index="cIdx" wx:key="{{cIdx}}">
+              <view class="item">
+                  <view bindtap="switchCate" data-index="{{cIdx}}" class='title listItem clearfix'>
+                    <view class='f-l'>
+                      <image class='iconImg' src="{{cItem.logo}}"></image>
+                      <text>{{cItem.name}}</text>
                     </view>
-                    <view class='rightBox f-r' bindtap="turnToDeviceDetail">
-                      <text class='iconfont iconjiantou' ></text>
-                    </view>
+                    <view class="f-r iconfont {{cItem.show?'iconup2':'icondown2'}}"></view>
                   </view>
+                  <!-- 设备的某一个控制 -listItem -->
+                  <view class="eq_Item {{cItem.show?'':'hidden'}}" wx:for="{{cItem.list}}" wx:for-item="its" wx:for-index="idx" wx:key="{{idx}}">
+                    <view class='listItem clearfix' bindtap="turnToDeviceDetail" data-its="{{its}}">
+                      <view class='leftBox f-l'>
+                        <view class="f-l equipName t-ellipsis">{{its.name}}</view>
+                        <view class='f-r'>
+                          <!-- 下面的开关不能在 isOpeating为true时wx:if  否则 找不到这个开关组件 执行不了开关组件中的方法 -->
+                          <view wx:if="{{its.isOnline}}" class="{{its.isOpeating?'hidden':''}}">
+                            <!-- 开关停 -->
+                            <onoff data-dname="{{its.name}}" wx:if="{{its.numType=='enum'}}" data-cIdx="{{cIdx}}" data-idx="{{idx}}" catch:changeSwitch="openSwitchToast" id="onoff{{cIdx}}{{idx}}" data-domid="onoff{{cIdx}}{{idx}}" data-type="1" type="1" selectedValue="{{its.value}}"></onoff>
+  
+                            <!-- 开关 -->
+                            <onoff data-dname="{{its.name}}" wx:elif="{{its.numType=='bool'}}" data-cIdx="{{cIdx}}" data-idx="{{idx}}" catch:changeSwitch="openSwitchToast" id="onoff{{cIdx}}{{idx}}" data-domid="onoff{{cIdx}}{{idx}}" data-type="2" type="2" selectedValue="{{its.value}}"></onoff>
+  
+                            <!-- 数值型 -->
+                            <view data-domid="icon{{cIdx}}{{idx}}" data-min="{{its.specsNumber.min}}" data-max="{{its.specsNumber.max}}" data-dname="{{its.name}}" data-cIdx="{{cIdx}}" data-idx="{{idx}}" wx:elif='{{its.numType=="int"||its.numType=="float"||its.numType=="double"}}' class="controlTemp" data-num="{{its.value}}" catchtap='openControlNumber'>
+                              <view><iconfont id="icon{{cIdx}}{{idx}}"  dataNum="{{its.value}}" color="#30E034" fontSize="30"></iconfont></view>
+                              <view class='iconfont iconset'></view>
+                            </view>
+                          </view>
 
-                  <view class='listItem clearfix'>
-                    <view class='leftBox f-l'>
-                      <view class="f-l">蘑菇大棚1#内遮阳</view>
-                      <view class='f-r'>
-                        <onoff bind:changeSwitch="openSwitchToast" id="onoff2" data-domid="onoff2" data-type="2" data-oldIndex="0" type="2" selectedIndex="0"></onoff>
+                          <!--   操作：  offline-离线    doing-正在操作    failed-失败   -->
+                          <text wx:if="{{its.isOpeating&&its.isOnline}}" class='opeate_text {{its.opeateClass}}'>{{its.opeateText}}</text>
+                          <text wx:if="{{!its.isOnline}}" class='opeate_text offline'>离线</text>
+                        </view>
+                      </view>
+                      <view class='rightBox f-r'>
+                        <text class='iconfont iconjiantou' ></text>
                       </view>
                     </view>
-                    <view class='rightBox f-r' bindtap="turnToDeviceDetail">
-                      <text class='iconfont iconjiantou' ></text>
-                    </view>
                   </view>
-
-                  <view class='listItem clearfix'>
-                    <view class='leftBox f-l'>
-                      <view class="f-l">蘑菇大棚3#内遮阳</view>
-                      <view class='f-r'>
-                        <text class='opeate_text'>操作成功</text>
-                      </view>
-                    </view>
-                    <view class='rightBox f-r' bindtap="turnToDeviceDetail">
-                      <text class='iconfont iconjiantou' ></text>
-                    </view>
-                  </view>
-                </view>
-            </view>
-
-            <!-- 哪个控制设备类型 -item -->
-            <view class="item">
-                <view class='title listItem clearfix'>
-                  <view class='f-l'>
-                    <image class='iconImg' src="/assets/images/weixin@2x.png"></image>
-                    <text>内遮阳</text>
-                  </view>
-                  <view class='f-r iconfont icondown2'></view>
-                </view>
-                <!-- 设备的某一个控制 -listItem -->
-                <view>
-                  <view class='listItem clearfix'>
-                    <view class='leftBox f-l'>
-                      <view class="f-l">蘑菇大棚1#内遮阳</view>
-                      <view class='f-r'>
-                        <text class='opeate_text offline'>离线</text>
-                      </view>
-                    </view>
-                    <view class='rightBox f-r' bindtap="turnToDeviceDetail">
-                      <text class='iconfont iconjiantou' ></text>
-                    </view>
-                  </view>
-                  <view class='listItem clearfix'>
-                    <view class='leftBox f-l'>
-                      <view class="f-l">蘑菇大棚1#内遮阳</view>
-                      <view class='f-r controlTemp' data-num="35" bindtap='openControlNumber'>
-                        <view><iconfont dataNum="35" color="#30E034" fontSize="30">°C</iconfont></view>
-                        <view class='iconfont iconset'></view>
-                      </view>
-                    </view>
-                    <view class='rightBox f-r' bindtap="turnToDeviceDetail">
-                      <text class='iconfont iconjiantou' ></text>
-                    </view>
-                  </view>
-                  <view class='listItem clearfix'>
-                    <view class='leftBox f-l'>
-                      <view class="f-l">蘑菇大棚2#内遮阳</view>
-                      <view class='f-r'>
-                        <text class='opeate_text doing'>正在操作...</text>
-                      </view>
-                    </view>
-                    <view class='rightBox f-r' bindtap="turnToDeviceDetail">
-                      <text class='iconfont iconjiantou' ></text>
-                    </view>
-                  </view>
-
-                  <view class='listItem clearfix'>
-                    <view class='leftBox f-l'>
-                      <view class="f-l">蘑菇大棚3#内遮阳</view>
-                      <view class='f-r'>
-                        <text class='opeate_text failed'>操作失败</text>
-                      </view>
-                    </view>
-                    <view class='rightBox f-r' bindtap="turnToDeviceDetail">
-                      <text class='iconfont iconjiantou' ></text>
-                    </view>
-                  </view>
-                </view>
-            </view>
+              </view>
+            </block>
         </view>
 
         <!-- 综合设备 -->
         <view class='common_equip' wx:if="{{activeTab=='INTEGRATED'}}">
-          <view class='item clearfix' bindtap="turnToWind">
-            <view class='f-l'>
-              <view class='iconBg f-l'>
-                <image class='iconImg' src="/assets/images/weixin@2x.png"></image>
+          <block wx:for="{{integList}}" wx:key="{{index}}">
+            <view data-id="{{item.id}}" class='item clearfix' bindtap="turnToEquipmentDetail">
+              <view class='f-l'>
+                <view class='iconBg f-l'>
+                  <image class='iconImg' src="{{item.productVO.productLogo?item.productVO.productLogo:'https://zaiot.oss-cn-hangzhou.aliyuncs.com/wechat/img/icon_eq_default.png'}}"></image>
+                </view>
+                <view class='equip_name t-ellipsis f-l'>{{item.clientDisplayName}}</view>
               </view>
-              <view class='f-l'>II型综合气象站</view>
+              <view class='f-r item-state {{item.deviceState=="ONLINE"?"":"offline"}}'>
+                {{item.deviceState=='ONLINE'?'运行中':'离线'}}
+              </view>
             </view>
-            <view class='f-r item-state'>
-              运行中
-            </view>
-          </view>
+          </block>
 
-          <view class='item clearfix' bindtap="turnToWind">
-            <view class='f-l'>
-              <view class='iconBg f-l'>
-                <image class='iconImg' src="/assets/images/weixin@2x.png"></image>
-              </view>
-              <view class='f-l'>II型综合气象站</view>
-            </view>
-            <view class='f-r item-state offline'>
-              离线
-            </view>
-          </view>
-
-          <view class='item clearfix' bindtap="turnToEquipmentDetail">
-            <view class='f-l'>
-              <view class='iconBg f-l'>
-                <image class='iconImg' src="/assets/images/weixin@2x.png"></image>
-              </view>
-              <view class='f-l'>水肥机</view>
-            </view>
-            <view class='f-r item-state'>
-              运行中
-            </view>
-          </view>
         </view>
       </scroll-view>
       <!-- 数值型弹窗控制器 -->
-      <i-modal visible="{{isVisibleModel}}" title="一号温度控制器"  bind:ok="ModelBtnOk" bind:cancel="ModelBtnCancel">
-          <input type='digit' value="{{modelValue}}" class="modelInput" focus='{{isFocusModel}}' />
-          <view class='rangeInput'>范围：0 ~ 100</view>
+      <i-modal visible="{{isVisibleModel}}" catchtouchmove title="{{modelName}}"  bind:ok="ModelBtnOk" bind:cancel="ModelBtnCancel">
+          <input cursor-spacing="160" type='text' value="{{modelValue}}" class="modelInput" bindinput="modelInputFn" focus='{{isFocusModel}}' />
+          <view class='rangeInput'>范围：{{modelRange}}</view>
       </i-modal>
 
       <!-- 开关确认弹窗 -->
-      <i-modal visible="{{isVisibleSwitch}}" bind:ok="handleBtnOk" bind:cancel="handleBtnCancel">
-        <view class="ques_tit">确定{{actionType}}“内遮阳开关#1”吗？</view>
+      <i-modal visible="{{isVisibleSwitch}}" catchtouchmove bind:ok="handleBtnOk" bind:cancel="handleBtnCancel">
+        <view class="ques_tit">确定{{actionType}}“{{actionDeviceName}}”吗？</view>
       </i-modal>
     </block>
-    <!-- 视频控制按钮 -->
-    <view wx:else class='videoContlPan'>
-      <ctrolPan bind:exitCtrl="exitCtrl" bind:intoSet="intoSet"></ctrolPan>
-    </view>
 
 
     <!-- 选择区域 -->
@@ -279,6 +201,28 @@
             <view catchtap="switchArea"  data-id="{{item.id}}" data-name="{{item.groupName}}" class="area_item {{areaActiveId==item.id?'active':''}}">{{item.groupName}}</view>
           </block>
         </view>
+        <view class="addArea" catch:tap="toAddArea">
+          <view class="inner">
+            <text class="iconfont iconshezhi1"></text>
+            区域管理
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <!-- 空页面 （该区域下 没有视频和设备） -->
+    <view class="noDataPage1" wx:if="{{!isCidPerson&&!activeTab&&videoList.length==0}}">
+      <image class="noEquip" src="../../assets/images/no_equip.png" ></image>
+      <view class="">未绑定任何设备</view>
+    </view>
+
+    <!-- 空页面 （个人设备 且该区域下 没有视频和设备） -->
+    <view class="emptyPage" wx:if="{{isCidPerson&&!activeTab&&videoList.length==0}}"> 
+      <view class="noEquipView">
+        <image class="noEquip" src="../../assets/images/no_equip.png" ></image>
+        <view class="">未绑定任何设备</view>
       </view>
     </view>
 </view>
+

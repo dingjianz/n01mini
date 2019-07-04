@@ -1,7 +1,17 @@
 var filter = {
   // 对不同字符串 返回其对应的色值
-  todealName:function (str){
-    var colors = ['#4BB7FB', '#F06292', '#FB854B', '#26C6DA', '#BA68C8', '#B3D64C', '#82B1FF', '#FF8A80'];
+  todealName:function (str,bool=false){ //bool为true，用shadowColors
+    var opacity = 0.4,colors;
+    var bgcolors = ['#4BB7FB', '#F06292', '#FB854B', '#26C6DA', '#BA68C8', '#B3D64C', '#82B1FF', '#FF8A80'];
+    var shadowColors = ['rgba(75,183,251,'+opacity+')','rgba(240,98,16,'+opacity+')','rgba(251,133,75,'+opacity+')',
+    'rgba(38,198,218,'+opacity+')','rgba(186,104,200,'+opacity+')','rgba(179,214,76,'+opacity+')',
+    'rgba(130,177,255,'+opacity+')','rgba(255,138,128,'+opacity+')'
+  ]
+  if(bool){
+    colors = shadowColors;
+  }else{
+    colors = bgcolors;
+  }
     if (typeof str == 'string') {
       var color = getcolors(str);
       return color;
@@ -13,10 +23,10 @@ var filter = {
     }
     //计算颜色
     function getcolors(str) {
-      var num = '';
+      var num = 0;
       var strarr = str.split("");
       for (var i = 0; i < strarr.length; i++) {
-        num += strarr[i].charCodeAt()+'';
+        num += Number(strarr[i].charCodeAt());
       }
       return colors[parseInt(num) % (colors.length)]
     }

@@ -1,6 +1,6 @@
 <!-- pages/create-team/create-team.wxml -->
 <view class="f-input">
-    <input class="f-input-input t-ellipsis" bindinput="inputedit" value="{{inputtxt}}" data-txt="inputtxt" placeholder="请输入团队名称" placeholder-class="f-input-placeholder"/>
+    <input cursor-spacing="160" class="f-input-input t-ellipsis" bindinput="inputedit" value="{{inputtxt}}" data-txt="inputtxt" placeholder="请输入团队名称" placeholder-class="f-input-placeholder"/>
     <!-- <text class="f-input-title">安徽左岸</text> -->
 </view>
 <text class="f-tips">Tips：创建团队后，已经添加的设备将全部转移至团队下。</text>

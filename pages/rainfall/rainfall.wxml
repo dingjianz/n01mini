@@ -1,13 +1,34 @@
-<view class="container">
+<view class="container {{isIPX ? 'IPX' : ''}}">
   <view class="rain-direct">
     <view class="rain-name">
-      <iconfont dataNum="284" color="#30E034" fontSize="50"></iconfont>
-      <text class="sub-name" decode>&nbsp;降雨量</text>
+      <!-- 数据型 -->
+      <block wx:if="{{numValueOyLsxFlag}}">
+        <!-- 在线 -->
+        <iconfont wx:if="{{(propertyValue || propertyValue===0) && isOnline}}" dataNum="{{(propertyValue || propertyValue === 0 ? propertyValue : '--' )}}" color="#15FC71"
+          fontSize="50">
+          <text style="font-size:26rpx;">{{propertyUnit}}</text>
+        </iconfont>
+        <!-- 离线 -->
+        <iconfont wx:if="{{!isOnline}}" dataNum="{{'--'}}" color="#15FC71"
+          fontSize="50">
+          <text style="font-size:26rpx;">{{propertyUnit}}</text>
+        </iconfont>
+      </block>
+
+      <!-- 离散型 -->
+      <block wx:if="{{!numValueOyLsxFlag}}">
+        <!-- 在线 -->
+        <text wx:if="{{isOnline}}">{{lsxKeyValue}}</text>
+        <!-- 离线 -->
+        <text wx:if="{{!isOnline}}">--</text>
+      </block>
+      <text class="sub-name" decode>&nbsp;{{name}}</text>
     </view>
-    <view class="update-time">10小时前更新</view>
+    <!-- 更新时间 -->
+    <view class="update-time" wx:if="{{(propertyValue || propertyValue===0) && isOnline}}">{{valueLastTime}}更新</view>
   </view>
 
-  <view class="rain-chart">
+  <view class="part_b">
     <view class="opts">
       <!-- 1天 7天 30天 -->
       <view class="opts-left">
@@ -15,12 +36,28 @@
           wx:for-item="item" wx:key="{{index}}" bindtap="conveyCurrentIndex" data-currentIndex="{{index}}"
           wx:if="{{index < 3}}">{{item.txt}}</view>
       </view>
-      <!-- 自定义  -->
-      <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
-        wx:for-item="item" wx:key="{{index}}" data-currentIndex="{{index}}"
-        wx:if="{{index === 3}}" bindtap="conveyCurrentIndex" bindtap="turnToDatePicker">
-        {{item.txt}}</view>
+      <!-- 自定义 选择天数 -->
+      <view class="opts-right">
+        <view class="optitem {{index === (currentIndex || 0) ? 'active':''}}" wx:for="{{opts}}" wx:for-index="index"
+          wx:for-item="item" wx:key="{{index}}" data-currentIndex="{{index}}" wx:if="{{index === 3}}"
+          bindtap="turnToDatePicker">
+          <text wx:if="{{!startDateStr && !endDateStr}}">
+            {{item.txt}}
+          </text>
+          <text wx:else>
+            {{startDateStr}}-{{endDateStr}}
+          </text>
+        </view>
+      </view>
     </view>
-    <ec-canvas id="rainchart-dom-line" canvas-id="rainchart-line" ec="{{ ecLine }}"></ec-canvas>
+
+    <view class="echart">
+      <view class="no-data-ww {{isHasHistory?'hidden':''}}">
+        <no-data tips="无历史数据"></no-data>
+      </view>
+      <ec-canvas id="mychart-dom-line" class="{{isHasHistory?'':'hidden'}}" canvas-id="mychart-line" ec="{{ ec }}"
+        wx:if="{{numValueOyLsxFlag}}" specsEnumList="{{specsEnumList}}"></ec-canvas>
+      <lsxChart class="{{isHasHistory?'':'hidden'}}" wx:if="{{!numValueOyLsxFlag}}" axis='{{historyList}}'></lsxChart>
+    </view>
   </view>
 </view>

@@ -20,19 +20,11 @@
       </view>
     </view>
     <view class="divede-border"></view>
-
     <view class="control-detail">
-      <!-- 时间轴 -->
-      <view class="border-left">
-        <block wx:for="{{axis}}" wx:key="{{index}}">
-          <view class="cell-circle"></view>
-          <view class="border-item" hidden="{{index === (axis.length - 1) ? 'lineHidden' : ''}}"></view>
-        </block>
-      </view>
       <!-- 具体记录内容 -->
       <view class="log-detail">
         <block wx:for="{{axis}}" wx:key="{{index}}">
-          <view class="log-wrapper">
+          <view class="log-wrapper {{index === (axis.length - 1) ? 'lineHidden' : ''}}">
             <view class="log-time">{{item.time}}</view>
             <view class="log-status">
                 设置为{{item.name}}<text style="color:#456EAD;" decode>&nbsp;&nbsp;(18365452545)</text>

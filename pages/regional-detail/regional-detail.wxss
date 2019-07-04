@@ -33,6 +33,14 @@
   font-size: 26rpx;
   color: #354e75;
 }
+.content-container{
+  position: relative;
+  height: calc(100vh - 148rpx);
+  box-sizing: border-box;
+}
+.content-container.add-device-tabs {
+  height: 100vh;
+}
 .device-num-tips {
   text-align: center;
   height: 40rpx;
@@ -52,14 +60,11 @@
   width: 710rpx;
   margin: 5rpx auto 0;
   box-sizing: border-box;
-  height: calc(100vh - 243rpx);
-  padding-bottom: 98rpx;
-}
-.device-tabs.add-device-tabs {
-  height: calc(100vh - 95rpx);
+  height: calc(100% - 223rpx);
 }
 .device-tabs.noAdmin {
-  padding-bottom: 15rpx;
+  /* padding-bottom: 15rpx; */
+  height: calc(100% - 125rpx);
 }
 .device-tabs .tabs-head {
   padding: 44rpx 15rpx;
@@ -103,10 +108,28 @@
   color: #15e9fc;
   border: 0 none;
 }
+/* .device-tabs .scroll-wrapper{
+} */
 .device-tabs .tabs-content {
-  height: calc(100% - 166rpx);
+  height: calc(100% - 130rpx);
+  /* overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; */
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+.device-tabs .tabs-content.IPX{
+  height: calc(100% - 205rpx);
 }
 .device-tabs .tabs-content .devices {
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+.device-tabs .tabs-content .devices.android{
+  height: 100%;
+}
+.device-tabs .tabs-content .devices.ios{
+  min-height:101%;
 }
 .device-tabs .tabs-content .devices .device-cell {
   padding: 30rpx;
@@ -123,7 +146,7 @@
   left: 50%;
   transform: translateX(-50%);
   height: 0;
-  width: 680rpx;
+  width: 650rpx;
   border-top: 1px solid #001f50;
 }
 .device-tabs .tabs-content .devices .device-cell.last {
@@ -136,6 +159,8 @@
 .device-tabs .tabs-content .devices .device-cell .device-icon {
   width: 90rpx;
   height: 90rpx;
+  min-width: 90rpx;
+  flex: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,19 +170,19 @@
   margin-right: 25rpx;
 }
 .device-tabs .tabs-content .devices .device-cell .device-icon .icon {
-  width: 100%;
-  height: 100%;
+  width: 68%;
+  height: 68%;
   display: block;
   border: 0 none;
 }
 .device-tabs .tabs-content .devices .device-cell .device-content {
   flex: 1;
+  width: 0;
   font-weight: 400;
 }
 .device-tabs .tabs-content .devices .device-cell .device-content .device-name {
   font-size: 28rpx;
   color: #8babe7;
-  height: 40rpx;
   line-height: 40rpx;
   margin-bottom: 10rpx;
   display: block;
@@ -170,9 +195,21 @@
   .device-status {
   font-size: 24rpx;
   color: #456ead;
-  height: 33rpx;
   line-height: 33rpx;
   display: block;
+}
+.device-tabs .tabs-content .devices .device-cell .checkbox-wrap {
+  position: relative;
+}
+.device-tabs .tabs-content .devices .device-cell .checkbox-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: transparent;
+  z-index: 99;
 }
 /* checkbox样式 */
 .device-tabs
@@ -206,6 +243,7 @@
   .wx-checkbox-input {
   background-color: #071f50;
   color: #456ead;
+  border: 1rpx solid transparent;
 }
 .device-tabs
   .tabs-content
@@ -214,6 +252,7 @@
   .device-check.other-check
   .wx-checkbox-input:before {
   content: "\e634";
+  color: #456EAD;
 }
 /* 选中的样式 */
 .device-tabs
@@ -264,10 +303,12 @@
   margin: 0;
 }
 .regional-btn.complete-btn {
-  color: #4d7bc1;
+  color: #659AEC;
+  background-color: #0F2F66;
+  border-color: #123779;
 }
 .regional-btn.del-btn {
-  color: #742424;
+  color: #8C1F1F;
 }
 
 /* modal */
@@ -303,8 +344,15 @@
   color: #7696d3;
   font-size: 32rpx;
   line-height: 48rpx;
-  margin-right: -36rpx;
+  /* margin-right: -36rpx; */
+  margin-top: -20rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
 }
+.dele-modal-c{
+  color: #4974B6;
+}
+/* 查看详情没有设备的样式 */
 .no-device {
   height: calc(100vh - 185rpx);
   margin: 22rpx auto 0;
@@ -314,9 +362,19 @@
   overflow: hidden;
   position: relative;
 }
+.no-device.showBtn{
+  height: calc(100vh - 283rpx);
+}
+.no-device.showBtn.IPX{
+  height: calc(100vh - 351rpx);
+}
+/* 添加区域没有设备的样式 */
 .no-device.add {
   height: calc(100vh - 60rpx);
   margin: 30rpx auto;
+}
+.no-device.add.IPX{
+  height: calc(100vh - 128rpx);
 }
 .no-device .no-device-content {
   position: absolute;

@@ -12,22 +12,30 @@
   color: #666;
 }
 form .form-item{
-  position: relative;
-  width: 580rpx;
-  margin: 0 auto;
-  margin-top: 50rpx;
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 10rpx;
+  width: 605rpx;
+  margin: 192rpx auto 0;
+  border-bottom: 2rpx solid #2E4973;
+}
+form .form-item.code-item{
+  margin-top: 95rpx;
 }
 form .form-item input{
   font-size: 30rpx;
   height: 62rpx;
-  padding-left: 55rpx;
-  border-bottom: 1rpx solid #eee;
+  color: #15E9FC;
+  flex: 1;
+}
+form .form-item input .input-placeholder{
+  color: #3F639C
 }
 form .form-item input::focus{
   border-color: #34C6A2;
 }
 form .form-item input.vcode{
-  width: 450rpx;
+  /* width: 450rpx; */
 }
 form .form-item .icon{
   position: absolute;
@@ -38,31 +46,30 @@ form .form-item .icon{
   height: 36rpx;
 }
 form .form-item .code-btn{
-  position: absolute;
-  top:0;
-  right: 0;
-  font-size: 30rpx;
-  color: #34C6A2;
+  /* position: absolute; */
+  /* top: 0; */
+  /* right: 10rpx; */
+  font-size: 26rpx;
+  color: #15E9FC;
   line-height: 62rpx;
-  border-bottom: 1rpx solid #eee;
   z-index: 99999
 }
 form .form-item .code-btn.disable{
-  color: #bfbfbf;
+  color: #2E4E82;
 }
 form .login button{
-  width: 580rpx;
-  height: 88rpx;
-  margin-top: 65rpx;
-  background-color: #34C6A2;
-  font-size: 30rpx;
-  color: #fff;
-  border-radius: 44rpx;
+  width: 604rpx;
+  height: 80rpx;
+  margin-top: 100rpx;
+  background-color: #12336D;
+  font-size: 28rpx;
+  color: #15E9FC;
+  border-radius: 10rpx;
   text-align: center;
-  line-height: 88rpx;
-  box-shadow:0px 19rpx 24rpx 0px rgba(52,198,162,0.3)
+  line-height: 80rpx;
+  padding: 0;
+  border: 2rpx solid #183F84;
 }
 form .login button.disable{
-  background-color: #C3CFD6;
-  box-shadow: none;
+  color: #4D7BC1;
 }

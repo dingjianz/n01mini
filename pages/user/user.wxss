@@ -1,16 +1,18 @@
 /* pages/user/user.wxss */
 @import "../../assets/default-skin/cell.wxss";
-
+.content-container{
+    width: 100vw;
+    overflow: hidden;
+}
 .user-info-container{
     height: 204rpx;
     padding-top: 34rpx;
     padding-left: 30rpx;
     position: relative;
     box-sizing: border-box;
-    overflow: hidden;
 }
 .user-info-container::after{
-    content: '12';
+    content: '';
     width: 140%;
     height: 238rpx;
     position: absolute;
@@ -35,7 +37,7 @@
 .user-info-container > .user-info .user-phone{
     vertical-align: top;
     display: inline-block;
-    margin-top: 13rpx;
+    margin-top: 20rpx;
     margin-left: 30rpx;
     font-size: 34rpx;
     color: #15E9FC;
@@ -60,6 +62,9 @@
     /* margin-left: -15rpx;
     margin-right: 5rpx; */
     margin:0 10rpx 0 15rpx;
+}
+.custom-cell-group{
+    margin-top: 48rpx;
 }
 .custom-cell-group .custom-cell .prefix-icon.iconchengyuanguanli{
     font-size: 30rpx;

@@ -21,12 +21,23 @@ Component({
   lifetimes: {
     attached: function () {
       // 在组件实例进入页面节点树时执行
+      this.updateNum();
+    },
+    detached: function () {
+      // 在组件实例被从页面节点树移除时执行
+    },
+  },
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    updateNum(num){
       if (!this.properties.color){
         this.setData({
-          color: '#15FC71'
+          color: '#15FC71',
         })
       }
-      var num = this.properties.dataNum.split('');
+      var num = num||num==0?String(num).split(''):String(this.properties.dataNum).split('');
       var arr = [];
       num.forEach((item,index)=>{
         if(item=='.'){
@@ -40,15 +51,6 @@ Component({
       this.setData({
         fontArr: arr
       })
-    },
-    detached: function () {
-      // 在组件实例被从页面节点树移除时执行
-    },
-  },
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-
+    }
   }
 })

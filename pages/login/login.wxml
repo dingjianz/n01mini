@@ -1,14 +1,18 @@
 <!-- 手机号登录页 -->
 <view class="logo">
-  <view class='title'>左岸物联网</view>
+  <view class='title' wx:if="{{false}}">左岸物联网</view>
 </view>
 <form bindsubmit="formSubmit">
   <view class='form-item'>
-    <input type="number" name="phone" maxlength="11" placeholder="请输入在农场预留的手机号" value="{{formData.phone}}" bindinput="getPhone"/>
+    <input cursor-spacing="160" type="number" name="phone" maxlength="11" placeholder="请输入手机号" value="{{formData.phone}}" placeholder-class="input-placeholder" bindinput="getPhone" />
+    <view class='code-btn {{canClick1&&baseCount === 60?"":"disable"}}' catchtap='getCode'>
+      {{baseCount === 60?'获取验证码':'重新获取（'+baseCount+'s）'}}
+    </view>
   </view>
-   <view class='form-item'>
-    <input type="number" class='vcode' name="msgCode" maxlength="4" placeholder="请输入验证码" bindinput="vCode"/>
-    <view class='code-btn {{canClick1&&baseCount === 60?"":"disable"}}' catchtap='getCode'>{{baseCount === 60?'获取验证码':'重新获取（'+baseCount+'s）'}}</view>
-   </view>
-   <view class='login'><button formType='submit' class='{{canClick2?"":"disable"}}'>登录</button></view>
+  <view class='form-item code-item'>
+    <input focus="{{isFocus}}" cursor-spacing="160" type="number" class='vcode' name="msgCode" maxlength="4" placeholder="请输入验证码" bindinput="vCode"  placeholder-class="input-placeholder" />
+  </view>
+  <view class='login'>
+    <button formType='submit' class='{{canClick2?"":"disable"}}'>登录</button>
+  </view>
 </form>

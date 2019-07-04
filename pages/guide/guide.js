@@ -1,5 +1,5 @@
 // pages/guide/guide.js
-import { post, urlData } from '../../utils/util.js'
+import { post, urlData, getCompany, getCompanyList } from '../../utils/util.js'
 
 const app = getApp()
 
@@ -24,6 +24,14 @@ Page({
                     _this.setData({
                         small: true
                     })
+                }
+            }
+        })
+        // 登录
+        wx.login({
+            success:function(res){
+                if(res.errMsg === 'login:ok'){
+                    wx.setStorageSync('CODE', res.code)
                 }
             }
         })
@@ -78,6 +86,7 @@ Page({
 
     },
     getPhoneNumber: function (e) {//微信手机号授权登录
+        console.log(e)
         var _this = this
         wx.checkSession({
             success: function () {
@@ -91,7 +100,6 @@ Page({
                         "encryptedData": e.detail.encryptedData,
                         "iv": e.detail.iv
                     }
-                    console.log(wx.getStorageSync('CODE'))
                     _this.postLogin(data)
                 }
             },
@@ -113,14 +121,36 @@ Page({
         })
     },
     postLogin(data) {//调取微信授权登录接口
-        post(urlData.accredit, data).then(function (resp) {
+        post(urlData.iotLoginByWX, data).then(function (resp) {
             if (resp.data.respCode === 0) {
                 wx.hideLoading()
-                wx.setStorageSync('TOKEN', resp.data.obj.accessToken);//缓存token
-                wx.setStorageSync('USERPHONE', resp.data.obj.phone);//缓存当前用户手机号
-                wx.switchTab({//跳转到首页
-                    url: '/pages/index/index'
-                })
+                wx.setStorageSync('TOKEN', resp.data.obj.accessToken);
+                wx.setStorageSync('USERPHONE', resp.data.obj.user.phone);
+                getCompanyList((res)=>{
+                    if(res.data.respCode === 0){
+                        if (res.data.obj.totalCount > 1) {
+                            getCompany(res.data.obj.list[0].id).then(function (callback) {
+                            if (callback.data.respCode === 0) {
+                                wx.switchTab({
+                                url: '/pages/index/index',
+                                })
+                            } else {
+                                wx.showToast({
+                                title: callback.data.respDesc,
+                                icon: 'none'
+                                })
+                            }
+                            })
+                        }else{
+                            //只有个人设备
+                            wx.setStorageSync('CID', 0);
+                            wx.hideLoading()
+                            wx.switchTab({
+                                url: '/pages/index/index',
+                            })
+                        }
+                    }
+                });
             } else {
                 wx.showToast({
                     title: resp.data.respDesc,
@@ -131,7 +161,7 @@ Page({
     },
     login: function () {//跳转登录页
       wx.navigateTo({
-            url: '/pages/login/login'
+        url: '/pages/login/login'
         });
     }
 })

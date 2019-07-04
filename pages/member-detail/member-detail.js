@@ -1,5 +1,5 @@
 // pages/member-detail/member-detail.js
-import { post, urlData, throttle } from '../../utils/util'
+import { post, urlData, throttle, ishasPower } from '../../utils/util'
 
 Page({
 
@@ -17,7 +17,7 @@ Page({
         },
         {
           name: '确定删除',
-          color: '#C23634'
+          color: '#8C1F1F'
         }
       ],
       tip: '删除后，该成员将失去在团队中的所有 权限。'
@@ -25,7 +25,11 @@ Page({
     role: '管理员',
     userId: undefined,
     self: false,
-    params: {}
+    params: {},
+    power: {
+      editRole: false,
+      deleRole: false
+    }
   },
 
   // 删除成员modal的按钮操作
@@ -48,6 +52,9 @@ Page({
               });
               this.closeModal({ currentTarget });
             }
+            // else if(res.respCode === 405){ //当前用户不在该团队时
+            //   this.closeModal({ currentTarget });
+            // }
           })
         break;
       default:
@@ -99,6 +106,14 @@ Page({
             userId: res.obj.userVO.id
           })
         }
+        else {
+          // 获取成员信息发生错误时的操作
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            });
+          }, 3000)
+        }
       })
   },
   /**
@@ -108,6 +123,7 @@ Page({
     this.setData({
       params: options
     })
+
   },
 
   /**
@@ -125,6 +141,14 @@ Page({
       title: '加载中',
       mask: true
     });
+    ishasPower(['iot:companyuser:editrole', 'iot:companyuser:del'], (p) => {
+      this.setData({
+        power: {
+          editRole: p[0],
+          deleRole: p[1]
+        }
+      })
+    })
     this.getMemberInfo(this.data.params.userId);
   },
 

@@ -1,10 +1,10 @@
 <!--pages/videoArea/videoArea.wxml-->
-<view class="container">
+<view class="container {{isIx?'isIx':''}}">
   <view class="type-wrapper">
     <block wx:for="{{arealist}}" wx:key="{{idnex}}">
-      <view class="type-list" bindtap="changeArea" data-areaid="{{item.id}}">
-        <view class="type-name {{selectedId === item.id ? 'active' : ''}}">{{item.groupName }}</view>
-        <i-icon type="right" size="20" color="#15E9FC" class="u-icon {{selectedId !== item.id ? 'icon-hidden' : ''}}" />
+      <view class="type-list" bindtap="changeArea" data-areaid="{{item.groupVO.id}}">
+        <view class="type-name {{selectedId == item.groupVO.id ? 'active' : ''}}">{{item.groupVO.groupName }}</view>
+        <i-icon type="right" size="20" color="#15E9FC" class="u-icon {{selectedId != item.groupVO.id ? 'icon-hidden' : ''}}" />
       </view>
       <view class="divede-border"></view>
     </block>

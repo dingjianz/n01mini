@@ -1,40 +1,27 @@
 // pages/videoArea/videoArea.js
-import { post, urlData } from '../../utils/util.js'
+import { post, urlData } from '../../utils/util.js';
+const app =  getApp();
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        selectedId: 9366,
+        selectedId: null,
         deviceId: '',
-        arealist: [
-            {
-                id: 1408,
-                groupName: '1生产示范基地'
-            }, {
-                id: 1740,
-                groupName: '2生产示范基地'
-            }, {
-                id: 9366,
-                groupName: '3生产示范基地'
-            }, {
-                id: 8275,
-                groupName: '4生产示范基地'
-            }, {
-                id: 381,
-                groupName: '5生产示范基地'
-            }
-        ]
+        arealist: [],
+        isIx:app.globalData.isIx
     },
     getAreaList() {//获取所有区域列表
         let _this = this;
-        post(urlData.iotDeviceGroupList, {
+        post(urlData.iotDeviceGroupListCount, {
             "companyId": wx.getStorageSync('CID')
         }, wx.getStorageSync('TOKEN')).then(function (resp) {
             if (resp.data.respCode == 0) {
+                console.log(JSON.stringify(resp.data.obj))
                 _this.setData({
-                    arealist: resp.data.obj.groupList
+                    arealist: resp.data.obj
                 });
             }
         });
@@ -42,24 +29,36 @@ Page({
     changeArea(e) {//绑定区域
         if (this.data.selectedId != e.currentTarget.dataset.areaid) {
             let _this = this;
-            post(urlData.iotDeviceEditGroup, {
+            post(urlData.iotCameraEditGroup, {
                 "companyId": wx.getStorageSync('CID'),
-                "deviceGroupId": this.data.selectedId,
-                "deviceId": this.data.deviceId
+                "deviceGroupId": e.currentTarget.dataset.areaid,
+                "cameraId": this.data.deviceId
             }, wx.getStorageSync('TOKEN')).then(function (resp) {
                 if (resp.data.respCode === 0) {
                     _this.setData({
                         selectedId: e.target.dataset.areaid
                     });
-
-                    let pages = getCurrentPages();
-                    let prevPage = pages[pages.length - 2];
-                    prevPage.setData({
-                        originTit: '切换了区域,要改一下区域id和区域名称'
-                    });
+                    _this.setIndexVideo();
                     wx.navigateBack();
                 }
             });
+        }
+    },
+    //修改首页的视频列表-重新拉去数据，传入视频id
+    setIndexVideo(){
+        let _this = this;
+        let pages = getCurrentPages(),indexPage=null;
+        pages.forEach((item,index)=>{
+            if(item.route=='pages/index/index'){
+                indexPage = item;
+                return
+            }
+        })
+        if(indexPage){
+            indexPage.setData({
+                isFromSet:true,
+                isFromSetId:_this.data.deviceId
+            })
         }
     },
     /**
@@ -67,8 +66,10 @@ Page({
      */
     onLoad: function (options) {
         this.setData({
-            deviceId: options.deviceId
+            deviceId: options.deviceId,
+            selectedId: options.areaId
         });
+        console.log(this.data.selectedId);
         this.getAreaList();
     },
 

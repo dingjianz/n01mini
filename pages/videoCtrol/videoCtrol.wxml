@@ -2,20 +2,23 @@
 <view class="videopage">
     <view class="grid"></view>
     <view class="videotit">
-        <text>{{deviceTit}}</text>
-        <text class="plot">生产示范基地</text>
+        <text class="devicetit t-ellipsis">{{deviceTit}}</text>
+        <text class="plot t-ellipsis">{{cameraArea}}</text>
     </view>
     <view class="hole_video">
-        <video id="myVideo" title="{{title}}" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" object-fit="cover" binderror="videoErrorCallback" show-center-play-btn='{{false}}' show-play-btn="{{true}}" controls='{{control}}' show-progress="{{false}}" bindfullscreenchange="fullListen" bindtap="tapcover"></video>
+        <video id="myVideo" title="{{title}}" src="{{hlsUrl}}" object-fit="fill" bindplay="videoPlay" binderror="videoErrorCallback" show-center-play-btn='{{false}}' show-play-btn="{{true}}" controls='{{control}}' show-progress="{{false}}" bindfullscreenchange="fullListen" bindtap="tapcover"></video>
         <view class="videoctrol">
-            <view class="left_ctrol playbtn iconfont iconzanting" bindtap="playfn"></view>
+            <view class="left_ctrol playbtn iconfont {{isPlay ? 'iconzanting':'iconplay'}}" bindtap="playfn"></view>
             <view class="right_ctrol">
-                <view class="ctrolbtn iconfont iconjiankong"></view>
                 <view class="fullscreen iconfont iconquanping" bindtap="fullfn"></view>
             </view>
-        </view>    
+        </view> 
+        <!-- 还未播放时 有一个loading -->
+        <view class="loading iconLoad" wx:if="{{isloading}}"></view>
+        <!-- 视频封面 -->
+        <view class="posterImg" wx:if="{{!playOnce}}"></view>   
     </view>
     <view class="pannel">
-        <ctrolPan device-id="{{deviceId}}" device-tit="{{deviceTit}}" bindctrol="ctrolEvent" bindexitCtrl="exitCtrl"></ctrolPan>
+        <ctrolPan isplay='{{isPlay?1:0}}' device-id="{{deviceId}}" device-tit="{{deviceTit}}" bindctrol="ctrolEvent" bindexitCtrl="exitCtrl"></ctrolPan>
     </view>
 </view>

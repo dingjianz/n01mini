@@ -1,36 +1,46 @@
 // pages/userSet/userSet.js
-import { post, urlData, ishasPower as hasPower} from '../../utils/util.js'
+import { post, urlData, ishasPower as hasPower, throttle } from '../../utils/util.js'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        userphone:'',
-        teamNum:1
+        userphone: '',
+        teamNum: 1
     },
-    logout(){//退出登录
-        post(urlData.iotLoginLogout, {}, wx.getStorageSync('TOKEN')).then(function (resp) {
-            if (resp.data.respCode === 0) {
-                console.log('退出登录');
-                wx.clearStorage();
-                wx.reLaunch({
-                    url: '/pages/login/login',
-                })
-            }
-        });
+    // 退出登录
+    logout() {
+        post(urlData.iotLoginLogout, {}, wx.getStorageSync('TOKEN'))
+            .then(function (resp) {
+                if (resp.data.respCode === 0) {
+                    // console.log('退出登录');
+                    // 清除所有缓存
+                    wx.clearStorage();
+                    // 转至登录页
+                    wx.reLaunch({
+                        url: '/pages/guide/guide',
+                    })
+                }
+            });
     },
+    navigateTo: throttle(({ currentTarget }) => {
+        wx.navigateTo({
+            url: currentTarget.dataset.url
+        })
+    }),
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        
+
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
         this.setData({
+            // 获取用户的手机号
             userphone: wx.getStorageSync('USERPHONE')
         });
     },
@@ -38,14 +48,16 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        let _this = this;
-        post(urlData.iotCompanyList, {}, wx.getStorageSync('TOKEN')).then(function (resp) {
-            if (resp.data.respCode === 0) {
-                _this.setData({
-                    teamNum: resp.data.obj.totalCount
-                });
-            }
-        });
+        // let _this = this;
+        // 获取公司列表--获取总个数
+        post(urlData.iotCompanyList, {}, wx.getStorageSync('TOKEN'))
+            .then((resp) => {
+                if (resp.data.respCode === 0) {
+                    this.setData({
+                        teamNum: resp.data.obj.totalCount
+                    });
+                }
+            });
     },
 
     /**

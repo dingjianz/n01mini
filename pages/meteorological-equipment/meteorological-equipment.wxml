@@ -3,69 +3,63 @@
     <!-- 设备名称 -->
     <view class="equip-title">
       <view class="equip-des">
-        <text class="euip-name">水肥机</text>
-        <text class="euip-basePosition">生产示范基地</text>
+        <text class="euip-name">{{clientDisplayName}}</text>
+        <text class="euip-basePosition">{{deviceObj.areaName}}</text>
       </view>
-      <view class="iconfont iconshezhi" bindtap="turnToDeviceInstall"></view>
+      <view class="iconfont iconshezhi" wx:if="{{power_set}}" bindtap="turnToDeviceInstall"></view>
     </view>
     <!-- EC 值列表 -->
-    <view class="ec-value">
-      <i-row>
-        <i-col span="12" i-class="col-class">
-          <view class="val-wrapper">
-            <view class="val-name">EC值</view>
-            <iconfont dataNum="7.5" color="#15FC71" fontSize="30" bindtap="turnToRain"></iconfont>
+    <view class="ec-value clearfix">
+      <block wx:for="{{rList}}" wx:key="{{index}}">
+        <view class="val-wrapper f-l"  bindtap="turnToRain" data-id="{{item.deviceId}}" data-index="{{index}}">
+            <view class="val-name t-ellipsis">{{item.name}}</view>
+            <view wx:if="{{item.dataType=='int'||item.dataType=='float'||item.dataType=='double'}}">
+              <iconfont dataNum="{{(item.propertyValue||item.propertyValue==0)&&isOnline?item.propertyValue:'--'}}" color="#15FC71" fontSize="30"><text style="font-size:24rpx;margin-left:10rpx;">{{item.specsNumber.unit?item.specsNumber.unit:''}}</text></iconfont>
+            </view>
+            <!-- 枚举型 value显示 -->
+            <view wx:if="{{item.dataType=='bool'||item.dataType=='enum'}}" class="enumValue t-ellipsis" >
+              {{item.enumNumber}}
+            </view>
           </view>
-        </i-col>
-        <i-col span="12" i-class="col-class">
-          <view class="val-wrapper">
-            <view class="val-name">EC值</view>
-            <iconfont dataNum="7.5" color="#15FC71" fontSize="30" bindtap="turnToRain"><text class="val-unit">us/cm</text></iconfont>
-          </view>
-        </i-col>
-        <i-col span="12" i-class="col-class">
-          <view class="val-wrapper">
-            <view class="val-name">EC值</view>
-            <iconfont dataNum="7.5" color="#15FC71" fontSize="30" bindtap="turnToRain"></iconfont>
-          </view>
-        </i-col>
-        <i-col span="12" i-class="col-class">
-          <view class="val-wrapper">
-            <view class="val-name">EC值</view>
-            <iconfont dataNum="7.5" color="#15FC71" fontSize="30" bindtap="turnToRain"><text class="val-unit">us/cm</text></iconfont>
-          </view>
-        </i-col>
-      </i-row>
+      </block>
     </view>
 
     <!-- 设备开关 -->
     <view class="euip-switch-list">
-      <view class="euip-switch-item">
-        <view class="switch-name">水泵</view>
-        <view class="switch-onoff">
-          <onoff type="2" selectedIndex="1" bind:changeSwitch="openSwitchToast" id="waterpump" data-domid="waterpump"></onoff>
-          <text class='iconfont iconjiantou' bindtap="turnToDeviceDetail"></text>
+      <block wx:for="{{rwList}}" wx:key="{{index}}">
+        <view class="euip-switch-item">
+          <view class="switch-name t-ellipsis">{{item.name}}</view>
+          <view class="switch-onoff">
+            <view wx:if="{{isOnline}}" class="{{item.isOpeating?'hidden':''}}">
+              <!-- 开关停 -->
+              <onoff data-dname="{{item.name}}" wx:if="{{item.dataType=='enum'}}" data-index="{{index}}" catch:changeSwitch="openSwitchToast" id="onoff{{index}}" data-domid="onoff{{index}}" data-type="1" type="1" selectedValue="{{item.propertyValue}}"></onoff>
+
+              <!-- 开关 -->
+              <onoff data-dname="{{item.name}}" wx:elif="{{item.dataType=='bool'}}" data-index="{{index}}" catch:changeSwitch="openSwitchToast" id="onoff{{index}}" data-domid="onoff{{index}}" data-type="2" type="2" selectedValue="{{item.propertyValue}}"></onoff>
+
+              <!-- 数值型 -->
+              <view wx:elif='{{item.dataType=="int"||item.dataType=="float"||item.dataType=="double"}}' data-domid="icon{{index}}" data-min="{{item.specsNumber.min}}" data-max="{{item.specsNumber.max}}" data-dname="{{item.name}}" data-index="{{index}}"  class="controlTemp" data-num="{{item.propertyValue}}" catchtap='openControlNumber'>
+                <view><iconfont id="icon{{index}}"  dataNum="{{item.propertyValue}}" color="#30E034" fontSize="30"></iconfont></view>
+                <view class='iconfont iconset'></view>
+              </view>
+            </view>
+            <!--   操作：  offline-离线    doing-正在操作    failed-失败   -->
+            <text wx:if="{{item.isOpeating&&isOnline}}" class='opeate_text {{item.opeateClass}}'>{{item.opeateText}}</text>
+            <text wx:if="{{!isOnline}}" class='opeate_text offline'>离线</text>
+          </view>
         </view>
-      </view>
-      <view class="euip-switch-item">
-        <view class="switch-name">水肥机控制器</view>
-        <view class="switch-onoff">
-          <onoff type="2" selectedIndex="1" bind:changeSwitch="openSwitchToast" id="watercontrol1" data-domid="watercontrol1"></onoff>
-          <text class='iconfont iconjiantou' bindtap="turnToDeviceDetail"></text>
-        </view>
-      </view>
-      <view class="euip-switch-item">
-        <view class="switch-name">二号水肥机控制器</view>
-        <view class="switch-onoff">
-          <onoff type="2" selectedIndex="1" bind:changeSwitch="openSwitchToast" id="watercontrol2" data-domid="watercontrol2"></onoff>
-          <text class='iconfont iconjiantou' bindtap="turnToDeviceDetail"></text>
-        </view>
-      </view>
+      </block>
     </view>
   </view>
 
   <!-- 开关确认弹窗 -->
-  <i-modal visible="{{isVisibleSwitch}}" bind:ok="handleBtnOk" bind:cancel="handleBtnCancel">
-    <view class="ques_tit">确定{{actionType}}“内遮阳开关#1”吗？</view>
+  <i-modal visible="{{isVisibleSwitch}}" catchtouchmove bind:ok="handleBtnOk" bind:cancel="handleBtnCancel">
+    <view class="ques_tit">确定{{actionType}}“{{equipProName}}”吗？</view>
+  </i-modal>
+
+  <!-- 数值型弹窗控制器 -->
+  <i-modal visible="{{isVisibleModel}}" catchtouchmove title="{{modelName}}"  bind:ok="ModelBtnOk" bind:cancel="ModelBtnCancel">
+      <input cursor-spacing="160" type='text' value="{{modelValue}}" class="modelInput" bindinput="modelInputFn" focus='{{isFocusModel}}' />
+      <view class='rangeInput'>范围：{{modelRange}}</view>
   </i-modal>
 </view>

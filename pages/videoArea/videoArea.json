@@ -2,7 +2,8 @@
   "usingComponents": {
     "i-cell-group": "../../components/i-view/cell-group/index",
     "i-cell": "../../components/i-view/cell/index",
-    "i-modal": "../../components/i-view/modal/index"
+    "i-modal": "../../components/i-view/modal/index",
+    "i-icon": "../../components/i-view/icon/index"
 },
 "navigationBarTitleText": "选择区域"
 }

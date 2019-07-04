@@ -22,7 +22,7 @@ Page({
             },
             {
                 name: '确定',
-                color: '#456EAD'
+                color: '#5689D7'
             },
         ]
     },
@@ -44,14 +44,12 @@ Page({
             });
         } else {//确定
             const action = [...this.data.actions];
-            this.data.actions[1].loading = true;
 
             this.setData({
                 actions: action
             });
 
             setTimeout(() => {
-                action[1].loading = false;
                 this.setData({
                     modal: false,
                     actions: action,

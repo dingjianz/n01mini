@@ -1,15 +1,14 @@
-<view class="container">
-    <view class="type-wrapper">
-      <block wx:for="{{typeList}}" wx:key="{{idnex}}">
-        <view class="type-list" bindtap="selectIndex" data-selectedIndex="{{index}}">
-          <!-- 类型名称 -->
-          <view class="type-name {{selectedIndex === index ? 'active' : ''}}">{{item.typeName}}</view>
-  
-          <!-- 箭头 -->
-          <i-icon type="right" size="20" color="#15E9FC"
-            class="u-icon {{selectedIndex !== index ? 'icon-hidden' : ''}}" />
-        </view>
-        <view class="divede-border"></view>
-      </block>
-    </view>
+<view class="container {{isIx?'isIx':''}}">
+  <view class="type-wrapper">
+    <block wx:for="{{groupList}}" wx:key="{{index}}">
+      <view class="type-list" bindtap="selectIndex" data-selectedIndex="{{index}}" data-devicegroupid="{{item.groupVO.id}}" data-groupname="{{item.groupVO.groupName}}">
+        <!-- 类型名称 -->
+        <view class="type-name {{selectedIndex === index ? 'active' : ''}}">{{item.groupVO.groupName}}</view>
+
+        <!-- 箭头 -->
+        <i-icon type="right" size="20" color="#15E9FC"  class="u-icon {{selectedIndex !== index ? 'icon-hidden' : ''}}" />
+      </view>
+      <view class="divede-border"></view>
+    </block>
   </view>
+</view>

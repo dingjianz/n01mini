@@ -1,5 +1,5 @@
 // pages/member-role/member-role.js
-import { post, urlData } from '../../utils/util'
+import { post, urlData, throttle } from '../../utils/util'
 
 Page({
 
@@ -17,8 +17,9 @@ Page({
     },
     userId: undefined,
   },
-  handleRoleChange({ currentTarget }) {
+  handleRoleChange: throttle(function ({ currentTarget }) {
     // console.log(currentTarget);
+    // 用于选择角色
     if (!this.data.userId) {
       // console.log(pages);
       let pages = getCurrentPages();
@@ -34,6 +35,7 @@ Page({
       });
       return true;
     };
+    // 用于修改角色
     post(urlData.iotCompanyUserRefEdit, {
       companyId: wx.getStorageSync('CID'),
       roleId: currentTarget.dataset.id,
@@ -55,8 +57,16 @@ Page({
             current: currentTarget.dataset.name
           });
         }
+        else if (res.respCode === 404) {
+          // 权限不足
+          // setTimeout(() => {
+          //   wx.reLaunch({
+          //     url: '/pages/index/index',
+          //   });
+          // }, 3000);
+        }
       })
-  },
+  }),
 
   getRoleList() {
     let accessToken = wx.getStorageSync('TOKEN');
@@ -73,7 +83,7 @@ Page({
                 roleDesc: item.roleDesc
               }
             }),
-            current: this.data.current || res.obj.list[0].roleName,
+            current: this.data.current,
             ['roleModal.role']: res.obj.list.map((item) => {
               return {
                 name: item.roleName,
@@ -111,10 +121,10 @@ Page({
       && this.setData({
         current: options.roleName
       })
-      wx.showLoading({
-        title: '加载中',
-        mask: true
-      });
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
     this.getRoleList();
   },
 

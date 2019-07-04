@@ -1,9 +1,9 @@
-<view class="container">
+<view class="container {{isIPX ? 'isIPX' : ''}}">
   <view class="type-wrapper">
     <block wx:for="{{typeList}}" wx:key="{{idnex}}">
-      <view class="type-list" bindtap="selectIndex" data-selectedIndex="{{index}}">
+      <view class="type-list" bindtap="selectIndex" data-selectedIndex="{{index}}" data-categoryId="{{item.id}}" data-categoryName="{{item.categoryName}}">
         <!-- 类型名称 -->
-        <view class="type-name {{selectedIndex === index ? 'active' : ''}}">{{item.typeName}}</view>
+        <view class="type-name {{selectedIndex === index ? 'active' : ''}}">{{item.categoryName}}</view>
 
         <!-- 箭头 -->
         <i-icon type="right" size="20" color="#15E9FC"

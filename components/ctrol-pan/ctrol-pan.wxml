@@ -1,10 +1,10 @@
 <!--components/ctrol-pan/ctrol-pan.wxml-->
 <view class="pancon">
     <view class="pantit">
-        <navigator class="config" url="/pages/videoSet/videoSet?deviceId={{deviceId}}&&deviceTit={{deviceTit}}">
+        <view class="config {{power_set?'':'vis_hid'}}" data-id="{{deviceId}}" data-tit="{{deviceTit}}" bindtap="toDetail" >
             <view class="iconfont iconset"></view>
-        </navigator>
-        <text>摄像头控制</text>
+        </view>
+        <text style="font-size:30rpx;color:#8BABE7">摄像头控制</text>
         <view class="exit" catchtap="closeCtrl">退出控制</view>
     </view>
     <view class="control-container">

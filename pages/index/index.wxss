@@ -1,10 +1,13 @@
 page{
   width: 100%;
-  height: 100%;
+}
+.animated{
+  animation-duration: 0.5s;
 }
 .container {
   color:#456EAD;
   font-size:28rpx;
+  height: 100vh;
 } 
 .container.overHidden{
   overflow: hidden;
@@ -12,6 +15,7 @@ page{
 .dis_ib{
   display: inline-block;
 }
+
 .area_check,.videoPlot,.fixedSelectArea>.content>.title{
     width:100%;
     height:82rpx;
@@ -33,14 +37,18 @@ page{
 }
 .videoPlot>.plotName{
   color: #15E9FC;
+  max-width: 40%;
+  font-size: 30rpx;
 }
 .videoPlot>.areaName{
   background-color: #0B224A;
   color: #395787;
-  padding: 0 15rpx;
+  padding: 0 13rpx;
   height: 38rpx;
   line-height: 38rpx;
   border-radius: 38rpx;
+  max-width: 35%;
+  font-size: 24rpx;
 }
 /* 视频监控 */
 .hole_video,#myVideo{
@@ -67,6 +75,39 @@ page{
 .hole_video .videoctrol .right_ctrol view{
     justify-content:flex-start;
     margin-left: 23rpx;
+}
+.posterImg{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 50;
+  background-image: url(https://zaiot.oss-cn-hangzhou.aliyuncs.com/wechat/img/video_poster.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.iconLoad{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* top: 50%;
+  left: 50%;
+  margin-left: -30rpx;
+  margin-top: -30rpx; */
+  left: 0;
+  top: 0;
+  z-index: 40;
+  background: #000;
+}
+.iconLoad>.loading{
+  position: absolute;
+  width: 60rpx;
+  height: 60rpx;
+  top: 50%;
+  left: 50%;
+  margin-left: -30rpx;
+  margin-top: -30rpx;
 }
 .playbtn,.ctrolbtn,.topbtn,.fullscreen{
   width: 60rpx;
@@ -113,7 +154,7 @@ page{
     align-items: center;
     flex-flow:row nowrap;
     font-size: 28rpx;
-    color: #15E9FC;
+    color: #456EAD;
 }
 .video_list{
     width:calc(100% - 100rpx);
@@ -140,7 +181,7 @@ page{
     vertical-align: middle;
 }
 .scroll-view_X .video_item>.name{
-    max-width: 215rpx;
+    max-width: 205rpx;
     padding: 12rpx 15rpx;
     overflow: hidden;
     white-space: nowrap;
@@ -149,6 +190,7 @@ page{
 .scroll-view_X .video_item.active{
     background-color: #001434;
     border-radius: 4rpx;
+    color: #14DFF3;
 }
 .scroll-view_X .video_item.active::before{
   content: '';
@@ -220,17 +262,18 @@ page{
 }
 .equip_tabcon{
     width:100%;
-    padding:0 10rpx;
+    padding:10rpx 10rpx 0;
     box-sizing:border-box;
 }
 .sensortit{
-    margin-top:20rpx;
+    margin-top:10rpx;
     height:65rpx;
     line-height:65rpx;
+    font-size: 28rpx;
     text-align:center;
 }
 .sensortit>.iconfont{
-  font-size: 30rpx;
+  font-size: 34rpx;
   margin-right: 10rpx;
 }
 .sensorlist,.sensorlist .wrap{
@@ -279,8 +322,8 @@ page{
     border-radius: 100%;
 }
 .sensorlist .equip_icon .label{
-    width: 60%;
-    height: 60%;
+    width: 80%;
+    height: 80%;
 }
 .sensorlist .desc{
     display:flex;
@@ -292,10 +335,17 @@ page{
   font-size: 24rpx;
   color: #FCAD15;
 }
+.sensorlist .enumValue{
+  /* 枚举型 传感器 显示 */
+  max-width:150rpx;
+  font-size: 28rpx;
+  color: #15FC71
+}
 .sensorlist .desc .tit{
-    font-size:28rpx;
-    line-height:1;
-    margin-bottom: 18rpx;
+  font-size:28rpx;
+  line-height:1;
+  margin-bottom: 18rpx;
+  color: #8BABE7;
 }
 .sensorlist .desc .indicator{
     font-size:22rpx;
@@ -318,12 +368,12 @@ page{
 .control_tabcon>.item{
     width: 100%;
     border-radius: 10rpx;
-    background-color: #102957;
     overflow: hidden;
     margin-bottom: 22rpx;
 }
 .control_tabcon>.item>.title{
-  line-height: 50rpx;
+  line-height: 66rpx;
+  background-color: #102957;
   font-size: 28rpx;
   color: #15E9FC;
 }
@@ -332,21 +382,31 @@ page{
   font-size: 30rpx;
 }
 .control_tabcon>.item .listItem{
+  background-color: #102957;
   border-bottom: 1rpx solid #001434;
-  padding: 18rpx 20rpx;
+  padding: 10rpx 20rpx;
+}
+.control_tabcon>.eq_Item:last-child .listItem{
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
 }
 
 .control_tabcon>.item .listItem .iconImg{
-  width: 40rpx;
-  height: 40rpx;
+  width: 52rpx;
+  height: 52rpx;
   float: left;
-  margin-top: 5rpx;
+  margin-top: 7rpx;
   margin-right: 15rpx;
+  margin-left: -5rpx;
 }
 
 .control_tabcon>.item .listItem>.leftBox{
   width: 575rpx;
   line-height: 80rpx;
+}
+.equipName{
+  max-width: 230rpx;
+  color: #8BABE7;
 }
 .control_tabcon>.item .listItem>.rightBox{
   line-height: 80rpx;
@@ -376,7 +436,7 @@ page{
 
 /* 数值型控制器 */
 .controlTemp{
-  width: 202rpx;
+  min-width: 202rpx;
   height:80rpx;
   display: flex;
   display: -webkit-flex;
@@ -398,6 +458,7 @@ page{
   border: 1rpx solid #30E034;
   color: #30E034;
   border-radius: 100%;
+  margin-left: 20rpx;
 }
 
 /* 综合设备 */
@@ -424,12 +485,14 @@ page{
   background-color: #09224A;
   border-radius: 100%;
   margin-right: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .common_equip>.item .iconBg>.iconImg{
   width: 50rpx;
   height: 50rpx;
-  display: inline-block;
-  vertical-align: middle;
+  display: block;
 }
 
 .common_equip>.item>.item-state{
@@ -439,7 +502,9 @@ page{
 .common_equip>.item>.item-state.offline{
   color: #FCAD15;
 }
-
+.common_equip .equip_name{
+  max-width: 400rpx;
+}
 /* 数值型控制器弹窗 */
 .modelInput{
   width: 340rpx;
@@ -479,6 +544,16 @@ page{
 .fixedSelectArea>.content{
   height: 100%;
 }
+.fixedSelectArea>.content>.addArea{
+  padding: 0 40rpx;
+  background-color: #011434;
+  line-height: 35rpx;
+  color: #395787;
+}
+.fixedSelectArea>.content .inner{
+  padding: 25rpx 0;
+  border-top: 1rpx solid #102957;
+}
 .fixedSelectArea>.content>.title{
   border-bottom: 3rpx solid #102957;
   background-color: #011434;
@@ -504,4 +579,54 @@ page{
   background-position: 94% center;
   background-size: 30rpx auto;
   background-repeat: no-repeat;
+}
+
+.noDataPage1{
+  position: absolute;
+  top: 82rpx;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 28rpx;
+  color: #264474;
+  border-top: 2rpx solid #102957;
+}
+.noDataPage1>.noEquip{
+  display: block;
+  width: 340rpx;
+  height: 195rpx;
+  margin-bottom: 30rpx;
+}
+
+.emptyPage{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 30rpx;
+  box-sizing: border-box;
+}
+.emptyPage>.noEquipView{
+  width: 710rpx;
+  height: 93%;
+  border-radius: 10rpx;
+  background-color: #102957;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 28rpx;
+  color: #3F639C;
+}
+.emptyPage>.noEquipView>.noEquip{
+  display: block;
+  width: 340rpx;
+  height: 195rpx;
+  margin-bottom: 30rpx;
 }

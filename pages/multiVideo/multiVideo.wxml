@@ -1,17 +1,25 @@
 <!--pages/multiVideo/multiVideo.wxml-->
-<view class="container">
-    <view class="video_item" wx:key="{{idx}}" wx:for="{{videolist}}" wx:for-index="idx" wx:for-item="item">
+<view class="container {{isIPX ? 'isIPX' : ''}}">
+    <view wx:if="{{videolist.length>0}}" class="video_item" wx:key="{{idx}}" wx:for="{{videolist}}" wx:for-index="idx" wx:for-item="item">
         <view class="hole_video">
-            <video id="video-{{item.id}}" title="{{item.name}}"  object-fit="contain"  class="myVideo" data-index="{{idx}}"src="{{item.hlsUrl}}" binderror="videoErrorCallback" show-center-play-btn='{{false}}' show-play-btn="{{true}}" controls='{{item.control}}' show-progress="{{false}}" bindfullscreenchange="fullListen" bindtap="clickVideo"></video>
-            <view class="videotit {{item.headShow ? 'show':''}}">{{item.displayName}}</view>
-            <view class="centerplay iconfont iconplaybtn" catchtap="firstPlay" data-index="{{idx}}" wx:if="{{item.centerPlay}}"></view>
+            <video wx:if="{{item.isVideoCreate}}" bindplay="onPlayFn" bindpause="onPauseFn" id="video-{{item.id}}" title="{{item.name}}"  object-fit="fill"  class="myVideo" data-index="{{idx}}" src="{{item.hlsUrl}}" binderror="videoErrorCallback" show-center-play-btn='{{false}}' show-play-btn="{{true}}" controls='{{item.control}}' show-progress="{{false}}" bindfullscreenchange="fullListen" bindtap="clickVideo"></video>
+            <!-- <video id="video-{{item.id}}" title="{{item.name}}"  object-fit="fill"  class="myVideo" data-index="{{idx}}" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" binderror="videoErrorCallback" show-center-play-btn='{{false}}' show-play-btn="{{true}}" controls='{{item.control}}' show-progress="{{false}}" bindfullscreenchange="fullListen" bindtap="clickVideo"></video> -->
+            <view class="videotit t-ellipsis {{item.headShow ? 'show':''}}">{{item.displayName}}</view>
+            <view class="centerplay iconfont iconplaybtn" catchtap="firstPlay" data-id="{{item.id}}" data-index="{{idx}}" wx:if="{{item.centerPlay}}"></view>
+            <!-- 视频未播放时 封面图片 -->
+            <view class="poster" wx:if="{{item.centerPlay}}"></view>
+            <!-- 还未播放时 有一个loading -->
+            <view class="loading iconLoad" wx:if="{{item.loading}}"></view>
             <view class="videoctrol {{item.footShow ? 'show':''}}">
                 <view class="left_ctrol playbtn iconfont {{item.isPlay ? 'iconzanting':'iconplay'}}" data-index="{{idx}}" catchtap="playfn"></view>
                 <view class="right_ctrol">
-                    <view class="ctrolbtn iconfont iconjiankong" data-id="{{item.id}}"  data-videotit="{{item.displayName}}" catchtap="ctrolPan"></view>
+                    <view class="ctrolbtn iconfont iconjiankong" data-id="{{item.id}}" data-play="{{item.isPlay}}" catchtap="ctrolPan"></view>
                     <view class="fullscreen iconfont iconquanping" data-index="{{idx}}" catchtap="fullfn"></view>
                 </view>
             </view> 
         </view>
+    </view>
+    <view class="no-data-ww" wx:if="{{videolist.length==0}}">
+        <no-data tips="该区域未绑定设备" imgWidth="340" imgHeight="195" imgUrl="../../assets/images/no_equip.png"></no-data>
     </view>
 </view>

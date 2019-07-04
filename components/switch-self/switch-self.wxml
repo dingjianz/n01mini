@@ -1,8 +1,5 @@
 <!--components/switch-self/switch-self.wxml-->
 <view class="{{type==1?'onoff-type1':'onoff-type2'}}">
-  <view wx:for="{{type==1?switchArr1:switchArr2}}" wx:key="{{index}}" catchtap='changeSwitchType1' data-index="{{index}}" class="btn {{item.class}} {{switchIndex==index?'active':''}}">{{item.text}}</view>
+  <view wx:for="{{type==1?switchArr1:switchArr2}}" wx:key="{{index}}" catchtap='changeSwitchType1' data-value="{{switchValue}}" data-index="{{index}}" class="btn {{item.class}} {{switchIndex==index?'active':''}}">{{item.text}}</view>
 </view>
 
-<!-- <i-modal visible="{{isVisible}}" bind:ok="handleBtnOk" bind:cancel="handleBtnCancel">
-    <view class="ques_tit">确定{{actionType}}“内遮阳开关#1”吗？</view>
-</i-modal> -->

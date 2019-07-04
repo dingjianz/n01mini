@@ -1,57 +1,75 @@
 // pages/teamList/teamList.js
-import { post, urlData, getCompany} from '../../utils/util.js'
+import { post, urlData, getCompany } from '../../utils/util.js'
+
+const app = getApp();
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        activeId:0,
-        clist:[
-            { id: 1104, companyName: '上海左岸芯慧有限公司安徽分公司研发中心', config: true},
-            { id: 1104, companyName: '上海左岸芯慧有限公司安徽分公司研发中心', config: true},
-            { id: 1104, companyName: '上海左岸芯慧有限公司安徽分公司研发中心', config: true},
-            { id: 1104, companyName: '个人设备', config: false }
-        ]
+        // iphoneX
+        isIPX: false,
+        activeId: 0,
+        clist: []
     },
-    companySet(e){//点击进入公司设置
+    companySet({ currentTarget }) {//点击进入公司设置
         wx.navigateTo({
-            url: '/pages/teamSet/teamSet?cid=' + e.currentTarget.dataset.id + '&cname=' + e.currentTarget.dataset.cname
+            url: `/pages/teamSet/teamSet?cid=${currentTarget.dataset.id}&cname=${currentTarget.dataset.cname}&ownid=${currentTarget.dataset.ownid}`
         });
     },
-    changeCompany(e){
-        const _this = this;
-        const index = e.currentTarget.dataset.index;
+    changeCompany({ currentTarget }) {
+        const index = currentTarget.dataset.index;
         const id = this.data.clist[index].id;
-        
-        if (this.data.activeId != id){
-            getCompany(id).then(function(resp){
-                if (resp.data.respCode == 0){
-                    _this.setData({
-                        activeId: id
-                    });
-                    wx.reLaunch({
-                        url: '/pages/index/index',
+        if (this.data.activeId !== id) {
+            if (id === 0) {
+                wx.setStorageSync('CID', id);
+                wx.setStorageSync('GID', {
+                    name: '全部区域',
+                    id: -1
+                });
+                this.setData({
+                    activeId: id
+                });
+                wx.reLaunch({
+                    url: '/pages/index/index',
+                });
+                return true;
+            }
+            getCompany(id)
+                .then((resp) => {
+                    if (resp.data.respCode == 0) {
+                        wx.setStorageSync('GID', {
+                            name: '全部区域',
+                            id: -1
+                        });
+                        this.setData({
+                            activeId: id
+                        });
+                        wx.reLaunch({
+                            url: '/pages/index/index',
+                        });
+                    }
+                });
+        }
+    },
+    getTotalCompany() {
+        post(urlData.iotCompanyList, {}, wx.getStorageSync('TOKEN'))
+            .then((resp) => {
+                if (resp.data.respCode === 0) {
+                    this.setData({
+                        clist: resp.data.obj.list
                     });
                 }
             });
-        }
-    },
-    getTotalCompany(){
-        let _this = this;
-        post(urlData.iotCompanyList,{}, wx.getStorageSync('TOKEN')).then(function (resp) {
-            if (resp.data.respCode === 0) {
-                _this.setData({
-                    clist: resp.data.obj.list
-                });
-            }
-        });
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        
+        this.setData({
+            isIPX: app.globalData.isIx
+        })
     },
 
     /**
@@ -69,7 +87,7 @@ Page({
         this.setData({
             activeId: wx.getStorageSync('CID')
         });
-        console.log(getCurrentPages());
+        // console.log(getCurrentPages());
     },
 
     /**

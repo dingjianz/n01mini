@@ -48,9 +48,12 @@
 }
 .f-button.change-role-btn{
   background-color: #102957;
-  color: #25538E;
+  color: #2C64AB;
 }
 .f-button.delete-role-btn{
   background-color: #0E244C;
-  color: #6F1E1E;
+  color: #8C1F1F;
+}
+.modal-c{
+  color: #4974B6;
 }

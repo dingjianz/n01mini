@@ -1,37 +1,85 @@
 // pages/deviceSelectType/deviceSelectType.js
+import { post, urlData } from '../../utils/util.js'
+
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    // iphoneX
+    isIPX: false,
     selectedIndex: 0,
-    typeList: [{
-      id: 0,
-      typeName: '内遮阳'
-    },{
-      id: 1,
-      typeName: '鼓风机'
-    },{
-      id: 2,
-      typeName: '数值控制器'
-    },{
-      id: 3,
-      typeName: '水泵'
-    },{
-      id: 4,
-      typeName: '搅拌机'
-    }]
+    typeList: [],
+    categoryId: '',
+    categoryName: '',
+    deviceId: ''
   },
-  selectIndex(e) {
+  selectIndex({ currentTarget }) {
     this.setData({
-      selectedIndex: e.target.dataset.selectedindex
+      categoryId: currentTarget.dataset.categoryid
+    })
+    post(urlData.iotDeviceEditContCate, {
+      companyId: wx.getStorageSync('CID'),
+      controllerCategoryId: this.data.categoryId,
+      deviceId:this.data.deviceId
+    }, wx.getStorageSync('TOKEN')).then(response => {
+      let res = response.data;
+      if (res.respCode === 0) {
+        this.setData({
+          selectedIndex: currentTarget.dataset.selectedindex
+        })
+        let pages = getCurrentPages();
+        console.log(JSON.stringify(pages))
+        // 改了之后 需要重新刷新首页那块的数据
+        
+        let prevPage = pages[pages.length - 2];
+        prevPage.setData({
+          categoryName: currentTarget.dataset.categoryname,
+          controllerCategoryId: currentTarget.dataset.categoryid
+        })
+        let indexPage;  //首页
+        pages.forEach((item,index)=>{
+          if(item.route=='pages/index/index'){
+            indexPage = item;
+            return false;
+          }
+        })
+        if(indexPage){
+          indexPage.getTabList()
+        }
+        wx.navigateBack()
+      }
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      deviceId: options.deviceId,
+      categoryId: options.controllerCategoryId,
+      isIPX: app.globalData.isIx
+    })
+    post(urlData.iotControllerCateList, {
+      companyId: wx.getStorageSync('CID')
+    }, wx.getStorageSync('TOKEN')).then(response => {
+      let res = response.data;
+      if (res.respCode === 0) {
+        this.setData({
+          typeList: res.obj
+        })
+        this.data.typeList.forEach((item, index) => {
+          if (item.id === Number(this.data.categoryId)) {
+            this.setData({
+              selectedIndex: index
+            })
+            return false;
+          }
+        })
+      }
+    })
 
   },
 
@@ -39,7 +87,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**

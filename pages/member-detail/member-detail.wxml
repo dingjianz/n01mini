@@ -10,10 +10,10 @@
   <text class="panel-suffix">{{role}}</text>
 </view>
 
-<button class="f-button change-role-btn" wx:if="{{!self}}" bind:tap="navigateTo" data-url="../member-role/member-role?userId={{userId}}&roleName={{role}}">
+<button class="f-button change-role-btn" wx:if="{{!self && power.editRole}}" bind:tap="navigateTo" data-url="../member-role/member-role?userId={{userId}}&roleName={{role}}">
   更换角色
 </button>
-<button class="f-button delete-role-btn"  wx:if="{{!self}}" bind:tap="openModal" data-modal="delRoleModal.visible">
+<button class="f-button delete-role-btn"  wx:if="{{!self && power.deleRole}}" bind:tap="openModal" data-modal="delRoleModal.visible">
   删除
 </button>
 

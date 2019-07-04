@@ -1,6 +1,9 @@
 {
+  "navigationBarTitleText": "",
   "usingComponents": {
     "iconfont": "../../components/iconfont/iconfont",
-    "ec-canvas": "../../components/ec-canvas/ec-canvas"
+    "ec-canvas": "../../components/ec-canvas/ec-canvas",
+    "no-data": "../../components/no-data/no-data",
+    "lsxChart": "../../components/lsx-chart/lsx-chart"
   }
 }

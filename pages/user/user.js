@@ -30,7 +30,8 @@ Page({
         wx.showToast({
             title: '请添加设备后再创建团队',
             icon: 'none',
-            duration: 3000
+            duration: 3000,
+            mask: true
         })
     },
     checkOwnedTeam() {

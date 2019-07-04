@@ -1,8 +1,10 @@
 /* pages/videoArea/videoArea.wxss */
 .container {
-  padding: 31rpx 20rpx 0 20rpx;
+  padding: 30rpx 20rpx;
 }
-
+.container.isIx{
+  padding: 30rpx 20rpx 98rpx;
+}
 .type-wrapper {
   width: 710rpx;
   box-sizing: border-box;

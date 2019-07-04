@@ -1,32 +1,81 @@
-// pages/deviceSelectType/deviceSelectType.js
+import { post, urlData } from '../../utils/util.js'
+const app =  getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isIPX: false,
     selectedIndex: 0,
-    typeList: [{
-      id: 0,
-      typeName: '生产示范基地'
-    },{
-      id: 1,
-      typeName: '云智能检测区'
-    },{
-      id: 2,
-      typeName: '默认区域'
-    }]
+    groupList: [],
+    deviceId: '',
+    groupId: '',
+    isIx:app.globalData.isIx
   },
-  selectIndex(e) {
-    this.setData({
-      selectedIndex: e.target.dataset.selectedindex
+  selectIndex({ currentTarget }) {
+    if(this.data.selectedIndex == currentTarget.dataset.selectedindex){
+      return false;
+    }
+    post(urlData.iotDeviceEditGroup, {
+      companyId: wx.getStorageSync('CID'),
+      deviceGroupId: currentTarget.dataset.devicegroupid,
+      deviceId: this.data.deviceId
+    }, wx.getStorageSync('TOKEN')).then(response => {
+      let res = response.data
+      if (res.respCode === 0) {
+        this.setData({
+          selectedIndex: currentTarget.dataset.selectedindex
+        })
+        let pages = getCurrentPages();
+        let prevPage = pages[pages.length - 2];
+        prevPage.setData({
+          groupName: currentTarget.dataset.groupname,
+          groupId: currentTarget.dataset.devicegroupid
+        })
+        let indexPage;  //首页
+        pages.forEach((item,index)=>{
+          if(item.route=='pages/index/index'){
+            indexPage = item;
+            return false;
+          }
+        })
+        if(indexPage){
+          indexPage.getTabList()
+        }
+        wx.navigateBack()
+      }
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      deviceId: options.deviceId,
+      groupId: Number(options.groupId),
+      isIPX: app.globalData.isIx
+    })
+    post(urlData.iotDeviceGroupListCount, {
+      companyId: wx.getStorageSync('CID')
+    }, wx.getStorageSync('TOKEN')).then(response => {
+      let res = response.data
+      console.log(JSON.stringify(res))
+      if (res.respCode === 0) {
+        this.setData({
+          groupList: res.obj
+        })
+        console.log(JSON.stringify(this.data.groupList))
+        this.data.groupList.forEach((item, index) => {
+          if (item.groupVO.id === this.data.groupId) {
+            this.setData({
+              selectedIndex: index
+            })
+            return false;
+          }
+        })
+      }
+    })
   },
 
   /**
@@ -54,7 +103,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**

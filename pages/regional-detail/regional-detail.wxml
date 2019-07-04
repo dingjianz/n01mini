@@ -2,19 +2,21 @@
 <!-- 区域详情
   该模块包含 添加设备、区域设备的详情（可以修改区域名称）
   默认详情页面与默认区域样式相同无法对设备进行勾选和区域名称修改 -->
-<view class="regional-name-cell" wx:if="{{!isAddDevice}}" bind:tap="openModal" data-modal="regionalNameModal">
+<!-- 区域名称 -->
+<view class="regional-name-cell" wx:if="{{!isAddDevice}}" bind:tap="editRegional" data-modal="regionalNameModal">
   <text class="cell-title">区域名称</text>
   <text class="cell-name t-ellipsis">{{regionalName}}</text>
-  <text class="cell-suffix iconfont iconjiantou"></text>
+  <text class="cell-suffix iconfont iconjiantou" wx:if="{{power.editRegionalName && regionalId !== 0}}"></text>
 </view>
+<!-- 设备列表 -->
 <!-- devicesFirst.length && devicesSecond.length -->
-<view wx:if="{{devicesFirst.length || devicesSecond.length}}">
+<view class="content-container clearfix {{isAddDevice ? 'add-device-tabs' : ''}}" wx:if="{{devicesFirst.length || devicesSecond.length}}">
   <view class="device-num-tips">
     已添加
     <text class="device-num">{{devicesNum}}</text>
     个设备
   </view>
-  <view class="device-tabs {{isAddDevice ? 'add-device-tabs' : ''}} {{isAdmin ? '' : 'noAdmin'}}">
+  <view class="device-tabs {{(power.deleteRegional && regionalId !== 0) ? '' : 'noAdmin'}}">
     <view class="tabs-head">
       <button class="tab-btn {{switchDeviceTabs ? 'active' : ''}} {{(devicesFirst.length && devicesSecond.length) ? 'line': ''}}" data-target="devicesFirst" bind:tap="switchTabs" data-tabs="1" wx:if="{{devicesFirst.length}}">
         监测&控制设备
@@ -23,8 +25,8 @@
         摄像头
       </button>
     </view>
-    <scroll-view id="devicesFirst" class="tabs-content" scroll-y scroll-with-animation wx:if="{{switchDeviceTabs}}">
-      <checkbox-group class="devices">
+    <scroll-view id="devicesFirst" class="tabs-content {{isIPX ? 'IPX' : ''}}" scroll-y scroll-with-animation wx:if="{{switchDeviceTabs}}">
+      <checkbox-group class="devices {{isIos ? 'ios' : 'android'}}">
         <label bind:tap="handleCheckbox" data-group="devicesFirst" data-id="{{item.id}}" data-index="{{index}}" class="device-cell {{index === devicesFirst.length - 1 ? 'last' : ''}}" wx:for="{{devicesFirst}}" wx:key="{{index}}">
           <view class="device-icon">
             <image class="icon" src="{{item.icon}}" />
@@ -33,46 +35,58 @@
             <text class="device-name">{{item.name}}</text>
             <text class="device-status">{{item.status}}</text>
           </view>
-          <checkbox wx:if="{{isAdmin && regionalId !== 0}}" disabled class="device-check {{item.otherRegional ? 'other-check' : ''}}" value="{{item.checkedValue}}" checked="{{item.checked}}" />
+          <!-- wx:if="{{isAdmin && regionalId !== 0}}" -->
+          <view class="checkbox-wrap">
+            <checkbox wx:if="{{power.editDeviceRegional && regionalId !== 0}}" class="device-check {{item.otherRegional ? 'other-check' : ''}}" value="{{item.checkedValue}}" disabled="{{true}}" checked="{{item.checked}}" />
+          </view>
         </label>
       </checkbox-group>
     </scroll-view>
-    <scroll-view id="devicesSecond" class="tabs-content" scroll-y scroll-with-animation wx:if="{{!switchDeviceTabs}}">
-      <checkbox-group class="devices">
+    <scroll-view id="devicesSecond" class="tabs-content {{isIPX ? 'IPX' : ''}}" scroll-y scroll-with-animation wx:if="{{!switchDeviceTabs}}">
+      <checkbox-group class="devices {{isIos ? 'ios' : 'android'}}">
         <label bind:tap="handleCheckbox" data-group="devicesSecond" data-id="{{item.id}}" data-index="{{index}}" class="device-cell {{index === devicesSecond.length - 1 ? 'last' : ''}}" wx:for="{{devicesSecond}}" wx:key="{{index}}">
           <view class="device-icon">
             <image class="icon" src="{{item.icon}}" />
           </view>
           <view class="device-content">
-            <text class="device-name">{{item.name}}</text>
-            <text class="device-status">{{item.status}}</text>
+            <text class="device-name t-ellipsis">{{item.name}}</text>
+            <text class="device-status t-ellipsis">{{item.status}}</text>
           </view>
-          <checkbox wx:if="{{isAdmin && regionalId !== 0}}" disabled class="device-check {{item.otherRegional ? 'other-check' : ''}}" value="{{item.checkedValue}}" checked="{{item.checked}}" />
+          <view class="checkbox-wrap">
+            <checkbox wx:if="{{power.editDeviceRegional && regionalId !== 0}}" class="device-check {{item.otherRegional ? 'other-check' : ''}}" value="{{item.checkedValue}}" disabled="{{true}}" checked="{{item.checked}}" />
+          </view>
         </label>
       </checkbox-group>
     </scroll-view>
   </view>
-  <button class="regional-btn {{isAddDevice ? 'complete-btn' : 'del-btn'}}" wx:if="{{isAdmin && (regionalId !== 0)}}" bind:tap="handleRegion" data-modal="deleteRegionalModal">
+  <!-- 按钮 -->
+  <button class="regional-btn {{isAddDevice ? 'complete-btn' : 'del-btn'}}" wx:if="{{power.deleteRegional && (regionalId !== 0)}}" bind:tap="handleRegion" data-modal="deleteRegionalModal" style="bottom: {{isIPX ? ' 68rpx' : '0'}};">
     {{isAddDevice ? '完成' : '删除区域'}}
   </button>
 </view>
-<view wx:else class="no-device {{isAddDevice ? 'add' : ''}}">
+<!-- 没有设备 -->
+<view wx:else class="no-device {{isAddDevice ? 'add' : ''}} {{isIPX ? 'IPX' : ''}} {{(power.deleteRegional && regionalId !== 0) ? 'showBtn': ''}}">
   <view class="no-device-content">
-    <image src="../../assets/images/no-devices.png" />
-    <text class="no-device-tips">{{isAddDevice ? '未绑定任何设备' : '该区域未绑定设备'}}</text>
+    <image src="../../assets/images/no_equip.png" />
+    <text class="no-device-tips">{{isAddDevice ? '没有可添加的设备' : '该区域未绑定设备'}}</text>
   </view>
+  <!-- 按钮 -->
+  <button class="regional-btn {{isAddDevice ? 'complete-btn' : 'del-btn'}}" wx:if="{{power.deleteRegional && !isAddDevice && regionalId !== 0}}" bind:tap="handleRegion" data-modal="deleteRegionalModal" style="bottom: {{isIPX ? ' 68rpx' : '0'}};">
+    {{isAddDevice ? '完成' : '删除区域'}}
+  </button>
 </view>
+<!-- 模态框 -->
 <!-- 修改区域名称模态框 -->
-<i-modal visible="{{regionalNameModal}}" title="修改区域名称" actions="{{actions}}" bind:click="handleRegionalNameModal">
+<i-modal catchtouchmove visible="{{regionalNameModal}}" title="修改区域名称" actions="{{actions}}" bind:click="handleRegionalNameModal">
   <label class="f-input-label">
-    <input class="f-input" placeholder="请输入区域名称" maxlength="20" placeholder-class="f-input-placeholder" value="{{editRegionalName}}" bindblur="changeEditRegionalName" />
+    <input cursor-spacing="160" focus="{{regionalNameModal}}" class="f-input" placeholder="请输入区域名称" placeholder-class="f-input-placeholder" value="{{editRegionalName}}" bindinput="changeEditRegionalName" />
   </label>
 </i-modal>
 <!-- 移动设备模态框 -->
-<i-modal data-index="{{checkIndex}}" data-group="{{checkGroup}}" visible="{{moveDeviceModal}}" title="" actions="{{actions}}" bind:click="handleMoveDeviceModal">
-  <view class="modal-c">该设备已关联到{{checkRegionalName}}， 确定将该设备移动到当前区域吗？</view>
+<i-modal catchtouchmove data-index="{{checkIndex}}" data-group="{{checkGroup}}" visible="{{moveDeviceModal}}" title="" actions="{{actions}}" bind:click="handleMoveDeviceModal">
+  <view class="modal-c">该设备已关联到{{checkRegionalName}}，确定将该设备移动到当前区域吗？</view>
 </i-modal>
 <!-- 删除区域模态框 -->
-<i-modal visible="{{deleteRegionalModal}}" title="确定删除该区域？" actions="{{deleteActions}}" bind:click="handleDeleteRegionalModal">
+<i-modal catchtouchmove visible="{{deleteRegionalModal}}" title="确定删除该区域？" actions="{{deleteActions}}" bind:click="handleDeleteRegionalModal">
   <view class="dele-modal-c">删除后，该区域的所有设备都将转移至 “默认区域“下。</view>
 </i-modal>

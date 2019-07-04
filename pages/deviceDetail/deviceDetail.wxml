@@ -1,43 +1,54 @@
 <wxs module="filter" src="../../utils/detail.wxs"></wxs>
-<view class="container">
-  <view class="device-status {{ zhsbFlag ? 'device-status-height' : ''}}">
-    <view class="status-top" wx:if="{{ !zhsbFlag }}">
-      <view class="device-positionDes">生产示范基地</view>
-      <icon class="iconfont iconshezhi" bindtap="turnToDeviceInstall"></icon>
+<view class="container {{isIPX ? 'IPX' : ''}}">
+  <view class="device-status">
+    <view class="status-top">
+      <view class="device-positionDes">{{deviceGroupVO.groupName  || '默认区域' }}</view>
+      <icon class="iconfont iconshezhi" wx:if="{{power_set}}" bindtap="turnToDeviceInstall"></icon>
     </view>
-    <view class="status-middle {{filter.returnstatusName('暂停')}}">
-      暂停
+    <!-- 开关型 -->
+    <block wx:if="{{numOrTextFlag && isOnline }}">
+      <view class="status-middle {{filter.returnstatusName(switchText)}}">
+        {{ switchText }}
+      </view>
+      <!-- <view class="status-bottom">{{propertyName || '-'}}</view> -->
+      <view class="status-bottom">{{deviceVO.clientDisplayName || '-'}}</view>
+
+    </block>
+    <!-- 数字型 -->
+    <view class="car-wrapper" wx:if="{{!numOrTextFlag && isOnline }}">
+      <iconfont wx:if="{{propertyValue || propertyValue===0}}" dataNum="{{propertyValue}}" color="#15FC71" fontSize="60"></iconfont>
+      <!-- <view class="car-des">{{propertyName || '-'}}</view> -->
+      <view class="car-des car-des-numType">{{deviceVO.clientDisplayName || '-'}}</view>
     </view>
-    <view class="status-bottom">内遮阳一号开关</view>
-    <!-- <view class="car-wrapper">
-      <iconfont dataNum="39.9" color="#15FC71" fontSize="60"></iconfont>
-      <view class="car-des">温度控制器一号</view>
-    </view> -->
+    <!-- 离线 -->
+    <view class="car-wrapper" wx:if="{{!isOnline }}">
+      <text style="font-size:54rpx;color:#15FC71;font-weight:400;">离线</text>
+      <!-- <view class="car-des">{{propertyName || '-'}}</view> -->
+      <view class="car-des">{{deviceVO.clientDisplayName || '-'}}</view>
+    </view>
   </view>
+
+  
   <view class="control-log">
     <view class="control-title">操作记录</view>
     <view class="divde-border"></view>
 
-    <view class="control-detail">
-      <!-- 时间轴 -->
-      <view class="border-left">
-        <block wx:for="{{axis}}" wx:key="{{index}}">
-          <view class="cell-circle"></view>
-          <view class="border-item" hidden="{{index === (axis.length - 1) ? 'lineHidden' : ''}}"></view>
-        </block>
-      </view>
+    <view class="control-detail" wx:if="{{isHasHistory}}">
       <!-- 具体记录内容 -->
-      <view class="log-detail">
-        <block wx:for="{{axis}}" wx:key="{{index}}">
-          <view class="log-wrapper">
-            <view class="log-time" decode>{{item.date}}<text decode> &nbsp; </text>
-              {{item.time}}</view>
+      <view class="log-detail" >
+        <block wx:for="{{logList}}" wx:key="{{index}}">
+          <view class="log-wrapper {{index === (logList.length - 1) ? 'lineHidden' : ''}}">
+            <view class="log-time" decode>{{item.operTime}}</view>
             <view class="log-status">
-              <text class="z-open" decode>设置为{{item.name}}&nbsp;&nbsp;</text>({{item.event}})
+              <text class="z-open" decode>设置为{{item.stateValue}}&nbsp;&nbsp;</text>({{item.phone}})
             </view>
           </view>
         </block>
       </view>
+    </view>
+
+    <view class="no-data-ww" wx:if="{{!isHasHistory}}">
+      <no-data tips="无操作记录" imgUrl="../../assets/images/no_record.png"></no-data>
     </view>
     <i-load-more i-class="i-load" wx:if="{{ loadFlag }}" loading="{{ loadFlag }}" />
   </view>

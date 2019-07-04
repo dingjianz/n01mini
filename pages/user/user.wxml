@@ -1,46 +1,48 @@
 <!-- pages/user/user.wxml -->
 <wxs module="filter" src="../../utils/filter.wxs"></wxs>
-<view class="user-info-container">
-    <view class="user-info">
-        <view class="user-icon">
-            <image class="user-pic" src="../../assets/images/head-icon.png" />
+<view class="content-container">
+    <view class="user-info-container">
+        <view class="user-info">
+            <view class="user-icon">
+                <image class="user-pic" src="../../assets/images/head-icon.png" />
+            </view>
+            <text class="user-phone">{{filter.numberHide(phone)}}</text>
         </view>
-        <text class="user-phone">{{filter.numberHide(phone)}}</text>
-    </view>
-    <!-- <button class="user-setting-btn">
+        <!-- <button class="user-setting-btn">
         <view class="iconfont iconshezhi"></view>
         <text class="t-setting">设置</text>
     </button> -->
-    <navigator class="user-setting-btn" url="/pages/userSet/userSet">
-        <view class="iconfont iconshezhi"></view>
-        <text class="t-setting">设置</text>
-    </navigator>
+        <navigator class="user-setting-btn" url="/pages/userSet/userSet">
+            <view class="iconfont iconshezhi"></view>
+            <text class="t-setting">设置</text>
+        </navigator>
+    </view>
+    <i-cell-group wx:if="{{ownedTeam}}" i-class="custom-cell-group clearfix">
+        <i-cell i-class="custom-cell" bind:tap="navigateTo" data-url="../membership/membership">
+            <text class="cell-title">成员管理</text>
+            <view slot="icon" class="prefix-icon iconfont iconchengyuanguanli"></view>
+            <view slot="footer" class="cell-footer-wrap">
+                <text class="cell-desc">邀请他人一起管理设备</text>
+                <view class="suffix-icon iconfont iconjiantou"></view>
+            </view>
+        </i-cell>
+        <i-cell i-class="custom-cell" bind:tap="navigateTo" data-url="../regional-management/regional-management">
+            <text class="cell-title">区域管理</text>
+            <view slot="icon" class="prefix-icon iconfont icondituicon"></view>
+            <view slot="footer" class="cell-footer-wrap">
+                <text class="cell-desc">将设备分区域进行管理</text>
+                <view class="suffix-icon iconfont iconjiantou"></view>
+            </view>
+        </i-cell>
+    </i-cell-group>
+    <i-cell-group wx:else i-class="custom-cell-group clearfix">
+        <!-- 该入口页功能暂时只做提示 -->
+        <i-cell i-class="custom-cell" bind:tap="goCreatedTeam" is-link="{{false}}" url="../create-team/create-team">
+            <text class="cell-title">邀请他人一起管理设备</text>
+            <view slot="footer" class="cell-footer-wrap">
+                <text class="cell-desc">创建团队</text>
+                <view class="suffix-icon iconfont iconjiantou"></view>
+            </view>
+        </i-cell>
+    </i-cell-group>
 </view>
-<i-cell-group wx:if="{{ownedTeam}}"  i-class="custom-cell-group clearfix">
-    <i-cell i-class="custom-cell" bind:tap="navigateTo" data-url="../membership/membership">
-        <text class="cell-title">成员管理</text>
-        <view slot="icon" class="prefix-icon iconfont iconchengyuanguanli"></view>
-        <view slot="footer" class="cell-footer-wrap">
-            <text class="cell-desc">邀请他人一起管理设备</text>
-            <view class="suffix-icon iconfont iconjiantou"></view>
-        </view>
-    </i-cell>
-    <i-cell i-class="custom-cell" bind:tap="navigateTo" data-url="../regional-management/regional-management">
-        <text class="cell-title">区域管理</text>
-        <view slot="icon" class="prefix-icon iconfont icondituicon"></view>
-        <view slot="footer" class="cell-footer-wrap">
-            <text class="cell-desc">将设备按区域进行管理</text>
-            <view class="suffix-icon iconfont iconjiantou"></view>
-        </view>
-    </i-cell>
-</i-cell-group>
-<i-cell-group wx:else i-class="custom-cell-group clearfix">
-    <!-- 该入口页功能暂时只做提示 -->
-    <i-cell i-class="custom-cell" bind:tap="goCreatedTeam" is-link="{{false}}" url="../create-team/create-team">
-        <text class="cell-title">邀请他人一起管理设备</text>
-        <view slot="footer" class="cell-footer-wrap">
-            <text class="cell-desc">创建团队</text>
-            <view class="suffix-icon iconfont iconjiantou"></view>
-        </view>
-    </i-cell>
-</i-cell-group>

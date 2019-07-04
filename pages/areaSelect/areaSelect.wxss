@@ -1,7 +1,9 @@
 .container {
-  padding: 31rpx 20rpx 0 20rpx;
+  padding: 30rpx 20rpx;
 }
-
+.container.isIx{
+  padding: 30rpx 20rpx 98rpx;
+}
 .type-wrapper {
   width: 710rpx;
   box-sizing: border-box;
@@ -9,6 +11,7 @@
   border-radius: 10rpx;
 }
 .type-list {
+  width: 100%;
   height: 110rpx;
   color: #15E9FC;
   font-size: 30rpx;
@@ -25,7 +28,11 @@
   border-bottom: 1rpx solid #001434;
 }
 .type-list .type-name {
+  width: 90%;
   color:#8BABE7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .type-list .type-name.active {
   color: #15E9FC;

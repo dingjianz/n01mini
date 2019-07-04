@@ -1,18 +1,27 @@
 // pages/membership/membership.js
-import { post, urlData, throttle } from '../../utils/util.js'
+import { post, urlData, throttle, ishasPower } from '../../utils/util.js'
 
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ownedAdmin: false,
-    memberList: []
+    // iphoneX
+    isIPX: false,
+    memberList: [],
+    // 权限
+    power: {
+      // 拥有添加成员权限
+      ownedAddMember: false,
+      // 查看详情全选
+      canDetaile: false
+    }
   },
 
-  navigateTo: throttle(function({ currentTarget }) {
-    if (this.data.ownedAdmin && (currentTarget.dataset.ownFlag !== 1)) {
+  navigateTo: throttle(function ({ currentTarget }) {
+    if (currentTarget.dataset.ownFlag !== 1 && this.data.power.canDetaile) {
       wx.navigateTo({
         url: currentTarget.dataset.url
       })
@@ -36,17 +45,21 @@ Page({
       })
   },
 
-  getUserInfo() {
-    let userInfo = wx.getStorageSync('COMPANYINFO').userCompanyVO;
-    this.setData({
-      ownedAdmin: true
-    })
-  },
+  // getUserPower() {
+  //   let power = ['iot:companyuser:add']
+
+  //   this.setData({
+  //     ownedAdmin: true
+  //   })
+  // },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      isIPX: app.globalData.isIx
+    })
   },
 
   /**
@@ -63,7 +76,17 @@ Page({
       title: '加载中',
       mask: true
     });
-    this.getUserInfo();
+
+    ishasPower(['iot:companyuser:add', 'iot:companyuser:editrole', 'iot:companyuser:del'], (p) => {
+      this.setData({
+        power: {
+          ownedAddMember: p[0],
+          canDetaile: p[1] || p[2]
+        }
+      })
+    })
+
+
     this.getMemberList();
   },
 
@@ -71,7 +94,6 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**

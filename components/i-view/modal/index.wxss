@@ -54,10 +54,16 @@
 }
 .i-modal-title {
   margin: 0;
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
   font-size: 32rpx;
   line-height: 1;
   color: #7696D3;
   text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .i-modal-body {
   padding: 26rpx 49rpx 0;
@@ -117,7 +123,7 @@
     color: #395787 !important;
 }
 .i-modal-btn-ok {
-  color: #456EAD !important;
+  color: #5689D7 !important;
 }
 .i-modal-btn-loading {
   display: inline-block;

@@ -1,6 +1,8 @@
 /* pages/membership/membership.wxss */
 @import "../../assets/default-skin/cell.wxss";
-
+.content-container{
+    padding-bottom: 30rpx;
+}
 .custom-cell-group{
     margin: 30rpx auto 0;
     padding: 0;
@@ -56,5 +58,5 @@
 }
 .f-button .iconfont{
     font-size: 32rpx;
-    vertical-align: middle
+    /* vertical-align: middle */
 }

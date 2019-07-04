@@ -1,17 +1,17 @@
-<!--pages/teamSet/teamSet.wxml-->
+<!-- pages/teamSet/teamSet.wxml -->
 <view>
     <i-cell-group i-class="custom-cell-group clearfix mb140">
         <i-cell i-class="custom-cell" bind:click="openModal" data-modal="editModal">
             <view class="cell-title">团队名称</view>
             <view slot="footer" class="cell-footer-wrap">
-                <view class="cname">{{originTit}}</view>
+                <view class="cname t-ellipsis">{{originTit}}</view>
                 <view wx:if="{{editRight}}" class="suffix-icon iconfont iconjiantou"></view>
             </view>
         </i-cell>
     </i-cell-group>
     <block wx:if="{{false}}">
         <i-cell-group i-class="custom-cell-group clearfix">
-            <i-cell i-class="custom-cell"  is-link url="/pages/handOver/handOver">
+            <i-cell i-class="custom-cell" is-link url="/pages/handOver/handOver">
                 <button class="f-button handover">移交团队</button>
             </i-cell>
         </i-cell-group>
@@ -19,25 +19,25 @@
             <i-cell i-class="custom-cell" bind:click="openModal" data-modal="delModal">
                 <button class="f-button delete">删除团队</button>
             </i-cell>
-        </i-cell-group>        
+        </i-cell-group>
     </block>
     <i-cell-group i-class="custom-cell-group clearfix" wx:if="{{viewable}}">
-        <i-cell i-class="custom-cell" bind:click="openModal" data-modal="exitModal">
+        <i-cell i-class="custom-cell" bindtap="openModal" data-modal="exitModal">
             <button class="f-button exit">
-            <text class="iconfont icontuichu"></text>退出团队
+                <text class="iconfont icontuichu"></text>
+                退出团队
             </button>
         </i-cell>
     </i-cell-group>
 </view>
 <i-modal title="修改团队名称" visible="{{editModal}}" actions="{{ actions }}" bind:click="handleClick" data-modal="editModal">
     <label class="f-input-label">
-        <input class="f-input" placeholder="请输入团队名称" bindinput="inputedit" value="{{companyTit}}" data-txt="companyTit" placeholder-class="f-input-placeholder" />
+        <input cursor-spacing="160" class="f-input" focus="{{editModal}}" placeholder="请输入团队名称" bindinput="inputedit" value="{{companyTit}}" data-txt="companyTit" placeholder-class="f-input-placeholder" />
     </label>
 </i-modal>
-<i-modal title="确定退出团队？" visible="{{exitModal}}" actions="{{ actions }}" bind:click="handleClick" data-modal="exitModal">
-    <view class="modaltip">退出后，该团队下的所有设备都将转移至“个人设备”下。</view>
+<i-modal title="确定退出团队？" visible="{{exitModal}}" actions="{{ actions }}" bind:click="editTeamHandle" data-modal="exitModal">
+    <view class="modaltip">退出后，将失去该团队的所有权限。</view>
 </i-modal>
 <i-modal title="确定删除团队？" visible="{{delModal}}" actions="{{ actions }}" bind:click="handleClick" data-modal="delModal">
-    <view class="modaltip">删除后，将失去该团队的所有权限。</view>
+    <view class="modaltip">删除后，该团队的所有设备都将转移至“个人设备”下。</view>
 </i-modal>
-

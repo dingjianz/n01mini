@@ -3,11 +3,13 @@
   color: #385076;
   font-size: 24rpx;
 }
+
 .install-wrapper {
   background-color: #102957;
   width: 100%;
   border-radius: 10rpx;
 }
+
 .device-wrapper {
   height: 110rpx;
   display: flex;
@@ -24,15 +26,31 @@
 }
 
 .device-wrapper .device-data {
+  width: 80%;
   color: #456ead;
   font-size: 26rpx;
   line-height: 37rpx;
-  margin-top: -15rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.device-wrapper .device-data>.name {
+  text-align: right;
+  /* width: calc(100% - 40rpx); */
+  max-width: 400rpx;
+  padding-right: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
 }
 
 .device-wrapper .device-data .u-jiantou {
+  text-align: right;
+  width: 40rpx;
   font-size: 26rpx;
-  padding: 0 29rpx 0 10rpx;
+  padding-right: 10rpx;
   color: #354e75;
 }
 
@@ -45,14 +63,21 @@
 .input-wrapper {
   width: 400rpx;
   height: 80rpx;
-  border:1rpx solid rgba(41,65,102,1);
+  border: 2rpx solid rgba(41, 65, 102, 1);
   box-sizing: border-box;
   display: flex;
   display: -webkit-flex;
   align-items: center;
   margin-left: 24rpx;
-  padding-left: 15rpx;
+  padding: 0 20rpx;
+  border-radius: 8rpx;
 }
+
 .u-input {
-  color:#15E9FC;
+  color: #15E9FC;
+  width: 100%;
+}
+
+.u-input .f-input-placeholder {
+  color: #395787;
 }

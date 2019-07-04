@@ -1,0 +1,11 @@
+<view class="wind-log">
+  <!-- 具体记录内容 -->
+  <block wx:for="{{axis}}" wx:key="{{index}}">
+    <view class="log-wrapper {{index === (axis.length - 1) ? 'lineHidden' : ''}}">
+      <view class="log-time">{{item.timestamp}}</view>
+      <view class="log-status">
+        {{item.value}}
+      </view>
+    </view>
+  </block>
+</view>

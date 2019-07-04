@@ -1,0 +1,11 @@
+/* components/no-data.wxss */
+.no-data-wrap>.tips{
+  color: #3F639C;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+  text-align: center;
+}
+.no-data-wrap>.images{
+  display: block;
+  margin: 0 auto;
+}

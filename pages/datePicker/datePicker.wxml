@@ -3,16 +3,12 @@
 <view class="container">
   <view class="datebox">
     <!-- data-index字段取值分别为1或2，用于区分是开始还是结束日期选择器 -->
-    <picker class="dateSt {{active==1 ? 'active':''}} {{dateSt ? 'hasval':''}}" data-index="1" mode="date"
-      value="{{dateSt}}" start="{{minDate}}" bindtap="getDate" end="{{filter.datelimit(dateOv,today)}}"
-      bindchange="bindDateChange" bindcancel="cancelPick">
-      <view class="weui-input">{{dateSt}}</view>
+    <picker class="dateSt {{active==1 ? 'active':''}} {{filter.classExchange(dateSt,'开始时间','hasval')}}" data-index="1" mode="date" value="{{dateSt}}" start="{{minDate}}" bindtap="getDate" end="{{filter.datelimit(dateOv,today)}}" bindchange="bindDateChange" bindcancel="cancelPick">
+      <view class="{{dateSt === '开始时间' ? 'weui-input' : 'weui-input2'}}">{{dateSt}}</view>
     </picker>
     <view class="connector">至</view>
-    <picker class="dateOv {{active==2 ? 'active':''}} {{filter.classExchange(dateOv,'结束日期','hasval')}}" data-index="2"
-      mode="date" value="{{dateOv}}" start="{{dateSt}}" bindtap="getDate" end="{{maxDate}}" bindchange="bindDateChange"
-      bindcancel="cancelPick">
-      <view class="weui-input">{{dateOv}}</view>
+    <picker class="dateOv {{active==2 ? 'active':''}} {{filter.classExchange(dateOv,'结束时间','hasval')}}" data-index="2" mode="date" value="{{dateOv}}" start="{{dateSt}}" bindtap="getDate" end="{{maxDate}}" bindchange="bindDateChange" bindcancel="cancelPick">
+      <view class="{{dateOv === '结束时间' ? 'weui-input' : 'weui-input2'}}">{{dateOv}}</view>
     </picker>
   </view>
   <view class="submit" bindtap="backAndSubmit">确定</view>

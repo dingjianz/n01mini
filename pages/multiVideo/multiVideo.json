@@ -1,4 +1,7 @@
 {
-    "usingComponents": {},
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "no-data": "../../components/no-data/no-data"
+    },
     "navigationBarTitleText": "多窗口监控"
 }

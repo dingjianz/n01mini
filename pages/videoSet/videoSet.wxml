@@ -1,24 +1,25 @@
 <!--pages/videoSet/videoSet.wxml-->
 <view>
-    <i-cell-group i-class="custom-cell-group clearfix mb140">
-        <i-cell i-class="custom-cell" bind:click="openModal" data-modal="editModal">
-            <view class="cell-title">设备名称</view>
-            <view slot="footer" class="cell-footer-wrap">
-                <view class="cname">{{originTit}}</view>
-                <view wx:if="{{editRight}}" class="suffix-icon iconfont iconjiantou"></view>
-            </view>
-        </i-cell>
-        <i-cell i-class="custom-cell" is-link url="/pages/videoArea/videoArea?deviceId={{deviceId}}">
-            <view class="cell-title">所属区域</view>
-            <view slot="footer" class="cell-footer-wrap">
-                <view class="cname">七号大棚</view>
-                <view class="suffix-icon iconfont iconjiantou"></view>
-            </view>
-        </i-cell>
-    </i-cell-group>
+  <i-cell-group i-class="custom-cell-group clearfix mb140">
+    <i-cell i-class="custom-cell" bind:click="openModal" data-modal="editModal">
+      <view class="cell-title">设备名称</view>
+      <view slot="footer" class="cell-footer-wrap">
+        <view class="cname">{{originTit}}</view>
+        <view wx:if="{{power_name}}" class="suffix-icon iconfont iconjiantou"></view>
+      </view>
+    </i-cell>
+    <i-cell i-class="custom-cell" bind:click="toSelectArea">
+      <view class="cell-title">所属区域</view>
+      <view slot="footer" class="cell-footer-wrap">
+        <view class="cname">{{areaName}}</view>
+        <view wx:if="{{power_area}}" class="suffix-icon iconfont iconjiantou"></view>
+      </view>
+    </i-cell>
+  </i-cell-group>
 </view>
 <i-modal title="修改设备名称" visible="{{editModal}}" actions="{{ actions }}" bind:click="handleClick" data-modal="editModal">
-    <label class="f-input-label">
-        <input class="f-input" placeholder="请输入设备名称" bindinput="inputedit" value="{{deviceTit}}" data-txt="deviceTit" placeholder-class="f-input-placeholder" />
-    </label>
+  <label class="f-input-label">
+    <input focus="{{isFocus}}" cursor-spacing="160" class="f-input" placeholder="请输入设备名称" bindinput="inputedit"
+      value="{{deviceTit}}" data-txt="deviceTit" placeholder-class="f-input-placeholder" />
+  </label>
 </i-modal>
